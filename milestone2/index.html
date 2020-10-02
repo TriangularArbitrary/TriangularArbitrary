@@ -123,6 +123,17 @@
             max-width: 100%;
         }
 
+        .nav-item :hover {
+            transform: scale(1.25);
+            transition: 1s;
+            background-color: black;
+            color: white;
+        }
+        .navbar-header > a :hover {
+            transform: scale(1.25);
+            transition: 1s;
+        }
+        
 
     </style>
 </head>
@@ -134,7 +145,7 @@
             <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 w-75">
                 <!-- Page Title -->
                 <div class="navbar-header m-2">            
-                    <a href="" class="navbar-brand ml-5"><h1 class="text-color-jet">Tri<b>angular</b> Arbitrary</h1></a>
+                    <a href="./index.html" class="navbar-brand ml-5"><h1 class="text-color-jet">Tri<b>angular</b> Arbitrary</h1></a>
                 </div>
             </div>
 
@@ -183,7 +194,7 @@
 
                         <div class="row">
                             <!-- TODO: INSERT href here -->
-                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>{{ PLACEHOLDER }}</b> </a></li>
+                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./create-ticket.component.html"><b>CREATE TICKET</b> </a></li>
                         </div>
                         <hr>
 
@@ -216,7 +227,45 @@
             <!-- Main Content -->
             <!-- TODO: When we create the Angular App, we will insert an <router-outlet></router-outlet> to pop different components in and out -->
             <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 bg-color-lively-grey shadow-lg rounded m-3"> 
-                <h2 class="d-flex mt-5 justify-content-center text-color-lively-darkgreen">{{ MAIN CONTENT DIV }}</h2>
+                <!-- <h2 class="d-flex mt-5 justify-content-center text-color-lively-darkgreen">{{ MAIN CONTENT DIV }}</h2> -->
+                <div class="fluid-container md-form m-5 h-50 w-50 align-self-center">
+                    <h1><b>Create Ticket</b></h1>
+                    <hr>
+            
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group">
+                                <input required type="text" placeholder="Enter Subject..." class="form-control w-100" maxlength="30">
+                            </div>
+                        </div>
+                        <div class="col float-left">
+                            <select required name="Ticket Type" id="" class="custom-select w-25 mr-2">
+                                <option value="0" selected>Type...</option>
+                                <option value="1">Account Issues</option>
+                                <option value="2">Report a Bug</option>
+                                <option value="3">Placeholder</option>
+                            </select>
+                            <select required name="Severity" id="" class="custom-select w-25">
+                                <option value="0" selected>Severity...</option>
+                                <option value="1" >Low</option>
+                                <option value="2">Medium</option>
+                                <option value="3">High</option>
+                                <option value="4">Critical</option>
+            
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row m-1">
+                        <textarea required id="ticket-textarea"class="md-textarea form-control" name="Ticket Content" id="" cols="10" rows="3" placeholder="Please enter the reason for your ticket..." maxlength="250"></textarea>
+                    </div>
+                    <br>
+                    <div class="row float-right mr-2">
+                        <!-- TODO: hookup button to function that submits data to appropriate location (firebase?, localstorage?) -->
+                        <button class="btn btn-primary">Submit Ticket</button>
+                    </div>
+            
+                </div>
             </div>
         </div>
 
