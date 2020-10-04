@@ -144,10 +144,15 @@
             max-width: 100%;
         }
 
+        .blur {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            height: 100vh;
+        }
 
     </style>
 </head>
-<body>
+<body class="blur">
 <div class="container-fluid color-lively-grey shadow min-width-1000 max-width-100">
     <!-- Header -->
     <div class="row">
@@ -173,59 +178,63 @@
     <hr>
 
     <div class="row">
-        <div class="col" style="width: 40%">
+        <div class="col" style="min-width: 60%">
             <h2>Ticket Queue</h2>
-            <table class="table table-striped">
-                <thead class="thead-light">
-                    <tr>
-                        <th>Subject</th>
-                        <th>Type</th>
-                        <th>Severity</th>
-                        <th>Description</th>
-                        <th>User</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Transaction rejected</td>
-                        <td>Bug found</td>
-                        <td>Critical</td>
-                        <td>When I clicked on the sell button I got a blank screen</td>
-                        <td>UserId123</td>
-                        <td><button class="btn btn-success">Resolve</button></td>
-                    </tr>
-                    <tr>
-                        <td>Can't change password</td>
-                        <td>Account Issues</td>
-                        <td>Medium</td>
-                        <td>I don't know how to change my password....</td>
-                        <td>UserId456</td>
-                        <td><button class="btn btn-success">Resolve</button></td>
-                    </tr>
-                    <tr>
-                        <td>Remove my account</td>
-                        <td>Account Issues</td>
-                        <td>High</td>
-                        <td>I'd like my account to be removed</td>
-                        <td>UserId789</td>
-                        <td><button class="btn btn-success">Resolve</button></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover table-sm">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Subject</th>
+                            <th>Type</th>
+                            <th>Severity</th>
+                            <th>Description</th>
+                            <th>User</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Transaction rejected</td>
+                            <td>Bug found</td>
+                            <td>Critical</td>
+                            <td>When I clicked on the sell button I got a blank screen</td>
+                            <td>UserId123</td>
+                            <td><button class="btn btn-success">Resolve</button></td>
+                        </tr>
+                        <tr>
+                            <td>Can't change password</td>
+                            <td>Account Issues</td>
+                            <td>Medium</td>
+                            <td>I don't know how to change my password....</td>
+                            <td>UserId456</td>
+                            <td><button class="btn btn-success">Resolve</button></td>
+                        </tr>
+                        <tr>
+                            <td>Remove my account</td>
+                            <td>Account Issues</td>
+                            <td>High</td>
+                            <td>I'd like my account to be removed</td>
+                            <td>UserId789</td>
+                            <td><button class="btn btn-success">Resolve</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="col float-left" style="width: 60%">
+        <div class="col float-left" style="min-width: 40%">
             <h2>Account Table</h2>
-            <table class="table table-striped">
+            <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover table-sm">
                 <thead class="thead-light">
                     <th>User ID</th>
                     <th>Name</th>
                     <th></th>
                     <th></th>
                 </thead>
+                <tbody>
                     <tr>
                         <td>UserId123</td>
-                        <td>Michael Scoot</td>
+                        <td>Michael Scott</td>
                         <td><button class="btn btn-warning">Freeze</button></td>
                         <td><button class="btn btn-danger">Remove</button></td>
                     </tr>
@@ -241,10 +250,9 @@
                         <td><button class="btn btn-warning">Freeze</button></td>
                         <td><button class="btn btn-danger">Remove</button></td>
                     </tr>
-                <tbody>
-
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 
