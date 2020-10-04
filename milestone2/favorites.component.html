@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS only -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+
+    <!-- Adding ROBOTO Google Font Family -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon-32x32.png" />
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    <title>Triangular Arbitrary</title>
+
+    <style>
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        background-color: #edeae5;
+        font-family: "Roboto", sans-serif;
+        background-image: url(./logo.png);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+      }
+
+      hr {
+        color: black;
+        background-color: black;
+        line-height: 2px;
+      }
+
+      .col-8,
+      .col-4,
+      .col-1,
+      .col-10 {
+        opacity: 0.8;
+      }
+
+      .color-jet {
+        background-color: #2f2d2e;
+      }
+
+      .color-charcoal {
+        background-color: #2e4057;
+      }
+
+      .color-orange {
+        background-color: #e27d60;
+      }
+      .color-lightblue {
+        background-color: #97caef;
+      }
+      .color-lightorange {
+        background-color: #e8a87c;
+      }
+      .color-pink {
+        background-color: #c38d9e;
+      }
+      .color-green {
+        background-color: #41b3a3;
+      }
+
+      .color-corp-lightblue {
+        background-color: #265077;
+      }
+      .color-corp-darkblue {
+        background-color: #022140;
+      }
+      .color-corp-pink {
+        background-color: #494b68;
+      }
+      .color-corp-darkgreen {
+        background-color: #1e4258;
+      }
+      .color-corp-lightgreen {
+        background-color: #2d5f5d;
+      }
+
+      .bg-color-lively-darkgreen {
+        background-color: #026670;
+      }
+      .bg-color-lively-lightgreen {
+        background-color: #9fedd7;
+      }
+      .bg-color-lively-tan {
+        background-color: #fef9c7;
+      }
+      .bg-color-lively-yellow {
+        background-color: #fce181;
+      }
+      .bg-color-lively-grey {
+        background-color: #edeae5;
+      }
+
+      .text-color-lively-darkgreen {
+        color: #026670;
+      }
+      .text-color-lively-lightgreen {
+        color: #9fedd7;
+      }
+      .text-color-lively-tan {
+        color: #fef9c7;
+      }
+      .text-color-lively-yellow {
+        color: #fce181;
+      }
+      .text-color-lively-grey {
+        color: #edeae5;
+      }
+      .text-color-jet {
+        color: #2f2d2e;
+      }
+
+      .min-width-1000 {
+        min-width: 1000;
+      }
+
+      .max-width-100 {
+        max-width: 100%;
+      }
+
+      table.darkTable {
+        font-family: "Arial Black", Gadget, sans-serif;
+        border: 2px solid #000000;
+        background-color: #4a4a4a;
+        width: 175%;
+        height: 200px;
+        text-align: center;
+        border-collapse: collapse;
+      }
+      table.darkTable td,
+      table.darkTable th {
+        border: 1px solid #4a4a4a;
+        padding: 3px 2px;
+      }
+      table.darkTable tbody td {
+        font-size: 13px;
+        color: #e6e6e6;
+      }
+      table.darkTable tr:nth-child(even) {
+        background: #888888;
+      }
+      table.darkTable thead {
+        background: #000000;
+        border-bottom: 3px solid #000000;
+      }
+      table.darkTable thead th {
+        font-size: 15px;
+        font-weight: bold;
+        color: #e6e6e6;
+        text-align: center;
+        border-left: 2px solid #4a4a4a;
+      }
+      table.darkTable thead th:first-child {
+        border-left: none;
+      }
+      .myButton {
+        box-shadow: inset 0px -3px 7px 0px #29bbff;
+        background: linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+        background-color: #2dabf9;
+        border-radius: 3px;
+        border: 1px solid #0b0e07;
+        display: inline-block;
+        cursor: pointer;
+        color: #ffffff;
+        font-family: Arial;
+        font-size: 15px;
+        padding: 9px 23px;
+        text-decoration: none;
+        text-shadow: 0px 1px 0px #263666;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="container-fluid color-lively-grey shadow min-width-1000 max-width-100"
+    >
+      <!-- Header -->
+      <div class="row">
+        <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 w-75">
+          <!-- Page Title -->
+          <div class="navbar-header m-2">
+            <a href="./index.html" class="navbar-brand ml-5"
+              ><h1 class="text-color-jet">Tri<b>angular</b> Arbitrary</h1></a
+            >
+          </div>
+        </div>
+
+        <!-- User Greeting - TODO: add interpolation for userName {{ userName }} -->
+        <div
+          class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 w-25"
+          style="float: right"
+        >
+          <div class="text-color-lively-darkgreen float-right m-3">
+            <span>Welcome, </span>
+            <a href="">John Doe</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fluid-container md-form m-5 h-50 w-50 align-self-center">
+      <h1><b>Favorites</b></h1>
+      <table class="darkTable">
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Open</th>
+            <th>High</th>
+            <th>Low</th>
+            <th>Price</th>
+            <th>Volume</th>
+            <th>Latest trading day</th>
+            <th>Previous close</th>
+            <th>Change</th>
+            <th>Change percent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="">TSLA</a></td>
+            <td>777.87</td>
+            <td>789.75</td>
+            <td>770.77</td>
+            <td>771.84</td>
+            <td>6995867</td>
+            <td>2020-02-12</td>
+            <td>774.38</td>
+            <td>-2.53</td>
+            <td>-0.32%</td>
+          </tr>
+          <tr>
+            <td><a href="">MSFT</a></td>
+            <td>208.00</td>
+            <td>210.99</td>
+            <td>205.54</td>
+            <td>206.19</td>
+            <td>33154781</td>
+            <td>2020-10-02</td>
+            <td>212.46</td>
+            <td>-6.27</td>
+            <td>-2.95%</td>
+          </tr>
+          <tr>
+            <td><a href="">AAPL</a></td>
+            <td>112.89</td>
+            <td>115.37</td>
+            <td>112.22</td>
+            <td>113.02</td>
+            <td>144711986</td>
+            <td>2020-10-02</td>
+            <td>116.79</td>
+            <td>-3.77</td>
+            <td>-3.22%</td>
+          </tr>
+          <tr>
+            <td><a href="">GOOGL</a></td>
+            <td>1459.63</td>
+            <td>1479.03</td>
+            <td>1447.35</td>
+            <td>1455.60</td>
+            <td>1561132</td>
+            <td>2020-10-02</td>
+            <td>1487.90</td>
+            <td>-32.30</td>
+            <td>-2.17%</td>
+          </tr>
+          <tr>
+            <td><a href="">GM</a></td>
+            <td>29.65</td>
+            <td>30.90</td>
+            <td>29.50</td>
+            <td>30.46</td>
+            <td>9474033</td>
+            <td>2020-10-02</td>
+            <td>30.38</td>
+            <td>0.08</td>
+            <td>0.26%</td>
+          </tr>
+        </tbody>
+      </table><br>
+      <button class="myButton" type="button">Refresh Data</button>
+    </div>
+  </body>
+</html>
