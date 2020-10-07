@@ -1,1 +1,60 @@
-<p>create-ticket works!</p>
+<!-- Form for submitting a ticket to support for the App -->
+<form #ticketForm="ngForm" (ngSubmit)="SubmitTicket(ticketForm)">
+  <div class="fluid-container md-form m-5 h-50 w-50 align-self-center form-group">
+      <h1><b>Create Ticket</b></h1>
+      <hr>
+      <div class="row">
+          <div class="col">
+              <div class="input-group">
+                  <input name="subject" required type="text" placeholder="Enter Subject..." class="form-control w-100" maxlength="30" [(ngModel)]="model.subject">
+              </div>
+          </div>
+          <div class="col float-left">
+              <select required name="Ticket Type" id=""class="custom-select form-control w-25 mr-2" [(ngModel)]="model.type">
+                  <option *ngFor="let type of this.enumKeys(ticketTypes)" [ngValue]="type">{{ ticketTypes[type] }}</option>
+              </select>
+              <select  required name="Severity" id="" class="custom-select form-control w-25" [(ngModel)]="model.severity">
+                <option *ngFor="let severity of this.enumKeys(severityTypes)" [ngValue]="severity">{{ severityTypes[severity] }}</option>
+
+
+              </select>
+          </div>
+      </div>
+      <br>
+      <div class="row m-1">
+          <textarea required id="ticket-textarea"class="md-textarea form-control" name="Ticket Content" id="" cols="10" rows="3" placeholder="Please enter the reason for your ticket..." maxlength="250" [(ngModel)]="model.ticketReason"></textarea>
+      </div>
+      <br>
+      <div class="row float-right mr-2">
+          <!-- TODO: hookup button to function that submits data to appropriate location (firebase?, localstorage?) -->
+          <button onclick="SubmitTicket()" class="btn btn-primary">Submit Ticket</button>
+      </div>
+  </div>
+</form>
+
+
+<!-- Debugging Form -->
+<!-- <div>
+<h1>Form Input Debugging</h1>
+  <ul>
+      <label for="debug-subject"><b>Subject</b> </label>
+      <li id="debug-subject"> {{model.subject}}</li>
+      <hr>
+      <label for="debug-severity"><b>Severity</b> </label>
+      <li id="debug-severity">  {{model.severity}}</li>
+      <hr>
+      <label for="debug-type"><b>Type</b> </label>
+      <li id="debug-type">  {{model.type}}</li>
+      <hr>
+      <label for="debug-ticketReason"><b>Reason</b> </label>
+      <li id="debug-ticketReason">  {{model.ticketReason}}</li>
+  </ul>
+</div> -->
+
+<!-- Debugging the list of Tickets in LocalStorage -->
+<div>
+  <h1>Current array of Tickets in LocalStorage</h1>
+  <ul>
+    <li *ngFor="let ticket of Tickets">{{ticket.subject}}: {{ticket.type}} | {{ticket.severity}} | {{ticket.ticketReason}}</li>
+  </ul>
+</div>

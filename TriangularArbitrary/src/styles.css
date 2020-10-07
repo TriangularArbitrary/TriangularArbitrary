@@ -1,1 +1,104 @@
 /* You can add global styles to this file, and also import other style files */
+html,body {
+  height:100%;
+  width: 100%;
+  background-color: #EDEAE5;
+  font-family: 'Roboto', sans-serif;
+  background-image: url(../../milestone2/logo.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+hr {
+  color:black;
+  background-color: black;
+  line-height: 2px;
+}
+
+.col-8, .col-4, .col-1, .col-10 {
+  opacity: .8;
+}
+
+.color-jet {
+  background-color: #2F2D2E;
+}
+
+.color-charcoal {
+  background-color: #2E4057;
+}
+
+.color-orange{
+  background-color:  #E27D60;
+}
+.color-lightblue {
+  background-color: #97caef;
+}
+.color-lightorange {
+  background-color: #E8A87C;
+}
+.color-pink {
+  background-color: #C38D9E;
+}
+.color-green {
+  background-color: #41B3A3;
+}
+
+.color-corp-lightblue {
+  background-color: #265077;
+}
+.color-corp-darkblue {
+  background-color: #022140;
+}
+.color-corp-pink {
+  background-color: #494B68;
+}
+.color-corp-darkgreen {
+  background-color: #1E4258;
+}
+.color-corp-lightgreen {
+  background-color: #2D5F5D
+}
+
+.bg-color-lively-darkgreen {
+  background-color: #026670;
+}
+.bg-color-lively-lightgreen {
+  background-color: #9FEDD7;
+}
+.bg-color-lively-tan {
+  background-color: #FEF9C7;
+}
+.bg-color-lively-yellow {
+  background-color: #FCE181;
+}
+.bg-color-lively-grey {
+  background-color: #EDEAE5;
+}
+
+.text-color-lively-darkgreen {
+  color: #026670;
+}
+.text-color-lively-lightgreen {
+  color: #9FEDD7;
+}
+.text-color-lively-tan {
+  color: #FEF9C7;
+}
+.text-color-lively-yellow {
+  color: #FCE181;
+}
+.text-color-lively-grey {
+  color: #EDEAE5;
+}
+.text-color-jet {
+  color: #2F2D2E;
+}
+
+.min-width-1000 {
+  min-width: 1000;
+}
+
+.max-width-100 {
+  max-width: 100%;
+}

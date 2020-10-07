@@ -1,13 +1,116 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
+<div class="container-fluid color-lively-grey shadow min-width-1000 max-width-100">
+    <!-- Header -->
+    <div class="row">
+        <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 w-75">
+            <!-- Page Title -->
+            <div class="navbar-header m-2">
+                <a href="./index.html" class="navbar-brand ml-5"><h1 class="text-color-jet">Tri<b>angular</b> Arbitrary</h1></a>
+            </div>
+        </div>
+
+        <!-- User Greeting - TODO: add interpolation for userName {{ userName }} -->
+        <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 w-25" style="float: right;">
+            <div class="text-color-lively-darkgreen float-right m-3">
+                <a href="./login.html">Login</a> <br />
+                <span>Welcome, </span>
+                <a href="./create-account-component.html">John Doe</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Left Navigation and Main Content-->
+<div class="container-fluid min-width-1000 max-width-100 w-100 h-100 shadow">
+    <!-- Navigation Options -->
+    <div class="row h-100">
+        <div style="min-width: 200px; max-width:100px" class="col-1 col-sm-1 col-m-1 col-lg-1 col-xl-1 shadow-lg rounded m-3">
+            <nav class="navbar">
+                <ul class="nav navbar-nav">
+                    <div class="row">
+                        <!-- TODO: INSERT href here -->
+                        <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" routerLink="./top-ten.component" routerLinkActive="active"><b>TOP 10</b> </a></li>
+                    </div>
+                    <hr class="color-jet">
+
+                    <div class="row">
+                        <!-- TODO: INSERT href here -->
+                        <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" href="./favorites"><b>FAVORITES</b> </a></li>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <!-- TODO: INSERT href here -->
+                        <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./search"><b>SEARCH</b> </a></li>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <!-- TODO: INSERT href here -->
+                        <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./conversion"><b>CONVERSIONS</b> </a></li>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <!-- TODO: INSERT href here -->
+                        <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./admin-account-management-component"><b>ACCOUNT ADMINISTRATION</b> </a></li>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <!-- TODO: INSERT href here -->
+                        <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" routerLink="./create-ticket" routerLinkActive="active"><b>CREATE TICKET</b> </a></li>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <!-- TODO: INSERT href here -->
+                        <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>PLACEHOLDER</b> </a></li>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <!-- TODO: INSERT href here -->
+                        <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>PLACEHOLDER</b></a></li>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <!-- TODO: INSERT href here -->
+                        <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>PLACEHOLDER</b> </a></li>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <!-- TODO: INSERT href here -->
+                        <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>PLACEHOLDER</b> </a></li>
+                    </div>
+
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <!-- TODO: When we create the Angular App, we will insert an <router-outlet></router-outlet> to pop different components in and out -->
+        <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 bg-color-lively-grey shadow-lg rounded m-3">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="container-fluid min-width-1000 max-width-100 w-100">
+        <div class="d-flex row h-25 text-white justify-content-center bg-color-lively-grey shadow rounded m-2">
+            <ul style="list-style: none;">
+                <li>
+                    <p class="text-color-lively-darkgreen justify-content-center">FOOTER CONTENT HERE - CSC436 Web Development Group 6</p>
+                </li>
+                <li>
+                    <p><a style="justify-content: center;" href="https://www.vecteezy.com/free-vector/logo">Logo Vectors by Vecteezy</a></p>
+                </li>
+            </ul>
 
 
-  <app-create-ticket></app-create-ticket>
-</body>
-</html>
+        </div>
+    </div>
+</div>
+
+  <!-- <app-create-ticket></app-create-ticket> -->
