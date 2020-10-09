@@ -28,6 +28,7 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center;
+            background-blend-mode: soft-light;
         }
 
         hr {
@@ -36,7 +37,7 @@
             line-height: 2px;
         }
 
-        .col-8, .col-4, .col-1, .col-10 {
+        .col-8, .col-4, .col-1 {
             opacity: .8;
         }
 
@@ -227,12 +228,11 @@
 
             <!-- Main Content -->
             <!-- TODO: When we create the Angular App, we will insert an <router-outlet></router-outlet> to pop different components in and out -->
-            <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 bg-color-lively-grey shadow-lg rounded m-3"> 
+            <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 shadow-lg rounded m-3"> 
                 <!-- <h2 class="d-flex mt-5 justify-content-center text-color-lively-darkgreen">{{ MAIN CONTENT DIV }}</h2> -->
                 <div class="fluid-container md-form m-5 h-50 w-50 align-self-center">
                     <h1><b>Create Ticket</b></h1>
                     <hr>
-            
                     <div class="row">
                         <div class="col">
                             <div class="input-group">
