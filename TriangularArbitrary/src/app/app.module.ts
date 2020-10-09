@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CreateTicketComponent } from './create-ticket/create-ticket.component';
+import { AdminAccountManagementComponent } from './admin-account-management/admin-account-management.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateTicketComponent
+    CreateTicketComponent,
+    AdminAccountManagementComponent
   ],
   imports: [
     BrowserModule,
