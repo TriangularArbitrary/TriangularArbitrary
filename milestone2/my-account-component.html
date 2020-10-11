@@ -37,7 +37,7 @@
             line-height: 2px;
         }
 
-        .col-8, .col-4, .col-1 {
+        .col-8, .col-4, .col-1, .col-10 {
             opacity: .8;
         }
 
@@ -153,6 +153,7 @@
             <!-- User Greeting - TODO: add interpolation for userName {{ userName }} -->
             <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 w-25" style="float: right;">
                 <div class="text-color-lively-darkgreen float-right m-3">
+                    
                     <span>Welcome, </span> 
                     <a href="./my-account-component.html">Warren Buffet</a>
                 </div>
@@ -160,113 +161,144 @@
         </div>
     </div>
 
-        <!-- Left Navigation and Main Content-->
-        <div class="container-fluid min-width-1000 max-width-100 w-100 h-100 shadow">
-            <!-- Navigation Options -->
-            <div class="row h-100">
-                <div style="min-width: 200px; max-width:100px" class="col-1 col-sm-1 col-m-1 col-lg-1 col-xl-1 shadow-lg rounded m-3">
-                    <nav class="navbar">            
-                        <ul class="nav navbar-nav">
-                            <div class="row">
-                                <!-- TODO: INSERT href here -->
-                                <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" href="./top-ten.component.html"><b>TOP 10</b> </a></li>
-                            </div>
-                            <hr class="color-jet">
-                            <div class="row">
-                                <!-- TODO: INSERT href here -->
-                                <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" href="./favorites.component.html"><b>FAVORITES</b> </a></li>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <!-- TODO: INSERT href here -->
-                                <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./search.component.html"><b>SEARCH</b> </a></li>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <!-- TODO: INSERT href here -->
-                                <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./conversion.component.html"><b>CONVERSIONS</b> </a></li>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <!-- TODO: INSERT href here -->
-                                <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./admin-account-management-component.html"><b>ACCOUNT ADMINISTRATION</b> </a></li>
-                            </div>
-                            <hr>
+    <!-- Left Navigation and Main Content-->
+    <div class="container-fluid min-width-1000 max-width-100 w-100 h-100 shadow">
+        <!-- Navigation Options -->
+        <div class="row h-100">
+            <div style="min-width: 200px; max-width:100px" class="col-1 col-sm-1 col-m-1 col-lg-1 col-xl-1 shadow-lg rounded m-3">
+                <nav class="navbar">            
+                    <ul class="nav navbar-nav">
+                        <div class="row">
+                            <!-- TODO: INSERT href here -->
+                            <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" href="./top-ten.component.html"><b>TOP 10</b> </a></li>
+                        </div>
+                        <hr class="color-jet">
+                        <div class="row">
+                            <!-- TODO: INSERT href here -->
+                            <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" href="./favorites.component.html"><b>FAVORITES</b> </a></li>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <!-- TODO: INSERT href here -->
+                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./search.component.html"><b>SEARCH</b> </a></li>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <!-- TODO: INSERT href here -->
+                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./conversion.component.html"><b>CONVERSIONS</b> </a></li>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <!-- TODO: INSERT href here -->
+                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./admin-account-management-component.html"><b>ACCOUNT ADMINISTRATION</b> </a></li>
+                        </div>
+                        <hr>
 
-                            <div class="row">
-                                <!-- TODO: INSERT href here -->
-                                <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./index.html"><b>CREATE TICKET</b> </a></li>
-                            </div>
-                            <hr>
+                        <div class="row">
+                            <!-- TODO: INSERT href here -->
+                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./create-ticket.component.html"><b>CREATE TICKET</b> </a></li>
+                        </div>
+                        <hr>
 
-                            <div class="row">
-                                <!-- TODO: INSERT href here -->
-                                <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>{{ PLACEHOLDER }}</b> </a></li>
-                            </div>
-                            <hr>
+                        <div class="row">
+                            <!-- TODO: INSERT href here -->
+                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>{{ PLACEHOLDER }}</b> </a></li>
+                        </div>
+                        <hr>
 
-                            <div class="row">
-                                <!-- TODO: INSERT href here -->
-                                <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>{{ PLACEHOLDER }}</b></a></li>
-                            </div>
-                            <hr>
+                        <div class="row">
+                            <!-- TODO: INSERT href here -->
+                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>{{ PLACEHOLDER }}</b></a></li>
+                        </div>
+                        <hr>
 
-                            <div class="row">
-                                <!-- TODO: INSERT href here -->
-                                <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>{{ PLACEHOLDER }}</b> </a></li>
-                            </div>
-                            <hr>
+                        <div class="row">
+                            <!-- TODO: INSERT href here -->
+                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>{{ PLACEHOLDER }}</b> </a></li>
+                        </div>
+                        <hr>
 
-                            <div class="row">
-                                <!-- TODO: INSERT href here -->
-                                <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>{{ PLACEHOLDER }}</b> </a></li>
-                            </div>
-                        </ul>
-                    </nav>
-                </div>
+                        <div class="row">
+                            <!-- TODO: INSERT href here -->
+                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>{{ PLACEHOLDER }}</b> </a></li>
+                        </div>
+                    </ul>
+                </nav>
+            </div>
 
             <!-- Main Content -->
             <!-- TODO: When we create the Angular App, we will insert an <router-outlet></router-outlet> to pop different components in and out -->
             <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 shadow-lg rounded m-3"> 
                 <!-- <h2 class="d-flex mt-5 justify-content-center text-color-lively-darkgreen">{{ MAIN CONTENT DIV }}</h2> -->
                 <div class="fluid-container md-form m-5 h-50 w-50 align-self-center">
-                    <h1><b>Create Ticket</b></h1>
+                    <h1><b>My Account</b></h1>
+                    <br/>
+                    <h3>Personal Information</h3>
                     <hr>
+
+                    <div class="row">
+                        <div class="col">
+                            <input required type="text" value="Warren" class="form-control w-100" maxlength="30">
+                        </div>
+                        <div class="col">
+                            <input required type="text" value="Cash" class="form-control w-100" maxlength="30">
+                        </div>
+                        <div class="col float-left">
+                            <input required type="text" value="Buffet" class="form-control w-100" maxlength="30">
+                        </div>
+                    </div>
+                    <br/>
                     <div class="row">
                         <div class="col">
                             <div class="input-group">
-                                <input required type="text" placeholder="Enter Subject..." class="form-control w-100" maxlength="30">
+                                <input required type="text" value="moneytoburn@wbbucks.com" class="form-control w-100" maxlength="30">
                             </div>
                         </div>
-                        <div class="col float-left">
-                            <select required name="Ticket Type" id="" class="custom-select w-25 mr-2">
-                                <option value="0" selected>Type...</option>
-                                <option value="1">Account Issues</option>
-                                <option value="2">Report a Bug</option>
-                                <option value="3">Placeholder</option>
+                        <div class="col">
+                            <select required name="Preferred Currency" id="" class="custom-select">
+                                <option value="0" selected>Select...</option>
+                                <option value="1">USD</option>
+                                <option value="2">CA</option>
+                                <option value="3" selected>Bitcoin</option>
                             </select>
-                            <select required name="Severity" id="" class="custom-select w-25">
-                                <option value="0" selected>Severity...</option>
-                                <option value="1" >Low</option>
-                                <option value="2">Medium</option>
-                                <option value="3">High</option>
-                                <option value="4">Critical</option>
-            
+                        </div>
+                        <div class="col float-left">
+                            <select required name="Account Type" id="" class="custom-select">
+                                <option value="0" selected>Select...</option>
+                                <option value="1">Day Trader</option>
+                                <option value="2">System Administrator</option>
+                                <option value="3">Fraud Detector</option>
+                                <option value="4" selected>I'm Feeling Lucky</option>
                             </select>
                         </div>
                     </div>
                     <br>
                     <div class="row m-1">
-                        <textarea required id="ticket-textarea"class="md-textarea form-control" name="Ticket Content" id="" cols="10" rows="3" placeholder="Please enter the reason for your ticket..." maxlength="250"></textarea>
+                        &nbsp;
+                    </div>
+                    <div class="row m-1">
+                        <hr width="100%">
                     </div>
                     <br>
-                    <div class="row float-right mr-2">
-                        <!-- TODO: hookup button to function that submits data to appropriate location (firebase?, localstorage?) -->
-                        <button class="btn btn-primary">Submit Ticket</button>
+                    <div class="row ">
+                        <div class="col-3"> <form action="./login.html"><button class="btn btn-danger form-control">Delete Account</button></form></div>
+                        <div class="col-3"></div>
+                        <div class="col float-left">
+                            <div class="row">
+                                <div class="col">
+                                    <button class="btn btn-primary form-control" style="background-color: white; border:#7043F5 1px solid; color: #7043F5; ">Cancel</button>
+                                </div>
+                                <div class="col">
+                                    <button class="btn btn-primary form-control">Save Changes</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-            
+                    <br/>
                 </div>
             </div>
+
+
         </div>
 
         <!-- FOOTER -->
@@ -280,14 +312,9 @@
                         <p><a style="justify-content: center;" href="https://www.vecteezy.com/free-vector/logo">Logo Vectors by Vecteezy</a></p>
                     </li>
                 </ul>
-
-
             </div>
         </div>
-
     </div>
-
-
 
     <!-- Footer -->
 </body>
