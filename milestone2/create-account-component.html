@@ -3,24 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CSS only -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
     <!-- Adding ROBOTO Google Font Family -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    
+
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="favicon-32x32.png"/>
 
     <!-- JS, Popper.js, and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    <title>Triangular Arbitrary</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    
+    <title>Triangular Arbitrary - Login</title>
 
     <style>
-        html,body {
-            height:100%;
+        html, body {
+            height: 100%;
             width: 100%;
             background-color: #EDEAE5;
             font-family: 'Roboto', sans-serif;
@@ -28,10 +34,11 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center;
+            background-blend-mode: soft-light;
         }
 
         hr {
-            color:black;
+            color: black;
             background-color: black;
             line-height: 2px;
         }
@@ -48,18 +55,22 @@
             background-color: #2E4057;
         }
 
-        .color-orange{
-            background-color:  #E27D60;
+        .color-orange {
+            background-color: #E27D60;
         }
+
         .color-lightblue {
             background-color: #97caef;
         }
+
         .color-lightorange {
             background-color: #E8A87C;
         }
+
         .color-pink {
             background-color: #C38D9E;
         }
+
         .color-green {
             background-color: #41B3A3;
         }
@@ -67,15 +78,19 @@
         .color-corp-lightblue {
             background-color: #265077;
         }
+
         .color-corp-darkblue {
             background-color: #022140;
         }
+
         .color-corp-pink {
             background-color: #494B68;
         }
+
         .color-corp-darkgreen {
             background-color: #1E4258;
         }
+
         .color-corp-lightgreen {
             background-color: #2D5F5D
         }
@@ -83,15 +98,19 @@
         .bg-color-lively-darkgreen {
             background-color: #026670;
         }
+
         .bg-color-lively-lightgreen {
             background-color: #9FEDD7;
         }
+
         .bg-color-lively-tan {
             background-color: #FEF9C7;
         }
+
         .bg-color-lively-yellow {
             background-color: #FCE181;
         }
+
         .bg-color-lively-grey {
             background-color: #EDEAE5;
         }
@@ -99,18 +118,23 @@
         .text-color-lively-darkgreen {
             color: #026670;
         }
+
         .text-color-lively-lightgreen {
             color: #9FEDD7;
         }
+
         .text-color-lively-tan {
             color: #FEF9C7;
         }
+
         .text-color-lively-yellow {
             color: #FCE181;
         }
+
         .text-color-lively-grey {
             color: #EDEAE5;
         }
+
         .text-color-jet {
             color: #2F2D2E;
         }
@@ -123,111 +147,35 @@
             max-width: 100%;
         }
 
-        .nav-item :hover {
-            transform: scale(1.25);
-            transition: 1s;
-            background-color: black;
-            color: white;
-        }
-        .navbar-header > a :hover {
-            transform: scale(1.25);
-            transition: 1s;
-        }
-        
 
     </style>
 </head>
 <body>
-
-    <div class="container-fluid color-lively-grey shadow min-width-1000 max-width-100">
-        <!-- Header -->
-        <div class="row">
-            <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 w-75">
-                <!-- Page Title -->
-                <div class="navbar-header m-2">            
-                    <a href="./index.html" class="navbar-brand ml-5"><h1 class="text-color-jet">Tri<b>angular</b> Arbitrary</h1></a>
-                </div>
+<div class="container-fluid  shadow min-width-1000 max-width-100">
+    <!-- Header -->
+    <div class="row">
+        <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 w-75">
+            <!-- Page Title -->
+            <div class="navbar-header m-2">
+                <a href="./index.html" class="navbar-brand ml-5"><h1 class="text-color-jet">Tri<b>angular</b> Arbitrary</h1></a>
             </div>
+        </div>
 
-            <!-- User Greeting - TODO: add interpolation for userName {{ userName }} -->
-            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 w-25" style="float: right;">
-                <div class="text-color-lively-darkgreen float-right m-3">
-                    <a href="./login.html">{{Login}}</a> <br />
-                    <span>Welcome, </span> 
-                    <a href="./create-account-component.html">John Doe</a>
-                </div>
-            </div>        
+        <!-- User Greeting - TODO: add interpolation for userName {{ userName }} -->
+        <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 w-25" style="float: right;">
+            <div class="text-color-lively-darkgreen float-right m-3">
+                <!-- <span>Welcome, </span>
+                <a href="">John Doe</a> -->
+            </div>
         </div>
     </div>
+</div>
 
-    <!-- Left Navigation and Main Content-->
-    <div class="container-fluid min-width-1000 max-width-100 w-100 h-100 shadow">
-        <!-- Navigation Options -->
-        <div class="row h-100">
-            <div style="min-width: 200px; max-width:100px" class="col-1 col-sm-1 col-m-1 col-lg-1 col-xl-1 shadow-lg rounded m-3">
-                <nav class="navbar">            
-                    <ul class="nav navbar-nav">
-                        <div class="row">
-                            <!-- TODO: INSERT href here -->
-                            <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" href="./top-ten.component.html"><b>TOP 10</b> </a></li>
-                        </div>
-                        <hr class="color-jet">
-                        <div class="row">
-                            <!-- TODO: INSERT href here -->
-                            <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" href="./favorites.component.html"><b>FAVORITES</b> </a></li>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <!-- TODO: INSERT href here -->
-                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./search.component.html"><b>SEARCH</b> </a></li>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <!-- TODO: INSERT href here -->
-                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./conversion.component.html"><b>CONVERSIONS</b> </a></li>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <!-- TODO: INSERT href here -->
-                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./admin-account-management-component.html"><b>ACCOUNT ADMINISTRATION</b> </a></li>
-                        </div>
-                        <hr>
-
-                        <div class="row">
-                            <!-- TODO: INSERT href here -->
-                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./create-ticket.component.html"><b>CREATE TICKET</b> </a></li>
-                        </div>
-                        <hr>
-
-                        <div class="row">
-                            <!-- TODO: INSERT href here -->
-                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>{{ PLACEHOLDER }}</b> </a></li>
-                        </div>
-                        <hr>
-
-                        <div class="row">
-                            <!-- TODO: INSERT href here -->
-                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>{{ PLACEHOLDER }}</b></a></li>
-                        </div>
-                        <hr>
-
-                        <div class="row">
-                            <!-- TODO: INSERT href here -->
-                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>{{ PLACEHOLDER }}</b> </a></li>
-                        </div>
-                        <hr>
-
-                        <div class="row">
-                            <!-- TODO: INSERT href here -->
-                            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>{{ PLACEHOLDER }}</b> </a></li>
-                        </div>
-                    </ul>
-                </nav>
-            </div>
-
+<div class="fluid-container md-form m-5 h-75 w-90 align-self-center">
+    
             <!-- Main Content -->
             <!-- TODO: When we create the Angular App, we will insert an <router-outlet></router-outlet> to pop different components in and out -->
-            <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 bg-color-lively-grey shadow-lg rounded m-3"> 
+            <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 shadow-lg rounded m-3"> 
                 <!-- <h2 class="d-flex mt-5 justify-content-center text-color-lively-darkgreen">{{ MAIN CONTENT DIV }}</h2> -->
                 <div class="fluid-container md-form m-5 h-50 w-50 align-self-center">
                     <h1><b>Create Account</b></h1>
@@ -273,14 +221,14 @@
                     </div>
                     <br>
                     <div class="row m-1">
-                        TBD?
+                        &nbsp;
                     </div>
                     <div class="row m-1">
                         <hr width="100%">
                     </div>
                     <br>
                     <div class="row ">
-                        <div class="col-3"><button class="btn btn-danger form-control">Delete Account</button></div>
+                        <div class="col-3"></div>
                         <div class="col-3"></div>
                         <div class="col float-left">
                             <div class="row">
@@ -288,7 +236,7 @@
                                     <button class="btn btn-primary form-control" style="background-color: white; border:#7043F5 1px solid; color: #7043F5; ">Cancel</button>
                                 </div>
                                 <div class="col">
-                                    <button class="btn btn-primary form-control">Create Account</button>
+                                    <form action="./my-account-component.html"><button class="btn btn-primary form-control">Create Account</button></form>
                                 </div>
                             </div>
                         </div>
@@ -297,24 +245,9 @@
                 </div>
             </div>
 
+</div>
 
-        </div>
-
-        <!-- FOOTER -->
-        <div class="container-fluid min-width-1000 max-width-100 w-100">
-            <div class="d-flex row h-25 text-white justify-content-center bg-color-lively-grey shadow rounded m-2">
-                <ul style="list-style: none;">
-                    <li>
-                        <p class="text-color-lively-darkgreen justify-content-center">FOOTER CONTENT HERE - CSC436 Web Development Group 6</p>
-                    </li>
-                    <li>
-                        <p><a style="justify-content: center;" href="https://www.vecteezy.com/free-vector/logo">Logo Vectors by Vecteezy</a></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
 </body>
 </html>
+
+
