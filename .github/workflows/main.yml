@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: '12.x'
 
-      - run: npm install
+      - run: npm clean install
       - run: npm install -g @angular/cli > /dev/null
       - run: npm run build --prefix ./TriangularArbitrary --prod --output-path=dist --base-href="https://triangulararbitrary.github.io/TriangularArbitrary/"
       - name: Publish generated content to GitHub Pages
