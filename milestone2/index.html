@@ -134,7 +134,10 @@
             transform: scale(1.25);
             transition: 1s;
         }
-        
+        .btn-standard {
+        color: #f4f4fa;
+        background-color: #022140;
+      }
 
     </style>
 </head>
@@ -199,12 +202,6 @@
                             </div>
                             <hr>
 
-                            <div class="row">
-                                <!-- TODO: INSERT href here -->
-                                <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href=""><b>{{ PLACEHOLDER }}</b> </a></li>
-                            </div>
-                            <hr>
-
                         </ul>
                     </nav>
                 </div>
@@ -247,7 +244,8 @@
                     <br>
                     <div class="row float-right mr-2">
                         <!-- TODO: hookup button to function that submits data to appropriate location (firebase?, localstorage?) -->
-                        <button class="btn btn-primary">Submit Ticket</button>
+                        <!-- <button class="btn btn-primary">Submit Ticket</button> -->
+                        <button class="btn btn-standard">Submit Ticket</button>
                     </div>
             
                 </div>

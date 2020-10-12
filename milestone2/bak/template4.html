@@ -169,7 +169,7 @@
         margin-right: 16px;
         font-size: 17px;
       }
-      .btn-standard {
+      .src {
         color: #f4f4fa;
         background-color: #022140;
       }
@@ -213,7 +213,7 @@
     </div>
 
         <!-- Left Navigation and Main Content-->
-        <div class="container-fluid min-width-1000 max-width-100 w-100 h-150 shadow">
+        <div class="container-fluid min-width-1000 max-width-100 w-100 h-100 shadow">
 
 
             <!-- Navigation Options -->
@@ -259,135 +259,93 @@
 
             <!-- Main Content -->
         
-        <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 shadow-lg rounded m-3"> 
+        <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 shadow-lg rounded m-3" style="border: 1px solid black"> 
                 
             <!-- <h2 class="d-flex mt-5 justify-content-center text-color-lively-darkgreen">{{ MAIN CONTENT DIV }}</h2> -->
-            <div class="fluid-container md-form m-5 h-50 w-500 align-self-center">
+            <div class="fluid-container md-form m-5 h-50 w-500 align-self-center" style="border: 1px solid black">
 
 
 
-                <h1><b>"I'm Feeling Lucky" - Top 10</b></h1>
-                <hr>
-                <h3><b>Stocks</b></h3>
-                <!-- TODO: backend functionality to populate table for top 10 list. -->
-                <table class="table table-striped table-dark">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Symbol</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Change</th>
-                        <th scope="col">Change %</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>NNOX</td>
-                        <td>NANO-X IMAGING LTD</td>
-                        <td>$37.44</td>
-                        <td>13.47</td>
-                        <td>56.2%</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>HMHC</td>
-                        <td>HOUGHTON MIFFLIN HARCOURT CO</td>
-                        <td>$2.49</td>
-                        <td>0.48</td>
-                        <td>23.88%</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>SLDB</td>
-                        <td>SOLID BIOSCIENCES INC.</td>
-                        <td>$4.18</td>
-                        <td>0.72</td>
-                        <td>20.81%</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">4</th>
-                        <td>AMZN</td>
-                        <td>AMAZON</td>
-                        <td>$3125.00</td>
-                        <td>96.26</td>
-                        <td>2.99%</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">5</th>
-                        <td>AAPL</td>
-                        <td>APPLE, INC</td>
-                        <td>$561.15</td>
-                        <td>0.12</td>
-                        <td>5%</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                
-                <hr>
-                <h3><b>Crypto</b></h3>
-                <table class="table table-striped table-dark">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Symbol</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Change</th>
-                        <th scope="col">Change %</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>BTC</td>
-                        <td>BITCOIN</td>
-                        <td>$37.44</td>
-                        <td>13.47</td>
-                        <td>56.2%</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>LTC</td>
-                        <td>LITECOIN</td>
-                        <td>$2.49</td>
-                        <td>0.48</td>
-                        <td>23.88%</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>TRX</td>
-                        <td>TRON</td>
-                        <td>$4.18</td>
-                        <td>0.72</td>
-                        <td>20.81%</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">4</th>
-                        <td>DOGE</td>
-                        <td>DOGECOIN</td>
-                        <td>$3125.00</td>
-                        <td>96.26</td>
-                        <td>2.99%</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">5</th>
-                        <td>BNB</td>
-                        <td>BINANCE COIN</td>
-                        <td>$561.15</td>
-                        <td>0.12</td>
-                        <td>5%</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                
-                
-                <div class="row float-left">
-                    <!-- TODO: hookup button to function that generates a new top 10 list. -->
-                    <button class="btn btn-standard">Generate New Top 10</button>
-                    <br />
-                </div>
+                <h1><b>Favorites</b></h1>
+                <table class="darkTable">
+                  <thead>
+                    <tr>
+                      <th>Symbol</th>
+                      <th>Open</th>
+                      <th>High</th>
+                      <th>Low</th>
+                      <th>Price</th>
+                      <th>Volume</th>
+                      <th>Latest trading day</th>
+                      <th>Previous close</th>
+                      <th>Change</th>
+                      <th>Change percent</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><a href="">TSLA</a></td>
+                      <td>777.87</td>
+                      <td>789.75</td>
+                      <td>770.77</td>
+                      <td>771.84</td>
+                      <td>6995867</td>
+                      <td>2020-02-12</td>
+                      <td>774.38</td>
+                      <td>-2.53</td>
+                      <td>-0.32%</td>
+                    </tr>
+                    <tr>
+                      <td><a href="">MSFT</a></td>
+                      <td>208.00</td>
+                      <td>210.99</td>
+                      <td>205.54</td>
+                      <td>206.19</td>
+                      <td>33154781</td>
+                      <td>2020-10-02</td>
+                      <td>212.46</td>
+                      <td>-6.27</td>
+                      <td>-2.95%</td>
+                    </tr>
+                    <tr>
+                      <td><a href="">AAPL</a></td>
+                      <td>112.89</td>
+                      <td>115.37</td>
+                      <td>112.22</td>
+                      <td>113.02</td>
+                      <td>144711986</td>
+                      <td>2020-10-02</td>
+                      <td>116.79</td>
+                      <td>-3.77</td>
+                      <td>-3.22%</td>
+                    </tr>
+                    <tr>
+                      <td><a href="">GOOGL</a></td>
+                      <td>1459.63</td>
+                      <td>1479.03</td>
+                      <td>1447.35</td>
+                      <td>1455.60</td>
+                      <td>1561132</td>
+                      <td>2020-10-02</td>
+                      <td>1487.90</td>
+                      <td>-32.30</td>
+                      <td>-2.17%</td>
+                    </tr>
+                    <tr>
+                      <td><a href="">GM</a></td>
+                      <td>29.65</td>
+                      <td>30.90</td>
+                      <td>29.50</td>
+                      <td>30.46</td>
+                      <td>9474033</td>
+                      <td>2020-10-02</td>
+                      <td>30.38</td>
+                      <td>0.08</td>
+                      <td>0.26%</td>
+                    </tr>
+                  </tbody>
+                </table><br>
+                <button class="btn src" type="button">Refresh Data</button>
         
 
 
