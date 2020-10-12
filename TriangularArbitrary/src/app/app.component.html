@@ -28,7 +28,7 @@
         <ul class="nav navbar-nav">
           <div class="row">
             <!-- TODO: INSERT href here -->
-            <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" href="./top-ten.component.html"><b>TOP 10</b> </a></li>
+            <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" routerLink="./top-ten" routerLinkActive="active"><b>TOP 10</b> </a></li>
           </div>
           <hr class="color-jet">
           <div class="row">
@@ -43,12 +43,12 @@
           <hr>
           <div class="row">
             <!-- TODO: INSERT href here -->
-            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./conversion.component.html"><b>CONVERSIONS</b> </a></li>
+            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" routerLink="./conversion" routerLinkActive="active"><b>CONVERSIONS</b> </a></li>
           </div>
           <hr>
           <div class="row">
             <!-- TODO: INSERT href here -->
-            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./admin-account-management-component.html"><b>ACCOUNT ADMINISTRATION</b> </a></li>
+            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" routerLink="./admin" routerLinkActive="active"><b>ACCOUNT ADMINISTRATION</b> </a></li>
           </div>
           <hr>
 
@@ -63,13 +63,14 @@
 
     <!-- Main Content -->
     <!-- TODO: When we create the Angular App, we will insert an <router-outlet></router-outlet> to pop different components in and out -->
-    <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 bg-color-lively-grey shadow-lg rounded m-3">
+    <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 shadow-lg rounded m-3">
       <!-- <h2 class="d-flex mt-5 justify-content-center text-color-lively-darkgreen">{{ MAIN CONTENT DIV }}</h2> -->
 
       <!-- Add in your component selector here to test out new component -->
       <!--      <app-create-ticket></app-create-ticket>-->
       <!-- <app-admin-account-management></app-admin-account-management> -->
-      <app-conversion></app-conversion>
+      <!-- <app-conversion></app-conversion> -->
+      <router-outlet></router-outlet>
 
     </div>
   </div>
