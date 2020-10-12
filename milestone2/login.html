@@ -34,6 +34,7 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center;
+            background-blend-mode: soft-light;
         }
 
         hr {
@@ -146,11 +147,21 @@
             max-width: 100%;
         }
 
+        .nav-item :hover {
+            transform: scale(1.25);
+            transition: 1s;
+            background-color: black;
+            color: white;
+        }
+        .navbar-header > a :hover {
+            transform: scale(1.25);
+            transition: 1s;
+        }
 
     </style>
 </head>
 <body>
-<div class="container-fluid color-lively-grey shadow min-width-1000 max-width-100">
+<div class="container-fluid  shadow min-width-1000 max-width-100">
     <!-- Header -->
     <div class="row">
         <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 w-75">
@@ -170,6 +181,7 @@
     </div>
 </div>
 
+<form action="./my-account-component.html">
 <div class="fluid-container md-form m-5 h-75 w-90 align-self-center">
     
     <!-- style="border: 1px solid black" -->
@@ -177,6 +189,7 @@
         <div class="col">
         </div>
 
+        
         <div class="col" style="background: white; padding-top: 2%;">
             <h2>Sign In</h2>
             or <a href="./create-account-component.html">create an account</a> 
@@ -201,6 +214,7 @@
     </div>
 
 </div>
+</form>
 
 </body>
 </html>

@@ -4,23 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS only -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+          <!-- Add icon library -->
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+
     <!-- Adding ROBOTO Google Font Family -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    
+
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="favicon-32x32.png"/>
 
     <!-- JS, Popper.js, and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <title>Triangular Arbitrary</title>
 
     <style>
-        html,body {
-            height:100%;
+        html, body {
+            height: 100%;
             width: 100%;
             background-color: #EDEAE5;
             font-family: 'Roboto', sans-serif;
@@ -28,10 +38,11 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center;
+            background-blend-mode: soft-light;
         }
 
         hr {
-            color:black;
+            color: black;
             background-color: black;
             line-height: 2px;
         }
@@ -48,18 +59,22 @@
             background-color: #2E4057;
         }
 
-        .color-orange{
-            background-color:  #E27D60;
+        .color-orange {
+            background-color: #E27D60;
         }
+
         .color-lightblue {
             background-color: #97caef;
         }
+
         .color-lightorange {
             background-color: #E8A87C;
         }
+
         .color-pink {
             background-color: #C38D9E;
         }
+
         .color-green {
             background-color: #41B3A3;
         }
@@ -67,15 +82,19 @@
         .color-corp-lightblue {
             background-color: #265077;
         }
+
         .color-corp-darkblue {
             background-color: #022140;
         }
+
         .color-corp-pink {
             background-color: #494B68;
         }
+
         .color-corp-darkgreen {
             background-color: #1E4258;
         }
+
         .color-corp-lightgreen {
             background-color: #2D5F5D
         }
@@ -83,15 +102,19 @@
         .bg-color-lively-darkgreen {
             background-color: #026670;
         }
+
         .bg-color-lively-lightgreen {
             background-color: #9FEDD7;
         }
+
         .bg-color-lively-tan {
             background-color: #FEF9C7;
         }
+
         .bg-color-lively-yellow {
             background-color: #FCE181;
         }
+
         .bg-color-lively-grey {
             background-color: #EDEAE5;
         }
@@ -99,18 +122,23 @@
         .text-color-lively-darkgreen {
             color: #026670;
         }
+
         .text-color-lively-lightgreen {
             color: #9FEDD7;
         }
+
         .text-color-lively-tan {
             color: #FEF9C7;
         }
+
         .text-color-lively-yellow {
             color: #FCE181;
         }
+
         .text-color-lively-grey {
             color: #EDEAE5;
         }
+
         .text-color-jet {
             color: #2F2D2E;
         }
@@ -123,10 +151,47 @@
             max-width: 100%;
         }
 
+        .nav-item :hover {
+            transform: scale(1.25);
+            transition: 1s;
+            background-color: black;
+            color: white;
+        }
+        .navbar-header > a :hover {
+            transform: scale(1.25);
+            transition: 1s;
+        }
+
+    .search input[type="text"] {
+        float: left;
+        border: none;
+        margin-top: 8px;
+        margin-right: 16px;
+        font-size: 17px;
+      }
+      .btn-standard {
+        color: #f4f4fa;
+        background-color: #022140;
+      }
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td,
+        th {
+            border: 1px solid #070000;
+            text-align: left;
+            padding: 8px;
+            font-weight: bold;
+        }
 
     </style>
 </head>
+
+
 <body>
+
     <div class="container-fluid color-lively-grey shadow min-width-1000 max-width-100">
         <!-- Header -->
         <div class="row">
@@ -141,138 +206,229 @@
             <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 w-25" style="float: right;">
                 <div class="text-color-lively-darkgreen float-right m-3">
                     <span>Welcome, </span> 
-                    <a href="">John Doe</a>
+                    <a href="./my-account-component.html">Warren Buffet</a>
                 </div>
             </div>        
         </div>
     </div>
 
-    <div class="fluid-container md-form m-5 h-50 w-50 align-self-center">
-        <h1><b>"I'm Feeling Lucky" - Top 10</b></h1>
-        <hr>
-        <h3><b>Stocks</b></h3>
-        <!-- TODO: backend functionality to populate table for top 10 list. -->
-        <table class="table table-striped table-dark">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Symbol</th>
-                <th scope="col">Name</th>
-                <th scope="col">Last</th>
-                <th scope="col">Change</th>
-                <th scope="col">Change %</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>NNOX</td>
-                <td>NANO-X IMAGING LTD</td>
-                <td>$37.44</td>
-                <td>13.47</td>
-                <td>56.2%</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>HMHC</td>
-                <td>HOUGHTON MIFFLIN HARCOURT CO</td>
-                <td>$2.49</td>
-                <td>0.48</td>
-                <td>23.88%</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>SLDB</td>
-                <td>SOLID BIOSCIENCES INC.</td>
-                <td>$4.18</td>
-                <td>0.72</td>
-                <td>20.81%</td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>AMZN</td>
-                <td>AMAZON</td>
-                <td>$3125.00</td>
-                <td>96.26</td>
-                <td>2.99%</td>
-              </tr>
-              <tr>
-                <th scope="row">5</th>
-                <td>AAPL</td>
-                <td>APPLE, INC</td>
-                <td>$561.15</td>
-                <td>0.12</td>
-                <td>5%</td>
-              </tr>
-            </tbody>
-          </table>
+        <!-- Left Navigation and Main Content-->
+        <div class="container-fluid min-width-1000 max-width-100 w-100 h-150 shadow">
+
+
+            <!-- Navigation Options -->
+            <div class="row h-100">
+                <div style="min-width: 200px; max-width:100px" class="col-1 col-sm-1 col-m-1 col-lg-1 col-xl-1 shadow-lg rounded m-3">
+                    <nav class="navbar">            
+                        <ul class="nav navbar-nav">
+                            <div class="row">
+                                <!-- TODO: INSERT href here -->
+                                <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" href="./top-ten.component.html"><b>TOP 10</b> </a></li>
+                            </div>
+                            <hr class="color-jet">
+                            <div class="row">
+                                <!-- TODO: INSERT href here -->
+                                <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" href="./favorites.component.html"><b>FAVORITES</b> </a></li>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <!-- TODO: INSERT href here -->
+                                <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./search.component.html"><b>SEARCH</b> </a></li>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <!-- TODO: INSERT href here -->
+                                <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./conversion.component.html"><b>CONVERSIONS</b> </a></li>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <!-- TODO: INSERT href here -->
+                                <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./admin-account-management-component.html"><b>ACCOUNT ADMINISTRATION</b> </a></li>
+                            </div>
+                            <hr>
+
+                            <div class="row">
+                                <!-- TODO: INSERT href here -->
+                                <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" href="./index.html"><b>CREATE TICKET</b> </a></li>
+                            </div>
+                            <hr>
+
+                        </ul>
+                    </nav>
+                </div>
+
+            <!-- Main Content -->
         
-        <hr>
-        <h3><b>Crypto</b></h3>
-        <table class="table table-striped table-dark">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Symbol</th>
-                <th scope="col">Name</th>
-                <th scope="col">Last</th>
-                <th scope="col">Change</th>
-                <th scope="col">Change %</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>BTC</td>
-                <td>BITCOIN</td>
-                <td>$37.44</td>
-                <td>13.47</td>
-                <td>56.2%</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>LTC</td>
-                <td>LITECOIN</td>
-                <td>$2.49</td>
-                <td>0.48</td>
-                <td>23.88%</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>TRX</td>
-                <td>TRON</td>
-                <td>$4.18</td>
-                <td>0.72</td>
-                <td>20.81%</td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>DOGE</td>
-                <td>DOGECOIN</td>
-                <td>$3125.00</td>
-                <td>96.26</td>
-                <td>2.99%</td>
-              </tr>
-              <tr>
-                <th scope="row">5</th>
-                <td>BNB</td>
-                <td>BINANCE COIN</td>
-                <td>$561.15</td>
-                <td>0.12</td>
-                <td>5%</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 shadow-lg rounded m-3"> 
+                
+            <!-- <h2 class="d-flex mt-5 justify-content-center text-color-lively-darkgreen">{{ MAIN CONTENT DIV }}</h2> -->
+            <div class="fluid-container md-form m-5 h-50 w-500 align-self-center">
+
+
+
+                <h1><b>"I'm Feeling Lucky" - Top 10</b></h1>
+                <hr>
+                <h3><b>Stocks</b></h3>
+                <!-- TODO: backend functionality to populate table for top 10 list. -->
+                <table class="table table-striped table-dark">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Symbol</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Change</th>
+                        <th scope="col">Change %</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>NNOX</td>
+                        <td>NANO-X IMAGING LTD</td>
+                        <td>$37.44</td>
+                        <td>13.47</td>
+                        <td>56.2%</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>HMHC</td>
+                        <td>HOUGHTON MIFFLIN HARCOURT CO</td>
+                        <td>$2.49</td>
+                        <td>0.48</td>
+                        <td>23.88%</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>SLDB</td>
+                        <td>SOLID BIOSCIENCES INC.</td>
+                        <td>$4.18</td>
+                        <td>0.72</td>
+                        <td>20.81%</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">4</th>
+                        <td>AMZN</td>
+                        <td>AMAZON</td>
+                        <td>$3125.00</td>
+                        <td>96.26</td>
+                        <td>2.99%</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">5</th>
+                        <td>AAPL</td>
+                        <td>APPLE, INC</td>
+                        <td>$561.15</td>
+                        <td>0.12</td>
+                        <td>5%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                
+                <hr>
+                <h3><b>Crypto</b></h3>
+                <table class="table table-striped table-dark">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Symbol</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Change</th>
+                        <th scope="col">Change %</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>BTC</td>
+                        <td>BITCOIN</td>
+                        <td>$37.44</td>
+                        <td>13.47</td>
+                        <td>56.2%</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>LTC</td>
+                        <td>LITECOIN</td>
+                        <td>$2.49</td>
+                        <td>0.48</td>
+                        <td>23.88%</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>TRX</td>
+                        <td>TRON</td>
+                        <td>$4.18</td>
+                        <td>0.72</td>
+                        <td>20.81%</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">4</th>
+                        <td>DOGE</td>
+                        <td>DOGECOIN</td>
+                        <td>$3125.00</td>
+                        <td>96.26</td>
+                        <td>2.99%</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">5</th>
+                        <td>BNB</td>
+                        <td>BINANCE COIN</td>
+                        <td>$561.15</td>
+                        <td>0.12</td>
+                        <td>5%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                
+                
+                <div class="row float-left">
+                    <!-- TODO: hookup button to function that generates a new top 10 list. -->
+                    <button class="btn btn-standard">Generate New Top 10</button>
+                    <br />
+                </div>
         
-        
-        <div class="row float-left">
-            <!-- TODO: hookup button to function that generates a new top 10 list. -->
-            <button class="btn btn-primary">Generate New Top 10</button>
+
+
+
+            </div>
+            
+        </div>
+
+        </div>
+
+        </div>
+
+
+        <!-- FOOTER -->
+        <div class="container-fluid min-width-1000 max-width-100 w-100">
+            <div class="d-flex row h-25 text-white justify-content-center bg-color-lively-grey shadow rounded m-2">
+                <ul style="list-style: none;">
+                    <li>
+                        <p class="text-color-lively-darkgreen justify-content-center">FOOTER CONTENT HERE - CSC436 Web Development Group 6</p>
+                    </li>
+                    <li>
+                        <p><a style="justify-content: center;" href="https://www.vecteezy.com/free-vector/logo">Logo Vectors by Vecteezy</a></p>
+                    </li>
+                </ul>
+
+
+            </div>
         </div>
 
     </div>
 
+
+
+    <!-- Footer -->
 </body>
 </html>
+
+
+
+
+
+
 
 
