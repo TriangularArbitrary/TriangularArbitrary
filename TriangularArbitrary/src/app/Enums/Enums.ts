@@ -12,5 +12,6 @@ export enum TicketTypes {
 
 export enum LocalStorageKeys {
   Tickets = 'Tickets',
-  Accounts = 'Accounts'
+  Accounts = 'Accounts',
+  Favorites = 'Favorites'
 }
