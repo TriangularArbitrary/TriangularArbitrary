@@ -33,9 +33,10 @@ jobs:
       - name: Publish generated content to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.5.9
         with:
-          FOLDER : dist
+          FOLDER : TriangularArbitrary/dist
           branch: gh-pages
           github_token : ${{ secrets.GITHUB_TOKEN }}
+          TARGET_FOLDER: .
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
