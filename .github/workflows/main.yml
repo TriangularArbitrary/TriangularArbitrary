@@ -17,13 +17,9 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # labels actions taken with the github token
-      - uses: actions/labeler@v2
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }} 
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2.3.1
@@ -37,9 +33,9 @@ jobs:
       - run: npm install --prefix ./TriangularArbitrary -g @angular/cli > /dev/null
       - run: npm install --prefix ./TriangularArbitrary angular-cli-ghpages
 #       - run: npm run build --prefix ./TriangularArbitrary --prod --output-path=dist --base-href="https://triangulararbitrary.github.io/TriangularArbitrary"
-      - run: npm run deploy --prefix ./TriangularArbitrary
+      - run: export GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+      - run: npm run deploy --prefix ./TriangularArbitrary 
 
-#
 #       - name: Publish generated content to GitHub Pages
 #         uses: JamesIves/github-pages-deploy-action@3.5.9
 #         with:
