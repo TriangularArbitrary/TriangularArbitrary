@@ -120,10 +120,16 @@
         },
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
-          "options": {}
+          "options": {
+            "baseHref": "https://triangulararbitrary.github.io/TriangularArbitrary/",
+            "name": "Triangular Arbitrary"
+          }
         }
       }
     }
   },
-  "defaultProject": "TriangularArbitrary"
+  "defaultProject": "TriangularArbitrary",
+  "cli": {
+    "analytics": false
+  }
 }
