@@ -33,8 +33,10 @@ jobs:
       - run: npm install --prefix ./TriangularArbitrary -g @angular/cli > /dev/null
       - run: npm install --prefix ./TriangularArbitrary angular-cli-ghpages
 #       - run: npm run build --prefix ./TriangularArbitrary --prod --output-path=dist --base-href="https://triangulararbitrary.github.io/TriangularArbitrary"
-      - run: export GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+#       - run: export GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
       - run: npm run deploy --prefix ./TriangularArbitrary 
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 #       - name: Publish generated content to GitHub Pages
 #         uses: JamesIves/github-pages-deploy-action@3.5.9
