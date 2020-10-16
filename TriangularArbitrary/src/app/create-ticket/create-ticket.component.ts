@@ -1,3 +1,4 @@
+import { TicketStorageService } from './../Services/ticket-storage.service';
 import { TicketTypes, TicketSeverityTypes, LocalStorageKeys } from './../Enums/Enums';
 import { ITicketModel } from './../Models/ITicketModel';
 import { Component, Input, OnInit } from '@angular/core';
@@ -16,12 +17,15 @@ export class CreateTicketComponent implements OnInit {
   @Input() isBusy = false;
   @Input() formSubmitted = false;
 
+  private ticketService: TicketStorageService;
+
   ticketTypes = TicketTypes;
   severityTypes = TicketSeverityTypes;
   enumKeys = Object.keys;
 
-  constructor() {
+  constructor(ticketService: TicketStorageService) {
     this.model = new ITicketModel();
+    this.ticketService = ticketService;
    }
 
   ngOnInit(): void {
@@ -29,11 +33,8 @@ export class CreateTicketComponent implements OnInit {
 
   // SubmitTicket to save the ITicketModel object to LocalStorage as a POC and then if we add Firebase, we'll set it there somehow
   SubmitTicket(form: NgForm): void {
-    let currentTickets: ITicketModel[] = JSON.parse(localStorage.getItem(LocalStorageKeys.Tickets));
-
-    currentTickets != null ? currentTickets.push(this.model) : currentTickets = [this.model];
-    this.Tickets = currentTickets;
-    localStorage.setItem(LocalStorageKeys.Tickets, JSON.stringify(currentTickets));
+    this.ticketService.saveTicket(this.model);
+    this.Tickets = this.ticketService.getAllTickets();
   }
 
   // SubmitTicket to save the ITicketModle object to Firebase as a POC for firebase
