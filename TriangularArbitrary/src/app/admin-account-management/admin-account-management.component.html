@@ -19,30 +19,14 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>Transaction rejected</td>
-              <td>Bug found</td>
-              <td>Critical</td>
-              <td>When I clicked on the sell button I got a blank screen</td>
-              <td>UserId123</td>
-              <td><button class="btn btn-success">Resolve</button></td>
-            </tr>
-            <tr>
-              <td>Can't change password</td>
-              <td>Account Issues</td>
-              <td>Medium</td>
-              <td>I don't know how to change my password....</td>
-              <td>UserId456</td>
-              <td><button class="btn btn-success">Resolve</button></td>
-            </tr>
-            <tr>
-              <td>Remove my account</td>
-              <td>Account Issues</td>
-              <td>High</td>
-              <td>I'd like my account to be removed</td>
-              <td>UserId789</td>
-              <td><button class="btn btn-success">Resolve</button></td>
-            </tr>
+                <tr *ngFor="let ticket of tickets; let i = index">
+                  <td>{{ticket.subject}}</td>
+                  <td>{{ticket.type}}</td>
+                  <td>{{ticket.severity}}</td>
+                  <td>{{ticket.ticketReason}}</td>
+                  <td>UserId123</td>
+                  <td><button class="btn btn-success" (click)="resolveTicket(i)">Resolve</button></td>
+                </tr>
             </tbody>
           </table>
         </div>
