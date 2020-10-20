@@ -1,5 +1,5 @@
 <!-- Form for submitting a ticket to support for the App -->
-<form #ticketForm="ngForm" (ngSubmit)="SubmitTicket(ticketForm)">
+<form #ticketForm="ngForm" (ngSubmit)="SubmitTicketFirebase(ticketForm)">
   <div class="fluid-container md-form m-5 h-50 w-50 align-self-center form-group">
       <h1><b>Create Ticket</b></h1>
       <hr>
@@ -32,29 +32,10 @@
   </div>
 </form>
 
-
-<!-- Debugging Form -->
-<!-- <div>
-<h1>Form Input Debugging</h1>
-  <ul>
-      <label for="debug-subject"><b>Subject</b> </label>
-      <li id="debug-subject"> {{model.subject}}</li>
-      <hr>
-      <label for="debug-severity"><b>Severity</b> </label>
-      <li id="debug-severity">  {{model.severity}}</li>
-      <hr>
-      <label for="debug-type"><b>Type</b> </label>
-      <li id="debug-type">  {{model.type}}</li>
-      <hr>
-      <label for="debug-ticketReason"><b>Reason</b> </label>
-      <li id="debug-ticketReason">  {{model.ticketReason}}</li>
-  </ul>
-</div> -->
-
 <!-- Debugging the list of Tickets in LocalStorage -->
-<div>
+<!-- <div>
   <h1>Current array of Tickets in LocalStorage</h1>
   <ul>
     <li *ngFor="let ticket of Tickets">{{ticket.subject}}: {{ticket.type}} | {{ticket.severity}} | {{ticket.ticketReason}}</li>
   </ul>
-</div>
+</div> -->

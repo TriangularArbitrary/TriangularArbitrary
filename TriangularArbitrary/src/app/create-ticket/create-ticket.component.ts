@@ -2,6 +2,7 @@ import { TicketTypes, TicketSeverityTypes, LocalStorageKeys } from './../Enums/E
 import { ITicketModel } from './../Models/ITicketModel';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-create-ticket',
@@ -34,7 +35,15 @@ export class CreateTicketComponent implements OnInit {
   }
 
   // SubmitTicket to save the ITicketModle object to Firebase as a POC for firebase
-  SubmitTicketFirebase(): void {
-    console.log("Implement me!")
+  SubmitTicketFirebase(form: NgForm): void {
+    firebase.firestore().collection('tickets').add( {
+      subject: this.model.subject,
+      type: this.model.type,
+      severity: this.model.severity,
+      ticketReason: this.model.ticketReason
+
+    }).catch((e) => {
+      console.error('Error writing new ticket to database', e);
+    });
   }
 }
