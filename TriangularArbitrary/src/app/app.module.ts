@@ -13,6 +13,8 @@ import { ConversionComponent } from './conversion/conversion.component';
 import { TopTenComponent } from './top-ten/top-ten.component';
 import { SearchComponent } from './search/search.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { UserAccountComponent } from './user-account/user-account.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { FavoritesComponent } from './favorites/favorites.component';
     SearchComponent,
     FavoritesComponent,
     ConversionComponent,
-    TopTenComponent
+    TopTenComponent,
+    UserAccountComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,8 @@ import { ConversionComponent } from './conversion/conversion.component';
 import { AdminAccountManagementComponent } from './admin-account-management/admin-account-management.component';
 import {SearchComponent } from './search/search.component';
 import {FavoritesComponent } from './favorites/favorites.component';
+import { LoginComponent } from './login/login.component';
+import { UserAccountComponent } from './user-account/user-account.component';
 
 const routes: Routes = [
   { path: 'create-ticket', component: CreateTicketComponent },
@@ -14,6 +16,8 @@ const routes: Routes = [
   { path: 'conversion', component: ConversionComponent },
   { path: 'admin', component: AdminAccountManagementComponent },
   { path: 'top-ten', component: TopTenComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'user-account', component: UserAccountComponent }
 ];
 
 @NgModule({
