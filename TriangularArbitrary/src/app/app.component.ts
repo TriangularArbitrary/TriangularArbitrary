@@ -32,12 +32,12 @@ export class AppComponent {
 
     this.localStorageKeys.forEach(element => {
       localStorage.getItem(element);
-      console.log(element);
     });
 
 
-    // Firebase initialization
-    var app = firebase.initializeApp(firebaseConfig);
+    // Firebase initialization - takes the firebaseConfig constant that points to the TriangularArbitrary firebase app
+    // and initializes its development functions for use
+    let app = firebase.initializeApp(firebaseConfig);
   }
 }
 
