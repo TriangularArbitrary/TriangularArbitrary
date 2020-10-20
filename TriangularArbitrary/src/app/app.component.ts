@@ -1,6 +1,7 @@
 import { LocalStorageKeys } from './Enums/Enums';
 import { Component } from '@angular/core';
 import * as firebase from 'firebase';
+import { BehaviorSubject } from 'rxjs';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAGVrbwqSR3WZjlUpL_13y7lLDe8e1kYWA",
@@ -12,7 +13,6 @@ const firebaseConfig = {
   appId: "1:991332102738:web:1399c62301d65b001fe58b",
   measurementId: "G-QRJ5RJR3F8"
 };
-
 
 @Component({
   selector: 'app-root',
