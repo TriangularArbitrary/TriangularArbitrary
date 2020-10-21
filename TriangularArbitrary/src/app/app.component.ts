@@ -1,6 +1,18 @@
 import { LocalStorageKeys } from './Enums/Enums';
 import { Component } from '@angular/core';
+import * as firebase from 'firebase';
 import { BehaviorSubject } from 'rxjs';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAGVrbwqSR3WZjlUpL_13y7lLDe8e1kYWA",
+  authDomain: "triangulararbitrary.firebaseapp.com",
+  databaseURL: "https://triangulararbitrary.firebaseio.com",
+  projectId: "triangulararbitrary",
+  storageBucket: "triangulararbitrary.appspot.com",
+  messagingSenderId: "991332102738",
+  appId: "1:991332102738:web:1399c62301d65b001fe58b",
+  measurementId: "G-QRJ5RJR3F8"
+};
 
 @Component({
   selector: 'app-root',
@@ -20,8 +32,12 @@ export class AppComponent {
 
     this.localStorageKeys.forEach(element => {
       localStorage.getItem(element);
-      console.log(element);
     });
+
+
+    // Firebase initialization - takes the firebaseConfig constant that points to the TriangularArbitrary firebase app
+    // and initializes its development functions for use
+    let app = firebase.initializeApp(firebaseConfig);
   }
 }
 

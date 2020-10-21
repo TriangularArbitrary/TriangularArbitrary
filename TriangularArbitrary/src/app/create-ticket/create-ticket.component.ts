@@ -1,7 +1,8 @@
 import { TicketTypes, TicketSeverityTypes, LocalStorageKeys } from './../Enums/Enums';
 import { ITicketModel } from './../Models/ITicketModel';
 import { Component, Input, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-create-ticket',
@@ -12,6 +13,7 @@ export class CreateTicketComponent implements OnInit {
 
   @Input() model: ITicketModel;
   @Input() Tickets = JSON.parse(localStorage.getItem(LocalStorageKeys.Tickets)) as ITicketModel[];
+  @Input() isBusy = false;
 
   ticketTypes = TicketTypes;
   severityTypes = TicketSeverityTypes;
@@ -34,7 +36,21 @@ export class CreateTicketComponent implements OnInit {
   }
 
   // SubmitTicket to save the ITicketModle object to Firebase as a POC for firebase
-  SubmitTicketFirebase(): void {
-    console.log("Implement me!")
+  SubmitTicketFirebase(form: NgForm): any {
+    // starts the loading spinner
+    this.isBusy = true;
+    // resets form validation
+    form.reset();
+    firebase.firestore().collection('tickets').add( {
+      subject: this.model.subject,
+      type: this.model.type,
+      severity: this.model.severity,
+      ticketReason: this.model.ticketReason
+    }).then(() => this.model = new ITicketModel())
+      .then(() => this.isBusy = false)
+      .catch((e) => {
+      this.isBusy = false;
+      console.error('Error writing new ticket to database', e);
+    });
   }
 }
