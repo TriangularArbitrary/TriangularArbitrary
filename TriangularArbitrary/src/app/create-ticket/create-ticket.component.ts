@@ -14,6 +14,7 @@ export class CreateTicketComponent implements OnInit {
   @Input() model: ITicketModel;
   @Input() Tickets = JSON.parse(localStorage.getItem(LocalStorageKeys.Tickets)) as ITicketModel[];
   @Input() isBusy = false;
+  @Input() formSubmitted = false;
 
   ticketTypes = TicketTypes;
   severityTypes = TicketSeverityTypes;
@@ -39,15 +40,18 @@ export class CreateTicketComponent implements OnInit {
   SubmitTicketFirebase(form: NgForm): any {
     // starts the loading spinner
     this.isBusy = true;
-    // resets form validation
-    form.reset();
+
     firebase.firestore().collection('tickets').add( {
       subject: this.model.subject,
       type: this.model.type,
       severity: this.model.severity,
       ticketReason: this.model.ticketReason
-    }).then(() => this.model = new ITicketModel())
-      .then(() => this.isBusy = false)
+    }).then(() => {
+      this.model = new ITicketModel();
+      form.reset();
+      this.isBusy = false;
+      this.formSubmitted = true;
+    })
       .catch((e) => {
       this.isBusy = false;
       console.error('Error writing new ticket to database', e);
