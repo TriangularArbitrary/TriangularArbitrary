@@ -1,3 +1,5 @@
+import { AdminAuthGuard } from './auth/admin-auth.guard';
+import { AuthGuard } from './auth/auth.guard';
 import { CreateTicketComponent } from './create-ticket/create-ticket.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -14,7 +16,7 @@ const routes: Routes = [
   { path: 'favorites', component: FavoritesComponent },
   { path: 'search', component: SearchComponent },
   { path: 'conversion', component: ConversionComponent },
-  { path: 'admin', component: AdminAccountManagementComponent },
+  { path: 'admin', component: AdminAccountManagementComponent, canActivate: [AuthGuard, AdminAuthGuard] },
   { path: 'top-ten', component: TopTenComponent },
   { path: 'login', component: LoginComponent },
   { path: 'user-account', component: UserAccountComponent }
