@@ -15,3 +15,9 @@ export enum LocalStorageKeys {
   Accounts = 'Accounts',
   Favorites = 'Favorites'
 }
+
+export enum UserAccountType{
+  Regular = 'Regular',
+  Power = 'Power',
+  Administrator = 'Admin'
+}

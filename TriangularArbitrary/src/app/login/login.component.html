@@ -20,26 +20,12 @@
                 <br/><br/>
                 <button class="btn btn-primary form-control" style="background-color: #7043F5; ">Sign In</button>
                 <br/><br/>
-                <button class="btn btn-primary form-control" style="background-color: white; border:#7043F5 1px solid; color: #7043F5; "><img src="assets/g-fakeonly.png" />Sign in with Google</button>
+                <button class="btn btn-primary form-control" style="background-color: white; border:#7043F5 1px solid; color: #7043F5; "
+                (click)="signInWithGoogle()"
+                ><img src="assets/g-fakeonly.png" />Sign in with Google</button>
 
                 <br/><br/>
 
-                <div>
-                    <button type="button" (click)="signInWithGoogle()" class="btn btn-primary">Sign In With Google</button>
-
-                </div>
-
-                <br/><br/>
-                <div *ngIf="loggedIn===true">
-                    <div >
-                        <label>Email</label>
-                        <input type="text" [value]="user.firstName">
-                    </div>
-                    <div>
-                        <button type="button" (click)="signOut()" class="btn btn-warning">Sign Out</button>
-                    </div>
-                </div>
-               
           </div>
 
           <div class="col float-left" >

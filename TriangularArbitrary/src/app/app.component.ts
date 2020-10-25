@@ -3,6 +3,10 @@ import { Component } from '@angular/core';
 import * as firebase from 'firebase';
 import { BehaviorSubject } from 'rxjs';
 
+
+import { AccountService } from './Services/account.service';
+import { IUserModel } from './Models/IUserModel';
+
 const firebaseConfig = {
   apiKey: "AIzaSyAGVrbwqSR3WZjlUpL_13y7lLDe8e1kYWA",
   authDomain: "triangulararbitrary.firebaseapp.com",
@@ -22,8 +26,19 @@ const firebaseConfig = {
 export class AppComponent {
   title = 'TriangularArbitrary';
   localStorageKeys = Object.keys(LocalStorageKeys);
+  account: IUserModel;
+  private accountService: AccountService;
 
-  constructor() {
+  constructor(accountService: AccountService) {
+    
+    //Load up the user account for app use
+    this.account = accountService.getUserAccount();
+    console.log('account' + this.account);
+
+    
+    //TODO: TEMP for log out; until update to use routing
+    this.accountService = accountService;
+
 
     // On Construction of the App Component,
     // get the localStorage Key/Value pair for storage (Could move pieces out to other components,
@@ -39,6 +54,11 @@ export class AppComponent {
     // and initializes its development functions for use
     let app = firebase.initializeApp(firebaseConfig);
   }
+
+  signOut():void{
+    this.accountService.signOut();
+  }
+
 }
 
 

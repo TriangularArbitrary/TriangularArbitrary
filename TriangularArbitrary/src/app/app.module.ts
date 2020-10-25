@@ -41,7 +41,7 @@ import { LoginComponent } from './login/login.component';
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
-        autoLogin: true,
+        //autoLogin: true,
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
