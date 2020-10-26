@@ -10,15 +10,15 @@
 
     <!-- User Greeting - TODO: add interpolation for userName {{ userName }} -->
     <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 w-25" style="float: right;">
-      <div class="text-color-lively-darkgreen float-right m-3 pt-2 pr-4">       
+      <div class="text-color-lively-darkgreen float-right m-3 pt-2 pr-4">
         <div *ngIf='!account.isAuthenticated; else elseBlock' ><a routerLink="login" routerLinkActive="active">Login</a></div>
         <ng-template #elseBlock>
           <span>Welcome, </span>
           <a routerLink="user-account" routerLinkActive="active">{{ account.firstName + ' ' + account.lastName }}
-          <div *ngIf='true' class="d-flex justify-content-center"><img [src]='account.photo' class='img-circle'></div></a>
+          <div *ngIf='showImage' class="d-flex justify-content-center"><img [src]='account.photo' class='img-circle'></div></a>
           <br/>
           <!--route this link to the account service to log out user-->
-          <input type="text" value="Sign Out" (click)="signOut()">
+          <a (click)="signOut()" class="float-right">Sign Out</a>
         </ng-template>
       </div>
     </div>

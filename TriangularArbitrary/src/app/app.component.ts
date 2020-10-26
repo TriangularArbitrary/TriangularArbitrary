@@ -28,14 +28,15 @@ export class AppComponent {
   localStorageKeys = Object.keys(LocalStorageKeys);
   account: IUserModel;
   private accountService: AccountService;
+  showImage: boolean = false;
 
   constructor(accountService: AccountService) {
-    
+
     //Load up the user account for app use
     this.account = accountService.getUserAccount();
     console.log('account' + this.account);
 
-    
+
     //TODO: TEMP for log out; until update to use routing
     this.accountService = accountService;
 
