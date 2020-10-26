@@ -18,6 +18,14 @@ export enum LocalStorageKeys {
 
 export enum UserAccountType{
   Regular = 'Regular',
-  Power = 'Power',
-  Administrator = 'Admin'
+  PowerUser = 'Power User',
+  Lucky = 'Lucky',
+  Administrator = 'Administrator',
+  FraudDetector = 'Fraud Detector'
+}
+
+export enum Currency{
+  USD = 'USD',
+  CAD = 'CAD',
+  BitCoin = 'BitCoin'
 }

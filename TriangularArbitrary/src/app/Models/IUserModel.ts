@@ -1,5 +1,5 @@
 import { Identifiers } from '@angular/compiler';
-import { UserAccountType } from '../Enums/Enums';
+import { Currency, UserAccountType } from '../Enums/Enums';
 
 export class IUserModel {
     id: string;
@@ -9,8 +9,11 @@ export class IUserModel {
     photo: string;
     isAuthenticated: boolean;
     accountType: UserAccountType;
+    preferredCurrency: Currency;
+    secret: string;
 
-    constructor(id?: string, email?: string, firstName?: string, lastName?: string, photo?: string, accountType?: UserAccountType){
+    constructor(id?: string, email?: string, firstName?: string, lastName?: string, photo?: string,
+                accountType?: UserAccountType, preferredCurrency?: Currency, secret?: string){
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -18,6 +21,8 @@ export class IUserModel {
         this.photo = photo;
         this.isAuthenticated = false;
         this.accountType = accountType;
+        this.preferredCurrency = preferredCurrency;
+        this.secret = secret;
     }
 
     //yep, intense level of security
