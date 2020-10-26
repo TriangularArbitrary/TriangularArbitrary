@@ -33,9 +33,10 @@
                           <input type="email" placeholder="Email" class="form-control w-100" maxlength="30"
                           name="email" [(ngModel)]="model.email" #email="ngModel"
                           [ngClass]="{'is-invalid': accountForm.submitted && email.invalid}"
-                          required>
+                          email required>
                         <div *ngIf="accountForm.submitted && email.invalid" class="invalid-feedback">
                           <div *ngIf="email.errors.required">Email is required</div>
+                          <div *ngIf="email.errors.email">Must be a valid email address</div>
                         </div>
                       </div>
                       </div>
@@ -59,21 +60,20 @@
 
                       </div>
                       <div class="col">
-                          <select required name="Preferred Currency" id="" class="custom-select">
-                              <option value="0" selected>Select...</option>
-                              <option value="1">USD</option>
-                              <option value="2">CA</option>
-                              <option value="3">Bitcoin</option>
+                          <select required name="Preferred Currency" id="" class="custom-select"
+                          [(ngModel)]="model.preferredCurrency" #preferredCurrency="ngModel"
+                          [ngClass]="{'is-invalid' : accountForm.submitted && preferredCurrency.invalid}">
+
+                              <option [value]="undefined" hidden>Select Currency...</option>
+                              <option *ngFor="let currency of this.enumKeys(currencies)" [value]="currency"> {{ currencies[currency] }} </option>
+
                           </select>
+                          <div *ngIf="accountForm.submitted && preferredCurrency.invalid" class="invalid-feedback">
+                            <div *ngIf="preferredCurrency.errors.required" class="text-danger">Preferred currency is required</div>
+                          </div>
                       </div>
                       <div class="col float-left">
-                          <select required name="Account Type" id="" class="custom-select">
-                              <option value="0" selected>Select...</option>
-                              <option value="1">Day Trader</option>
-                              <option value="2">System Administrator</option>
-                              <option value="3">Fraud Detector</option>
-                              <option value="4">I'm Feeling Lucky</option>
-                          </select>
+
                       </div>
                   </div>
                   <br>

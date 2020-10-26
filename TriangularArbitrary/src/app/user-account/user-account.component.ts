@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IUserModel } from '../Models/IUserModel';
 import { FormControl, NgForm, Validators } from '@angular/forms';
 import * as firebase from 'firebase/app';
-import { UserAccountType } from '../Enums/Enums';
+import { UserAccountType, Currency } from '../Enums/Enums';
 
 @Component({
   selector: 'app-user-account',
@@ -16,6 +16,7 @@ export class UserAccountComponent implements OnInit {
   model = new IUserModel();
   enumKeys = Object.keys;
   accountTypes = UserAccountType;
+  currencies = Currency;
 
   constructor() {
     this.model = new IUserModel();
@@ -31,12 +32,16 @@ export class UserAccountComponent implements OnInit {
     //debug
     console.log('New user: '+'First Name: ' +this.model.firstName +'\tLast Name: ' +this.model.lastName +'\tEmail: ' +this.model.email);
 
+    //import account service - populate the account for use within app
+
+
     //pass to firestore service
     firebase.firestore().collection('users').add({
       accountType: this.model.accountType,
       email: this.model.email,
       firstName: this.model.firstName,
       lastName: this.model.lastName,
+      preferredCurrency: this.model.preferredCurrency,
       //secret: this.model.secret
       secret: 'abcdef'
     }).then(()=>{
