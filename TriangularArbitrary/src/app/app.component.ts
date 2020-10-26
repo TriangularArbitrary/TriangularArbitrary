@@ -58,6 +58,7 @@ export class AppComponent {
 
   signOut():void{
     this.accountService.signOut();
+    this.account = this.accountService.getUserAccount();
   }
 
 }

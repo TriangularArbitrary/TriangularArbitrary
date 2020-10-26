@@ -32,17 +32,17 @@ export class AccountService {
 
   public getUserAccount(): IUserModel{
 
-    // this.account = new IUserModel("abc123",null, 'Louis', 'Winthorpe III', 
+    // this.account = new IUserModel("abc123",null, 'Louis', 'Winthorpe III',
     // 'https://lh3.googleusercontent.com/a-/AOh14GhvZZQurEkbtdvPrvV8Fce3qApk7TQqsHhCJIdQ=s96-c');
     // this.account.isAuthenticated = true;
 
-    return this.account;   
+    return this.account;
   }
 
   public signOut():void{
     this.authService.signOut();
     //remove any reference to the user
-    this.account = null;
+    this.account = new IUserModel();
   }
 
 
