@@ -1,27 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 
 import { IUserModel } from './../Models/IUserModel';
 import { AccountService } from './../Services/account.service';
+
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-
 export class LoginComponent implements OnInit {
 
-  private accountService: AccountService;
-  private authService: SocialAuthService;
+  //Output properties for emitting events to parent (App.Component)
+  @Output() accountCreationEnabled = new EventEmitter<boolean>();
+
   user: SocialUser;
   loggedIn:boolean;
   account: IUserModel;
 
-  constructor(authService: SocialAuthService,
-              accountService: AccountService) {
-                this.authService = authService;
-                this.accountService = accountService;
+  constructor(private authService: SocialAuthService,
+              private accountService: AccountService) {
                }
 
 
@@ -45,6 +45,11 @@ export class LoginComponent implements OnInit {
       //   + '\nresponse: ' + user.response
       // )
     })
+  }
+
+  createAccountClicked() {
+    console.log('Login Component create account clicked' + this.accountCreationEnabled);
+    this.accountCreationEnabled.emit(true);
   }
 
   signInWithGoogle():void{

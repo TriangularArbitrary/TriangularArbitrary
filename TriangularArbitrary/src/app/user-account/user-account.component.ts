@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IUserModel } from '../Models/IUserModel';
 import { FormControl, NgForm, Validators } from '@angular/forms';
 import * as firebase from 'firebase/app';
-import { UserAccountType, Currency } from '../Enums/Enums';
+import { UserAccountType, Currency, UserAccountContext } from '../Enums/Enums';
 
 @Component({
   selector: 'app-user-account',
@@ -11,15 +11,21 @@ import { UserAccountType, Currency } from '../Enums/Enums';
 })
 export class UserAccountComponent implements OnInit {
 
-  @Input() isBusy = false;
+  //Input properties for tracking changes against and binding based on parent component context
+  @Input() isBusy: boolean = false;
+  @Input() model = new IUserModel();
 
-  model = new IUserModel();
+  @Output() accountCreationCancelEvent = new EventEmitter<boolean>();
+
+  // set a local variable to this enum so we can traverse it for setting user-account title
+  userAccountContext = UserAccountContext;
+
   enumKeys = Object.keys;
   accountTypes = UserAccountType;
   currencies = Currency;
 
   constructor() {
-    this.model = new IUserModel();
+    if(this.model === undefined) this.model = new IUserModel();
   }
 
   ngOnInit(): void {
@@ -57,6 +63,7 @@ export class UserAccountComponent implements OnInit {
 
   onCancel(form):void{
     console.log('cancel');
+    this.accountCreationCancelEvent.emit(false);
     form.reset();
   }
 

@@ -1,5 +1,5 @@
-import { LocalStorageKeys } from './Enums/Enums';
-import { Component } from '@angular/core';
+import { LocalStorageKeys, UserAccountContext } from './Enums/Enums';
+import { Component, Input } from '@angular/core';
 import * as firebase from 'firebase';
 import { BehaviorSubject } from 'rxjs';
 
@@ -18,15 +18,20 @@ const firebaseConfig = {
   measurementId: "G-QRJ5RJR3F8"
 };
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  //Input properties to track changes against
+  @Input() accountCreationEnabled = false;
+  @Input() account: IUserModel;
+
   title = 'TriangularArbitrary';
   localStorageKeys = Object.keys(LocalStorageKeys);
-  account: IUserModel;
   private accountService: AccountService;
   showImage: boolean = false;
 
@@ -36,10 +41,8 @@ export class AppComponent {
     this.account = accountService.getUserAccount();
     console.log('account' + this.account);
 
-
     //TODO: TEMP for log out; until update to use routing
     this.accountService = accountService;
-
 
     // On Construction of the App Component,
     // get the localStorage Key/Value pair for storage (Could move pieces out to other components,
@@ -59,6 +62,11 @@ export class AppComponent {
   signOut():void{
     this.accountService.signOut();
     this.account = this.accountService.getUserAccount();
+  }
+
+  accountCreationEvent(e: boolean) {
+    this.account.accountContext = UserAccountContext.create;
+    this.accountCreationEnabled = e;
   }
 
 }

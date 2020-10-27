@@ -45,7 +45,6 @@ export class AccountService {
     this.account = new IUserModel();
   }
 
-
   //+------------------------------------+
   // TODO: build out or fake out some more?
   //+------------------------------------+
