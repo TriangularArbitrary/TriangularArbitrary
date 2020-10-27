@@ -15,3 +15,17 @@ export enum LocalStorageKeys {
   Accounts = 'Accounts',
   Favorites = 'Favorites'
 }
+
+export enum UserAccountType{
+  Regular = 'Regular',
+  PowerUser = 'Power User',
+  Lucky = 'Lucky',
+  Administrator = 'Administrator',
+  FraudDetector = 'Fraud Detector'
+}
+
+export enum Currency{
+  USD = 'USD',
+  CAD = 'CAD',
+  BitCoin = 'BitCoin'
+}
