@@ -14,11 +14,14 @@ import { AccountService } from './../Services/account.service';
 export class LoginComponent implements OnInit {
 
   //Output properties for emitting events to parent (App.Component)
-  @Output() accountCreationEnabled = new EventEmitter<boolean>();
+  @Output() accountCreationEvent = new EventEmitter<boolean>();
+  @Output() account = new EventEmitter<IUserModel>();
+  @Output() userAuthenticated = new EventEmitter<boolean>();
 
   user: SocialUser;
   loggedIn:boolean;
-  account: IUserModel;
+  formEmail: string;
+  formPassword: string;
 
   constructor(private authService: SocialAuthService,
               private accountService: AccountService) {
@@ -45,11 +48,16 @@ export class LoginComponent implements OnInit {
       //   + '\nresponse: ' + user.response
       // )
     })
+
+
   }
 
   createAccountClicked() {
-    console.log('Login Component create account clicked' + this.accountCreationEnabled);
-    this.accountCreationEnabled.emit(true);
+    this.accountCreationEvent.emit(true);
+  }
+
+  signInWithEmail(): void{
+    this.userAuthenticated.emit(true);
   }
 
   signInWithGoogle():void{

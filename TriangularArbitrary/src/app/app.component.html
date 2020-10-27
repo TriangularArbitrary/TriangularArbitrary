@@ -1,4 +1,4 @@
-<div class="container-fluid color-lively-grey min-width-1000 h-100 max-width-100">
+<div class="container-fluid color-lively-grey min-width-1000 h-75 m-0 max-width-100">
   <!-- Header -->
   <div class="row">
     <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
@@ -13,8 +13,8 @@
       <div class="text-color-lively-darkgreen float-right m-3 pt-2 pr-4">
         <div *ngIf='account.isAuthenticated'>
           <span>Welcome, </span>
-          <a routerLink="user-account" routerLinkActive="active">{{ account.firstName + ' ' + account.lastName }}
-          <div *ngIf='showImage' class="d-flex justify-content-center"><img [src]='account.photo' class='img-circle'></div></a>
+          <button class="btn btn-link" (click)="accountUpdateClicked()">{{ account.firstName + ' ' + account.lastName }}
+          <div *ngIf='showImage' class="d-flex justify-content-center"><img [src]='account.photo' class='img-circle'></div></button>
           <br/>
           <!--route this link to the account service to log out user-->
           <a (click)="signOut()" class="float-right">Sign Out</a>
@@ -24,22 +24,23 @@
 </div>
 
 <!-- Login Component -->
-<div *ngIf='!account.isAuthenticated && !accountCreationEnabled' class="container-fluid min-width-1000 max-width-100 h-100 w-100 mx-auto">
+<div *ngIf='!account.isAuthenticated && !accountCreationClicked' class="container-fluid min-width-1000 max-width-100 h-100 w-100 mx-auto">
   <app-login
-    (accountCreationEnabled)='accountCreationEvent($event)'
+    (accountCreationEvent)='accountCreationEvent($event)'
+    (userAuthenticated)='userAuthEvent($event)'
     ></app-login>
 </div>
 
 <!-- User-Account Component -->
-<div *ngIf='!account.isAuthenticated && accountCreationEnabled' class="container-fluid min-width-1000 max-width-100 h-100 w-50 align-middle mx-auto">
+<div *ngIf='accountCreationClicked' class="container-fluid min-width-1000 max-width-100 h-100 w-50 align-middle mx-auto">
   <app-user-account
-    [title]='account.accountContext'
-    (accountCreationCancelEvent)='accountCreationEvent($event)'
+    [model]='account'
+    (accountCreationEvent)='accountCreationEvent($event)'
     ></app-user-account>
 </div>
 
 <!-- Left Navigation and Main Content-->
-<div *ngIf='account.isAuthenticated' class="container-fluid max-width-100 w-100 h-100">
+<div *ngIf='account.isAuthenticated && !accountCreationClicked' class="container-fluid max-width-100 w-100 h-100">
   <div class="row">
 
     <!-- Navigation-->

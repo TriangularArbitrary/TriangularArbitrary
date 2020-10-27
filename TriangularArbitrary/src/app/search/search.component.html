@@ -1,9 +1,3 @@
-<head>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-  />
-</head>
 <div class="fluid-container md-form m-5 h-50 w-500 align-self-center">
   <h1><b>Search Stocks</b></h1>
   <div class="search">
@@ -19,40 +13,43 @@
     {{noData}}
   </div>
   <br />
-  <table id = "stockTable">
-    <thead>
-      <tr>
-        <th>Company</th>
-        <th>Open</th>
-        <th>High</th>
-        <th>Low</th>
-        <th>Price</th>
-        <th>Volume</th>
-        <th>Latest trading day</th>
-        <th>Previous close</th>
-        <th>Change</th>
-        <th>Change percent</th>
-        <th>Add to Favorites</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let stock of stocks">
-        <td><a href="{{'https://www.marketwatch.com/investing/stock/' + stock.symbol }}">{{ stock.symbol }}</a></td>
-        <td>{{ stock.open }}</td>
-        <td>{{ stock.high }}</td>
-        <td>{{ stock.low }}</td>
-        <td>{{ stock.price }}</td>
-        <td>{{ stock.volume }}</td>
-        <td>{{ stock.latestTradingDay }}</td>
-        <td>{{ stock.prevClose }}</td>
-        <td>{{ stock.change }}</td>
-        <td>{{ stock.changePercent }}</td>
-        <td>
-          <button (click)="addFavorite(stock.symbol)" class="btn src">
-            <i class="fa fa-star"></i>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-sm" id = "stockTable">
+      <thead class="thead-light">
+        <tr>
+          <th>Company</th>
+          <th>Open</th>
+          <th>High</th>
+          <th>Low</th>
+          <th>Price</th>
+          <th>Volume</th>
+          <th>Latest trading day</th>
+          <th>Previous close</th>
+          <th>Change</th>
+          <th>Change percent</th>
+          <th>Add to Favorites</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stock of stocks">
+          <td><a href="{{'https://www.marketwatch.com/investing/stock/' + stock.symbol }}">{{ stock.symbol }}</a></td>
+          <td>{{ stock.open }}</td>
+          <td>{{ stock.high }}</td>
+          <td>{{ stock.low }}</td>
+          <td>{{ stock.price }}</td>
+          <td>{{ stock.volume }}</td>
+          <td>{{ stock.latestTradingDay }}</td>
+          <td>{{ stock.prevClose }}</td>
+          <td>{{ stock.change }}</td>
+          <td>{{ stock.changePercent }}</td>
+          <td>
+            <button (click)="addFavorite(stock.symbol)" class="btn src">
+              <i class="fa fa-star"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>

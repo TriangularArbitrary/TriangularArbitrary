@@ -32,5 +32,5 @@ export enum Currency{
 
 export enum UserAccountContext {
   create = 'Create Account',
-  update = 'My Account'
+  update = 'Update Account'
 }

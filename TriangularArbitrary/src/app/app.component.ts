@@ -27,7 +27,7 @@ const firebaseConfig = {
 export class AppComponent {
 
   //Input properties to track changes against
-  @Input() accountCreationEnabled = false;
+  @Input() accountCreationClicked = false;
   @Input() account: IUserModel;
 
   title = 'TriangularArbitrary';
@@ -57,16 +57,32 @@ export class AppComponent {
     // Firebase initialization - takes the firebaseConfig constant that points to the TriangularArbitrary firebase app
     // and initializes its development functions for use
     let app = firebase.initializeApp(firebaseConfig);
+
+
+    //DEBUG without login
+    // this.account.isAuthenticated = true;
   }
 
   signOut():void{
     this.accountService.signOut();
     this.account = this.accountService.getUserAccount();
+    this.account.isAuthenticated = false;
+    this.accountCreationClicked = false;
+  }
+
+  accountUpdateClicked(): void {
+    this.account.accountContext = UserAccountContext.update;
+    this.accountCreationClicked = true;
   }
 
   accountCreationEvent(e: boolean) {
     this.account.accountContext = UserAccountContext.create;
-    this.accountCreationEnabled = e;
+    this.accountCreationClicked = e;
+  }
+
+
+  userAuthEvent(e: boolean) {
+    this.account.isAuthenticated = e;
   }
 
 }
