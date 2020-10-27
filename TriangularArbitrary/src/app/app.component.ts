@@ -1,4 +1,4 @@
-import { LocalStorageKeys, UserAccountContext } from './Enums/Enums';
+import { LocalStorageKeys, SessionStorageKeys, UserAccountContext } from './Enums/Enums';
 import { Component, Input } from '@angular/core';
 import * as firebase from 'firebase';
 import { BehaviorSubject } from 'rxjs';
@@ -32,17 +32,12 @@ export class AppComponent {
 
   title = 'TriangularArbitrary';
   localStorageKeys = Object.keys(LocalStorageKeys);
-  private accountService: AccountService;
   showImage: boolean = false;
 
-  constructor(accountService: AccountService) {
+  constructor(private accountService: AccountService) {
 
-    //Load up the user account for app use
-    this.account = accountService.getUserAccount();
-    console.log('account' + this.account);
-
-    //TODO: TEMP for log out; until update to use routing
-    this.accountService = accountService;
+    // get account object for use authenticating and contextualizing the app
+    this.getAppSessionAccount();
 
     // On Construction of the App Component,
     // get the localStorage Key/Value pair for storage (Could move pieces out to other components,
@@ -68,6 +63,26 @@ export class AppComponent {
     this.account = this.accountService.getUserAccount();
     this.account.isAuthenticated = false;
     this.accountCreationClicked = false;
+    // TODO: remove sessionStorage for the IUserModel
+  }
+
+  getAppSessionAccount():void {
+    // TODO: set sessionStorage for the IUserModel
+
+    //Load up the user account for app use
+    this.account = this.accountService.getUserAccount();
+
+    try{
+      this.account = JSON.parse(sessionStorage.get(SessionStorageKeys.UserContext));
+      this.account = this.account === null ? this.account : new IUserModel();
+
+      // authenticated if email and password exist on account
+      this.account.isAuthenticated = !this.account.email && !this.account.secret;
+    }
+    catch(e) {
+      console.log('exception thrown attempting to retrieve session storage user', e);
+    }
+    console.log('account' + this.account);
   }
 
   accountUpdateClicked(): void {

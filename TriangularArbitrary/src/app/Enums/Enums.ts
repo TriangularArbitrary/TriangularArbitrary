@@ -16,6 +16,10 @@ export enum LocalStorageKeys {
   Favorites = 'Favorites'
 }
 
+export enum SessionStorageKeys {
+  UserContext = 'UserContext'
+}
+
 export enum UserAccountType{
   Regular = 'Regular',
   PowerUser = 'Power User',

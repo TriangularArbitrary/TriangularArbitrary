@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit {
 
   //Output properties for emitting events to parent (App.Component)
   @Output() accountCreationEvent = new EventEmitter<boolean>();
-  @Output() account = new EventEmitter<IUserModel>();
   @Output() userAuthenticated = new EventEmitter<boolean>();
+  @Output() userAccountEvent = new EventEmitter<IUserModel>();
 
   user: SocialUser;
   loggedIn:boolean;
@@ -48,8 +48,6 @@ export class LoginComponent implements OnInit {
       //   + '\nresponse: ' + user.response
       // )
     })
-
-
   }
 
   createAccountClicked() {
@@ -57,18 +55,12 @@ export class LoginComponent implements OnInit {
   }
 
   signInWithEmail(): void{
+    // TODO: authenticate by searching in firebase, finding a match on email and checking against the stored secret
     this.userAuthenticated.emit(true);
   }
 
   signInWithGoogle():void{
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
-
-  signOut():void{
-    this.authService.signOut();
-    //remove any reference to the user
-    this.account = null;
-  }
-
 }
 
