@@ -1,23 +1,26 @@
 <div>
   <div class="fluid-container md-form m-5 h-75 w-90 align-self-center">
-    <h1><b>Account Administration</b></h1>
-    <hr>
-
+      <h1><b>Account Administration</b></h1>
+      <hr>
     <div class="row">
       <div class="col" style="min-width: 60%">
-        <h2>Ticket Queue</h2>
-        <div class="table-responsive">
-          <table class="table table-striped table-hover table-sm">
-            <thead class="thead-light">
-            <tr>
-              <th>Subject</th>
-              <th>Type</th>
-              <th>Severity</th>
-              <th>Description</th>
-              <th>User</th>
-              <th></th>
-            </tr>
-            </thead>
+          <h2 class="float-left mr-3">Support Tickets</h2>
+          <!-- loading spinner while ticket is submitting to firebase just in case it takes any amount of time -->
+          <div *ngIf="isBusy" class="spinner-border spinner-sm text-info float-left" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover table-sm fixed-table-header">
+              <thead class="thead-light">
+                <tr>
+                  <th>Subject</th>
+                  <th>Type</th>
+                  <th>Severity</th>
+                  <th>Description</th>
+                  <th>User</th>
+                  <th></th>
+                </tr>
+              </thead>
             <tbody>
                 <tr *ngFor="let ticket of tickets; let i = index">
                   <td>{{ticket.subject}}</td>
@@ -31,8 +34,9 @@
           </table>
         </div>
       </div>
+
       <div class="col float-left" style="min-width: 40%">
-        <h2>Account Table</h2>
+        <h2 class="">Accounts</h2>
         <div class="table-responsive">
           <table class="table table-striped table-hover table-sm">
             <thead class="thead-light">
@@ -65,7 +69,5 @@
         </div>
       </div>
     </div>
-
   </div>
-
 </div>

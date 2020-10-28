@@ -57,9 +57,27 @@ export class TicketStorageService {
   ///////////////////////////////////
 
   getAllFirebaseTickets(): ITicketModel[] {
-    // return firebase.firestore().collection('tickets').get()
 
-    return {} as ITicketModel[];
+    // Create the query to load the last 12 tickets and listen for new ones.
+    let currentTickets = [] as ITicketModel[];
+
+    var query = firebase.firestore()
+    .collection('tickets')
+    // .limit(12);
+
+    query.onSnapshot(function(snapshot) {
+      snapshot.docChanges().forEach(function(change) {
+        if(change.type === 'removed') {
+          // deleteTicket(change.doc.id);
+        } else {
+          let ticket = change.doc.data() as ITicketModel;
+          ticket.id = change.doc.id;
+          currentTickets.push(ticket);
+        }
+      });
+    });
+
+    return currentTickets;
   }
 
   /**
@@ -76,6 +94,19 @@ export class TicketStorageService {
       .catch((e) => {
       console.error('Error writing new ticket to database', e);
     });
+  }
+
+  /**
+   * Delete ticket from Firebase DB
+   * @param id
+   */
+  deleteFirebaseTicket(id: string): Promise<void> {
+    try{
+      return firebase.firestore().collection('tickets').doc(id).delete();
+    }
+    catch(e) {
+      console.error('unable to delete ticket', e);
+    }
   }
   //////////////////////////////////////
   // #endregion "Firebase Functionality"

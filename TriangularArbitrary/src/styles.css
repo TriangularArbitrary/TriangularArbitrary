@@ -124,6 +124,30 @@ hr {
   height: 5rem;
 }
 
+.app-header {
+  position: sticky !important;
+  top: 0;
+}
+.fixed-table-header {
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.fixed-table-header tbody{
+  display: block;
+  overflow: auto;
+  height: 420px;
+}
+
+.fixed-table-header thead tr {
+  display: block;
+}
+
+.fixed-table-header th, .fixed-table-header td {
+  padding: 5px;
+  text-align: left;
+  width: 200px
+}
 
 
 .l-25 {
