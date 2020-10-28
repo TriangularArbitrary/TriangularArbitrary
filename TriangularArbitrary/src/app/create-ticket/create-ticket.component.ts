@@ -41,21 +41,14 @@ export class CreateTicketComponent implements OnInit {
   SubmitTicketFirebase(form: NgForm): any {
     // starts the loading spinner
     this.isBusy = true;
-
-    firebase.firestore().collection('tickets').add( {
-      subject: this.model.subject,
-      type: this.model.type,
-      severity: this.model.severity,
-      ticketReason: this.model.ticketReason
-    }).then(() => {
-      this.model = new ITicketModel();
-      form.reset();
-      this.isBusy = false;
-      this.formSubmitted = true;
-    })
-      .catch((e) => {
-      this.isBusy = false;
-      console.error('Error writing new ticket to database', e);
-    });
+    this.ticketService.saveFirebaseTicket(this.model)
+      .then(() => {
+        this.model = new ITicketModel();
+        form.reset();
+        this.isBusy = false;
+        this.formSubmitted = true;
+      }).catch((e) => {
+        this.isBusy = false;
+      });
   }
 }
