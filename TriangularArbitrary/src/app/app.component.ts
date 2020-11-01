@@ -1,4 +1,4 @@
-import { LocalStorageKeys, SessionStorageKeys, UserAccountContext } from './Enums/Enums';
+import { LocalStorageKeys, UserAccountContext } from './Enums/Enums';
 import { Component, Input } from '@angular/core';
 import * as firebase from 'firebase';
 import { BehaviorSubject } from 'rxjs';
@@ -43,10 +43,9 @@ export class AppComponent {
     // get the localStorage Key/Value pair for storage (Could move pieces out to other components,
     // could remove if we use firebase or something else for storage)
     // Simply add the key to the LocalStorageKeys enum and set key/value where you need to it. (localStorage.setItem(...))
-
-    this.localStorageKeys.forEach(element => {
-      localStorage.getItem(element);
-    });
+    // this.localStorageKeys.forEach(element => {
+    //   localStorage.getItem(element);
+    // });
 
 
     // Firebase initialization - takes the firebaseConfig constant that points to the TriangularArbitrary firebase app
@@ -63,26 +62,12 @@ export class AppComponent {
     this.account = this.accountService.getUserAccount();
     this.account.isAuthenticated = false;
     this.accountCreationClicked = false;
-    // TODO: remove sessionStorage for the IUserModel
   }
 
   getAppSessionAccount():void {
-    // TODO: set sessionStorage for the IUserModel
 
     //Load up the user account for app use
     this.account = this.accountService.getUserAccount();
-
-    try{
-      this.account = JSON.parse(sessionStorage.get(SessionStorageKeys.UserContext));
-      this.account = this.account === null ? this.account : new IUserModel();
-
-      // authenticated if email and password exist on account
-      this.account.isAuthenticated = !this.account.email && !this.account.secret;
-    }
-    catch(e) {
-      console.log('exception thrown attempting to retrieve session storage user', e);
-    }
-    console.log('account' + this.account);
   }
 
   accountUpdateClicked(): void {
