@@ -1,52 +1,64 @@
+<form #conversionForm="ngForm" (ngSubmit) = "conversionForm.form.valid && getConversions()" [mustNotMatch]="['toCurrency','fromCurrency']">
+<div class = "form-row">
+  <div class="form-group col-md-3 md-3">
+    <label for="fromCurrency"> Originating Currency:  </label>
+        <select class="form-control" id="fromCurrency"
+                required
+                [(ngModel)]="money.fromCurrency"
+                name="fromCurrency"
+                #fromCurrency="ngModel"
+                [ngClass]="{ 'is-invalid': conversionForm.submitted && fromCurrency.invalid }">
+          <option  *ngFor="let currency of currencies" [value]="currency"> {{currency}}</option>
+        </select>
+        <div *ngIf="conversionForm.submitted && fromCurrency.invalid" class="invalid-feedback">
+          <p *ngIf="fromCurrency.errors.required"> Originating Currency is required!</p>
+          <p *ngIf="fromCurrency.errors.mustNotMatch">Originating and Desired Currencies must not be the same.</p>
+        </div>
+    </div>
+    <div class="form-group col-md-3 md-3">
+      <label for="toCurrency"> Desired Currency:  </label>
+          <select class="form-control" id="toCurrency"
+                  required
+                  [(ngModel)]="money.toCurrency"
+                  name="toCurrency"
+                  #toCurrency="ngModel"
+                  [ngClass]="{ 'is-invalid': conversionForm.submitted && toCurrency.invalid }">
+            <option  *ngFor="let currency of currencies" [value]="currency"> {{currency}}</option>
+          </select>
+          <div *ngIf="conversionForm.submitted && toCurrency.invalid" class="invalid-feedback">
+            <p *ngIf="toCurrency.errors.required"> Desired Currency is required!</p>
+            <p *ngIf="toCurrency.errors.mustNotMatch">Originating and Desired Currencies must not be the same.</p>
+          </div>
+      </div>
 
-<div>
+  </div>
+  <div class="form-group col-md-6 md-6">
+  <button type="submit" class="btn btn-primary btn-block" >Submit</button>
+  </div>
     <div class="fluid-container md-form m-5 h-50 w-50 align-self-center">
         <h1><b>Currency Conversion</b></h1>
         <hr>
-        <h3><b>From [USD]</b></h3>
-        <!-- TODO: PULLS PREFERRED CURRENCY. POPULATES TABLE BASED ON PREFERRED CURRENCY.  ALTERNATIVELY COULD MAKE A DROP DOWN SELECT. -->
+        <h3><b>Results:</b></h3>
         <table class="table table-striped table-hover table-sm">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">To Currency</th>
-                <th scope="col">To Currency Name</th>
-                <th scope="col">Exchange rate</th>
+                <th>From Code</th>
+                <th>From Name</th>
+                <th>To Code</th>
+                <th>To Name</th>
+                <th>Exchange Rate</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>JPY</td>
-                <td>JAPANESE YEN</td>
-                <td>123</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>GBP</td>
-                <td>GREAT BRITISH POUND</td>
-                <td>1.2937</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>BTC</td>
-                <td>BITCOIN</td>
-                <td>10,587.501</td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>AUD</td>
-                <td>AUSTRALIAN DOLLAR</td>
-                <td>0.7165</td>
-              </tr>
-              <tr>
-                <th scope="row">5</th>
-                <td>CAD</td>
-                <td>CANADIAN DOLLAR</td>
-                <td>1.50</td>
+              <tr *ngFor="let conversion of conversions">
+                <td>{{conversion.fromCurrencyCode}}</td>
+                <td>{{conversion.fromCurrencyName}}</td>
+                <td>{{conversion.toCurrencyCode}}</td>
+                <td>{{conversion.toCurrencyName}}</td>
+                <td>{{conversion.exchangeRate}}</td>
+
               </tr>
             </tbody>
           </table>
     </div>
-  </div>
-
+</form>

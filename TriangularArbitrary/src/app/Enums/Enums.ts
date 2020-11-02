@@ -13,7 +13,31 @@ export enum TicketTypes {
 export enum LocalStorageKeys {
   Tickets = 'Tickets',
   Accounts = 'Accounts',
-  Favorites = 'Favorites'
+  Favorites = 'Favorites',
+  Conversions = 'Conversions',
+  TopTen = 'TopTen'
+}
+
+export enum Currencies {
+  USD = 'USD',
+  EUR = 'EUR',
+  JPY = 'JPY',
+  GBP = 'GBP',
+  AUD = 'AUD',
+  NZD = 'NZD',
+  HKD = 'HKD',
+  CHF = 'CHF',
+  CAD = 'CAD'
+
+}
+
+export enum Cryptos {
+  BTC = 'BTC',
+  BNB = 'BNB',
+  ETH = 'ETH',
+  XRP = 'XRP',
+  BCH = 'BCH',
+  LTC = 'LTC'
 }
 
 export enum UserAccountType{
