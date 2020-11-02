@@ -21,4 +21,9 @@ getStocks(symbol: string) {
   return this.http.get("https://alpha-vantage.p.rapidapi.com/query?symbol=" + symbol + "&function=GLOBAL_QUOTE",{ headers });
 }
 
+getCurrencyExchange(to:string, from:string) {
+  let headers = new HttpHeaders().set('x-rapidapi-host','alpha-vantage.p.rapidapi.com').set('x-rapidapi-key','dab15a3f9cmshddce05f66ea95dcp13569ejsn701258d7a016');
+  return this.http.get("https://alpha-vantage.p.rapidapi.com/query?function=CURRENCY_EXCHANGE_RATE&to_currency="+to+"&from_currency="+from, {headers});
+}
+
 }

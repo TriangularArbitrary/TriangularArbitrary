@@ -15,6 +15,7 @@ import { TopTenComponent } from './top-ten/top-ten.component';
 import { SearchComponent } from './search/search.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { UserAccountComponent } from './user-account/user-account.component';
+import { DupeCheckDirective } from './directives/dupe-check.directive';
 import { LoginComponent } from './login/login.component';
 
 @NgModule({
@@ -27,7 +28,8 @@ import { LoginComponent } from './login/login.component';
     ConversionComponent,
     TopTenComponent,
     UserAccountComponent,
-    LoginComponent
+    LoginComponent,
+    DupeCheckDirective
   ],
   imports: [
     BrowserModule,
