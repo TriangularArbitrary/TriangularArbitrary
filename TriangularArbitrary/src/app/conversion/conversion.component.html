@@ -40,33 +40,28 @@
       <button type="submit" class="btn bg-color-lively-darkgreen text-white btn-block" >Convert</button>
       </div>
     </form>
-
 </div>
+<div class="fluid-container md-form m-5 align-self-center">
+    <h3><b>Results:</b></h3>
+    <table class="table table-striped table-hover table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th>From Code</th>
+            <th>From Name</th>
+            <th>To Code</th>
+            <th>To Name</th>
+            <th>Exchange Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let conversion of conversions">
+            <td>{{conversion.fromCurrencyCode}}</td>
+            <td>{{conversion.fromCurrencyName}}</td>
+            <td>{{conversion.toCurrencyCode}}</td>
+            <td>{{conversion.toCurrencyName}}</td>
+            <td>{{conversion.exchangeRate}}</td>
 
-
-
-
-    <div class="fluid-container md-form m-5 align-self-center">
-        <h3><b>Results:</b></h3>
-        <table class="table table-striped table-hover table-sm">
-            <thead>
-              <tr>
-                <th>From Code</th>
-                <th>From Name</th>
-                <th>To Code</th>
-                <th>To Name</th>
-                <th>Exchange Rate</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let conversion of conversions">
-                <td>{{conversion.fromCurrencyCode}}</td>
-                <td>{{conversion.fromCurrencyName}}</td>
-                <td>{{conversion.toCurrencyCode}}</td>
-                <td>{{conversion.toCurrencyName}}</td>
-                <td>{{conversion.exchangeRate}}</td>
-
-              </tr>
-            </tbody>
-          </table>
-    </div>
+          </tr>
+        </tbody>
+      </table>
+</div>
