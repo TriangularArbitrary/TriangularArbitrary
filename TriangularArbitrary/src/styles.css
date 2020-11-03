@@ -4,7 +4,7 @@ html,body {
   width: 100%;
   background-color: #EDEAE5;
   font-family: 'Roboto', sans-serif;
-  background-image: url(./assets/logo.png);
+  /* background-image: url(./assets/logo.png); */
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
@@ -116,7 +116,7 @@ hr {
 }
 .navbar-header > a :hover {
   transform: scale(1.25);
-  transition: 1s;
+  transition: 0.5s;
 }
 
 .spinner-lg {
