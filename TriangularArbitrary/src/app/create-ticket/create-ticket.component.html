@@ -1,6 +1,6 @@
 <!-- Form for submitting a ticket to support for the App -->
 <form #ticketForm="ngForm" (ngSubmit)="SubmitTicketFirebase(ticketForm)">
-  <div class="fluid-container md-form m-5 h-50 w-50 form-group">
+  <div class="fluid-container md-form m-5 form-group">
       <h1><b>Create Ticket</b></h1>
       <hr>
       <div *ngIf="!isBusy && !formSubmitted" class="row">
