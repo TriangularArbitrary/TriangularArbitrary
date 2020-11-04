@@ -12,19 +12,35 @@ export class AdminAccountManagementComponent implements OnInit {
   private ticketService: TicketStorageService;
 
   @Input() tickets: ITicketModel[];
+  @Input() isBusy: boolean;
 
   constructor(ticketService: TicketStorageService) {
     this.ticketService = ticketService;
-    this.tickets = this.ticketService.getAllTickets();
 
+    // LocalStorage solution:
+    // this.tickets = this.ticketService.getAllTickets();
+
+    // Firebase solution:
+    this.tickets = this.ticketService.getAllFirebaseTickets();
    }
 
   ngOnInit(): void {
   }
 
-  resolveTicket(index: number): void {
-    this.ticketService.deleteTicket(index)
-    this.tickets = this.ticketService.getAllTickets();
+  resolveTicket(index: string): void {
+
+    this.isBusy = true;
+    // LocalStorage solution:
+    // this.ticketService.deleteTicket(index)
+    // this.tickets = this.ticketService.getAllTickets();
+
+    // Firebase solution:
+    this.ticketService.deleteFirebaseTicket(this.tickets[index].id).then( () =>
+      {
+        this.tickets = this.ticketService.getAllFirebaseTickets();
+        this.isBusy = false;
+      }
+    );
   }
 
 }

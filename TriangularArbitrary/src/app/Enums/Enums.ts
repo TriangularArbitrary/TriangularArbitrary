@@ -53,3 +53,8 @@ export enum Currency{
   CAD = 'CAD',
   BitCoin = 'BitCoin'
 }
+
+export enum UserAccountContext {
+  create = 'Create Account',
+  update = 'Update Account'
+}

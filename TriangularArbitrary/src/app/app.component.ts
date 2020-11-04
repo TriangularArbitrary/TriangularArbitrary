@@ -1,5 +1,5 @@
-import { LocalStorageKeys } from './Enums/Enums';
-import { Component } from '@angular/core';
+import { LocalStorageKeys, UserAccountContext } from './Enums/Enums';
+import { Component, Input } from '@angular/core';
 import * as firebase from 'firebase';
 import { BehaviorSubject } from 'rxjs';
 
@@ -18,47 +18,71 @@ const firebaseConfig = {
   measurementId: "G-QRJ5RJR3F8"
 };
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  //Input properties to track changes against
+  @Input() accountCreationClicked = false;
+  @Input() account: IUserModel;
+
   title = 'TriangularArbitrary';
   localStorageKeys = Object.keys(LocalStorageKeys);
-  account: IUserModel;
-  private accountService: AccountService;
   showImage: boolean = false;
 
-  constructor(accountService: AccountService) {
+  constructor(private accountService: AccountService) {
 
-    //Load up the user account for app use
-    this.account = accountService.getUserAccount();
-    console.log('account' + this.account);
-
-
-    //TODO: TEMP for log out; until update to use routing
-    this.accountService = accountService;
-
+    // get account object for use authenticating and contextualizing the app
+    this.getAppSessionAccount();
 
     // On Construction of the App Component,
     // get the localStorage Key/Value pair for storage (Could move pieces out to other components,
     // could remove if we use firebase or something else for storage)
     // Simply add the key to the LocalStorageKeys enum and set key/value where you need to it. (localStorage.setItem(...))
-
-    this.localStorageKeys.forEach(element => {
-      localStorage.getItem(element);
-    });
+    // this.localStorageKeys.forEach(element => {
+    //   localStorage.getItem(element);
+    // });
 
 
     // Firebase initialization - takes the firebaseConfig constant that points to the TriangularArbitrary firebase app
     // and initializes its development functions for use
     let app = firebase.initializeApp(firebaseConfig);
+
+
+    //DEBUG without login
+    // this.account.isAuthenticated = true;
   }
 
   signOut():void{
     this.accountService.signOut();
     this.account = this.accountService.getUserAccount();
+    this.account.isAuthenticated = false;
+    this.accountCreationClicked = false;
+  }
+
+  getAppSessionAccount():void {
+
+    //Load up the user account for app use
+    this.account = this.accountService.getUserAccount();
+  }
+
+  accountUpdateClicked(): void {
+    this.account.accountContext = UserAccountContext.update;
+    this.accountCreationClicked = true;
+  }
+
+  accountCreationEvent(e: boolean) {
+    this.account.accountContext = UserAccountContext.create;
+    this.accountCreationClicked = e;
+  }
+
+
+  userAuthEvent(e: boolean) {
+    this.account.isAuthenticated = e;
   }
 
 }

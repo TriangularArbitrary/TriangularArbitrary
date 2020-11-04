@@ -1,109 +1,105 @@
-<!-- Main Content -->
-            <!-- TODO: When we create the Angular App, we will insert an <router-outlet></router-outlet> to pop different components in and out -->
-            <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 shadow-lg rounded m-3">
-              <!-- <h2 class="d-flex mt-5 justify-content-center text-color-lively-darkgreen">{{ MAIN CONTENT DIV }}</h2> -->
-              <div class="fluid-container md-form m-5 h-50 w-50 align-self-center">
-                  <h1><b>Create Account</b></h1>
-                  <br/>
-                  <h3>Personal Information</h3>
-                  <hr>
-
-                  <form #accountForm="ngForm" (ngSubmit)="accountForm.form.valid && onSubmit(accountForm)">
-                  <div class="row">
-                      <div class="col">
-                          <input required type="text" placeholder="First Name" class="form-control w-100" maxlength="30"
-                          name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel"
-                          [ngClass]="{'is-invalid': accountForm.submitted && firstName.invalid}"
-                          >
-                          <div *ngIf="accountForm.submitted && firstName.invalid" class="invalid-feedback">
-                            <div *ngIf="firstName.errors.required">First name is required</div>
-                          </div>
-                      </div>
-                      <div class="col">
-                        <input required type="text" placeholder="Last Name" class="form-control w-100" maxlength="30"
-                        name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel"
-                        [ngClass]="{'is-invalid': accountForm.submitted && lastName.invalid}"
-                        >
-                        <div *ngIf="accountForm.submitted && lastName.invalid" class="invalid-feedback">
-                          <div *ngIf="lastName.errors.required">Last name is required</div>
-                        </div>
-                      </div>
-                      <div class="col float-left">
-                        <div class="input-group">
-                          <input type="email" placeholder="Email" class="form-control w-100" maxlength="30"
-                          name="email" [(ngModel)]="model.email" #email="ngModel"
-                          [ngClass]="{'is-invalid': accountForm.submitted && email.invalid}"
-                          email required>
-                        <div *ngIf="accountForm.submitted && email.invalid" class="invalid-feedback">
-                          <div *ngIf="email.errors.required">Email is required</div>
-                          <div *ngIf="email.errors.email">Must be a valid email address</div>
-                        </div>
-                      </div>
-                      </div>
-                  </div>
-                  <br/>
-                  <div class="row">
-                      <div class="col">
-                        <select required name="accountType" id="accountType" class="custom-select"
-                        [(ngModel)]="model.accountType" #accountType="ngModel"
-                        [ngClass]="{'is-invalid' : accountForm.submitted && accountType.invalid}">
-
-                        <option [value]="undefined" hidden>Select Account Type...</option>
-                        <!-- <option value="">Select Account Type...</option> -->
-                        <option *ngFor="let accountType of this.enumKeys(accountTypes)" [value]="accountType"> {{ accountTypes[accountType]}} </option>
-
-                      </select>
-
-                      <div *ngIf="accountForm.submitted && accountType.invalid" class="invalid-feedback">
-                        <div *ngIf="accountType.errors.required" class="text-danger">Type of account is required</div>
-                      </div>
-
-                      </div>
-                      <div class="col">
-                          <select required name="Preferred Currency" id="" class="custom-select"
-                          [(ngModel)]="model.preferredCurrency" #preferredCurrency="ngModel"
-                          [ngClass]="{'is-invalid' : accountForm.submitted && preferredCurrency.invalid}">
-
-                              <option [value]="undefined" hidden>Select Currency...</option>
-                              <option *ngFor="let currency of this.enumKeys(currencies)" [value]="currency"> {{ currencies[currency] }} </option>
-
-                          </select>
-                          <div *ngIf="accountForm.submitted && preferredCurrency.invalid" class="invalid-feedback">
-                            <div *ngIf="preferredCurrency.errors.required" class="text-danger">Preferred currency is required</div>
-                          </div>
-                      </div>
-                      <div class="col float-left">
-
-                      </div>
-                  </div>
-                  <br>
-                  <div class="row m-1">
-                      &nbsp;
-                  </div>
-                  <div class="row m-1">
-                      <hr width="100%">
-                  </div>
-                  <br>
-                  <div class="row ">
-                      <div class="col-3"></div>
-                      <div class="col-3"></div>
-                      <div class="col float-left">
-                          <div class="row">
-                              <div class="col">
-                                  <button (click)="onCancel(accountForm)" class="btn btn-primary form-control" style="background-color: white; border:#7043F5 1px solid; color: #7043F5; ">Cancel</button>
-                              </div>
-                              <div class="col">
-                                  <!-- <form action="./my-account-component.html">
-                                    <button class="btn btn-primary form-control">Create Account</button>
-                                  </form> -->
-                                  <button class="btn btn-primary form-control text-nowrap">Create Account</button>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-                </form>
-
-                  <br/>
-              </div>
+<div class="md-form h-100 w-75 mt-5 mx-auto align-middle">
+  <div class="row mb-5">
+    <h1><b>{{ this.model.accountContext }}</b></h1>
+  </div>
+  <div class="row ml-2">
+    <h3>Personal Information</h3>
+  </div>
+  <form #accountForm="ngForm" (ngSubmit)="accountForm.form.valid && onSubmit(accountForm)">
+    <div class="row">
+        <div class="col">
+            <input required type="text" placeholder="First Name" class="form-control w-100" maxlength="30"
+            name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel"
+            [ngClass]="{'is-invalid': accountForm.submitted && firstName.invalid}"
+            >
+            <div *ngIf="accountForm.submitted && firstName.invalid" class="invalid-feedback">
+              <div *ngIf="firstName.errors.required">First name is required</div>
+            </div>
+        </div>
+        <div class="col">
+          <input required type="text" placeholder="Last Name" class="form-control w-100" maxlength="30"
+          name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel"
+          [ngClass]="{'is-invalid': accountForm.submitted && lastName.invalid}"
+          >
+          <div *ngIf="accountForm.submitted && lastName.invalid" class="invalid-feedback">
+            <div *ngIf="lastName.errors.required">Last name is required</div>
           </div>
+        </div>
+        <div class="col float-left">
+          <div class="input-group">
+            <input type="email" placeholder="Email" class="form-control w-100" maxlength="30"
+            name="email" [(ngModel)]="model.email" #email="ngModel"
+            [ngClass]="{'is-invalid': accountForm.submitted && email.invalid}"
+            email required>
+          <div *ngIf="accountForm.submitted && email.invalid" class="invalid-feedback">
+            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.email">Must be a valid email address</div>
+          </div>
+        </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col">
+          <select required name="accountType" id="accountType" class="custom-select"
+          [(ngModel)]="model.accountType" #accountType="ngModel"
+          [ngClass]="{'is-invalid' : accountForm.submitted && accountType.invalid}">
+
+          <option [value]="undefined" hidden>Select Account Type...</option>
+          <!-- <option value="">Select Account Type...</option> -->
+          <option *ngFor="let accountType of this.enumKeys(accountTypes)" [value]="accountType"> {{ accountTypes[accountType]}} </option>
+
+        </select>
+
+        <div *ngIf="accountForm.submitted && accountType.invalid" class="invalid-feedback">
+          <div *ngIf="accountType.errors.required" class="text-danger">Type of account is required</div>
+        </div>
+
+        </div>
+        <div class="col">
+            <select required name="Preferred Currency" id="" class="custom-select"
+            [(ngModel)]="model.preferredCurrency" #preferredCurrency="ngModel"
+            [ngClass]="{'is-invalid' : accountForm.submitted && preferredCurrency.invalid}">
+
+                <option [value]="undefined" hidden>Select Currency...</option>
+                <option *ngFor="let currency of this.enumKeys(currencies)" [value]="currency"> {{ currencies[currency] }} </option>
+
+            </select>
+            <div *ngIf="accountForm.submitted && preferredCurrency.invalid" class="invalid-feedback">
+              <div *ngIf="preferredCurrency.errors.required" class="text-danger">Preferred currency is required</div>
+            </div>
+        </div>
+        <div class="col float-left">
+
+        </div>
+    </div>
+    <br>
+    <div class="row m-1">
+        &nbsp;
+    </div>
+    <div class="row m-1">
+        <hr width="100%">
+    </div>
+    <br>
+    <div class="row ">
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col float-left">
+            <div class="row">
+                <div class="col">
+                    <button (click)="onCancel(accountForm)" class="btn btn-primary form-control" style="background-color: white; border:#7043F5 1px solid; color: #7043F5; ">Cancel</button>
+                </div>
+                <div class="col">
+                    <!-- <form action="./my-account-component.html">
+                      <button class="btn btn-primary form-control">Create Account</button>
+                    </form> -->
+                    <button class="btn bg-color-lively-darkgreen text-white form-control text-nowrap">{{ this.model.accountContext }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </form>
+
+    <br/>
+</div>

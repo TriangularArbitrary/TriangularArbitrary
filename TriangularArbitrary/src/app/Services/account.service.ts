@@ -28,6 +28,7 @@ export class AccountService {
         this.account.accountType = this.getAccountType();
         this.account.isAuthenticated = true;
       }
+      // TODO: set user in firebase DB, I think this is just a re-factor of code already in user-account-component.ts (we should also consider a bit of cryptography for storing and retrieving encoded and decoded passwords)
   }
 
   public getUserAccount(): IUserModel{
@@ -35,6 +36,8 @@ export class AccountService {
     // this.account = new IUserModel("abc123",null, 'Louis', 'Winthorpe III',
     // 'https://lh3.googleusercontent.com/a-/AOh14GhvZZQurEkbtdvPrvV8Fce3qApk7TQqsHhCJIdQ=s96-c');
     // this.account.isAuthenticated = true;
+
+    // TODO: get user from firebase (we should also consider a bit of cryptography for storing and retrieving encoded and decoded passwords)
 
     return this.account;
   }
@@ -44,7 +47,6 @@ export class AccountService {
     //remove any reference to the user
     this.account = new IUserModel();
   }
-
 
   //+------------------------------------+
   // TODO: build out or fake out some more?

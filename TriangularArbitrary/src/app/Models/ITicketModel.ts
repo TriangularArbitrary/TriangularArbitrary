@@ -1,6 +1,7 @@
 import { TicketTypes, TicketSeverityTypes } from '../Enums/Enums';
 
 export class ITicketModel {
+  id: string;
   subject: string;
   type: TicketTypes;
   severity: TicketSeverityTypes;

@@ -1,27 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 
 import { IUserModel } from './../Models/IUserModel';
 import { AccountService } from './../Services/account.service';
+
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-
 export class LoginComponent implements OnInit {
 
-  private accountService: AccountService;
-  private authService: SocialAuthService;
+  //Output properties for emitting events to parent (App.Component)
+  @Output() accountCreationEvent = new EventEmitter<boolean>();
+  @Output() userAuthenticated = new EventEmitter<boolean>();
+  @Output() userAccountEvent = new EventEmitter<IUserModel>();
+
   user: SocialUser;
   loggedIn:boolean;
-  account: IUserModel;
+  formEmail: string;
+  formPassword: string;
 
-  constructor(authService: SocialAuthService,
-              accountService: AccountService) {
-                this.authService = authService;
-                this.accountService = accountService;
+  constructor(private authService: SocialAuthService,
+              private accountService: AccountService) {
                }
 
 
@@ -47,15 +50,17 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  createAccountClicked() {
+    this.accountCreationEvent.emit(true);
+  }
+
+  signInWithEmail(): void{
+    // TODO: authenticate by searching in firebase, finding a match on email and checking against the stored secret
+    this.userAuthenticated.emit(true);
+  }
+
   signInWithGoogle():void{
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
-
-  signOut():void{
-    this.authService.signOut();
-    //remove any reference to the user
-    this.account = null;
-  }
-
 }
 
