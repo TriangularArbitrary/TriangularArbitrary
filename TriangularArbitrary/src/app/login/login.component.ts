@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 
 import { IUserModel } from './../Models/IUserModel';
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
   formPassword: string;
 
   constructor(private authService: SocialAuthService,
-              private accountService: AccountService) {
+              private accountService: AccountService, private router: Router) {
                }
 
 
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
       if(this.loggedIn){
         this.accountService.setUserAccount(user);
         console.log('populated model: ' + this.accountService.getUserAccount().isAuthenticated);
+        this.router.navigate(['favorites']);
       }
 
       // console.log(
@@ -52,11 +54,14 @@ export class LoginComponent implements OnInit {
 
   createAccountClicked() {
     this.accountCreationEvent.emit(true);
+    this.router.navigate(['user-account']);
+
   }
 
   signInWithEmail(): void{
     // TODO: authenticate by searching in firebase, finding a match on email and checking against the stored secret
     this.userAuthenticated.emit(true);
+    this.router.navigate(['favorites'])
   }
 
   signInWithGoogle():void{

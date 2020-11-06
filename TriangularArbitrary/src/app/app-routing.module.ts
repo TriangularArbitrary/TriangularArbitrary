@@ -12,12 +12,13 @@ import { LoginComponent } from './login/login.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 
 const routes: Routes = [
-  { path: 'create-ticket', component: CreateTicketComponent },
-  { path: 'favorites', component: FavoritesComponent },
-  { path: 'search', component: SearchComponent },
-  { path: 'conversion', component: ConversionComponent },
+  { path: '', redirectTo: 'favorites', pathMatch: 'full'},
+  { path: 'create-ticket', component: CreateTicketComponent, canActivate: [AuthGuard] },
+  { path: 'favorites', component: FavoritesComponent, canActivate: [AuthGuard] },
+  { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
+  { path: 'conversion', component: ConversionComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminAccountManagementComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-  { path: 'top-ten', component: TopTenComponent },
+  { path: 'top-ten', component: TopTenComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'user-account', component: UserAccountComponent }
 ];

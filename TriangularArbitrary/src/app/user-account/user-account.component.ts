@@ -3,6 +3,7 @@ import { IUserModel } from '../Models/IUserModel';
 import { FormControl, NgForm, Validators } from '@angular/forms';
 import * as firebase from 'firebase/app';
 import { UserAccountType, Currency, UserAccountContext } from '../Enums/Enums';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-account',
@@ -24,7 +25,7 @@ export class UserAccountComponent implements OnInit {
   accountTypes = UserAccountType;
   currencies = Currency;
 
-  constructor() {
+  constructor(private router: Router) {
     if(this.model === undefined || this.model == null) this.model = new IUserModel();
   }
 
@@ -56,6 +57,7 @@ export class UserAccountComponent implements OnInit {
           this.model = new IUserModel();
           form.reset();
           this.isBusy = false;
+          this.router.navigate(['favorites'])
       }).catch((e) => {
         this.isBusy = false;
         console.error('Error writing user to database', e);
@@ -71,6 +73,7 @@ export class UserAccountComponent implements OnInit {
     console.log('cancel');
     this.accountCreationEvent.emit(false);
     form.reset();
+    this.router.navigate(['login'])
   }
 
 
