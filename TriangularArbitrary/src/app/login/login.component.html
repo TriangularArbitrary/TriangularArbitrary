@@ -1,4 +1,4 @@
-<form action="./my-account-component.html">
+<form #loginForm="ngForm">
   <div class="fluid-container md-form w-90 align-self-center">
 
       <!-- style="border: 1px solid black" -->
@@ -12,9 +12,9 @@
                 or <button class="btn btn-link" (click)="createAccountClicked()">create an account</button>
                 <br/>
                 <br/>
-                <input required type="email" name="email" placeholder="Email" class="form-control" [(ngModel)]='formEmail'/>
+                <input required type="email" name="email" placeholder="Email" class="form-control" [(ngModel)]='model.email'/>
                 <br/>
-                <input required type="password" name="password" placeholder="Password" class="form-control" [(ngModel)]='formPassword'/>
+                <input required type="password" name="password" placeholder="Password" class="form-control" [(ngModel)]='model.secret'/>
                 <br/>
                 <input type="checkbox"> Remember Me
                 <br/><br/>
@@ -25,10 +25,12 @@
                 >Sign In</button>
                 <br/><br/>
                 <button
+                  type="submit"
                   class="btn btn-primary form-control"
                   style="background-color: white; border:#7043F5 1px solid; color: #7043F5; "
                   (click)="signInWithGoogle()"
-                ><img src="assets/g-fakeonly.png" />Sign in with Google</button>
+                >
+                <img src="assets/g-fakeonly.png" />Sign in with Google</button>
 
                 <br/><br/>
 

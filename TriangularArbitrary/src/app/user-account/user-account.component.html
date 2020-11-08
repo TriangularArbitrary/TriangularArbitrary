@@ -27,7 +27,7 @@
         </div>
         <div class="col float-left">
           <div class="input-group">
-            <input type="email" placeholder="Email" class="form-control w-100" maxlength="30"
+            <input type="email" placeholder="Email" class="form-control w-100" maxlength="50"
             name="email" [(ngModel)]="model.email" #email="ngModel"
             [ngClass]="{'is-invalid': accountForm.submitted && email.invalid}"
             email required>
@@ -62,7 +62,7 @@
             [ngClass]="{'is-invalid' : accountForm.submitted && preferredCurrency.invalid}">
 
                 <option [value]="undefined" hidden>Select Currency...</option>
-                <option *ngFor="let currency of this.enumKeys(currencies)" [value]="currency"> {{ currencies[currency] }} </option>
+                <option *ngFor="let preferredCurrency of this.enumKeys(currencies)" [value]="preferredCurrency"> {{ currencies[preferredCurrency] }} </option>
 
             </select>
             <div *ngIf="accountForm.submitted && preferredCurrency.invalid" class="invalid-feedback">

@@ -74,7 +74,8 @@ export class AppComponent {
 
   accountUpdateClicked(): void {
     this.account.accountContext = UserAccountContext.update;
-    this.accountCreationClicked = true;
+    this.accountCreationClicked = false;
+    this.router.navigate(['user-account']);
   }
 
   accountCreationEvent(e: boolean) {

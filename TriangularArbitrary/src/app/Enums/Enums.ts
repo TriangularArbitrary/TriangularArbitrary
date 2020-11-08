@@ -45,13 +45,15 @@ export enum UserAccountType{
   PowerUser = 'Power User',
   Lucky = 'Lucky',
   Administrator = 'Administrator',
-  FraudDetector = 'Fraud Detector'
+  FraudDetector = 'Fraud Detector',
+  Undeclared = 'Undeclared'
 }
 
 export enum Currency{
   USD = 'USD',
   CAD = 'CAD',
-  BitCoin = 'BitCoin'
+  BitCoin = 'BitCoin',
+  Undeclared = 'Undeclared'
 }
 
 export enum UserAccountContext {

@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IUserModel } from '../Models/IUserModel';
 import { FormControl, NgForm, Validators } from '@angular/forms';
-import * as firebase from 'firebase/app';
 import { UserAccountType, Currency, UserAccountContext } from '../Enums/Enums';
+import { AccountService } from './../Services/account.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,8 +25,16 @@ export class UserAccountComponent implements OnInit {
   accountTypes = UserAccountType;
   currencies = Currency;
 
-  constructor(private router: Router) {
-    if(this.model === undefined || this.model == null) this.model = new IUserModel();
+  constructor(private accountService: AccountService, private router: Router) {
+    if(this.model === undefined || this.model == null){
+      this.model = new IUserModel();
+    }else{
+      this.model = this.accountService.getUserAccount();
+      console.log(this.model.isAuthenticated);
+      console.log(this.model.accountContext);
+      console.log(this.model.preferredCurrency);
+    }
+
   }
 
   ngOnInit(): void {
@@ -36,41 +44,39 @@ export class UserAccountComponent implements OnInit {
   onSubmit(form:NgForm):void{
     this.isBusy = true;
 
-    //debug
-    console.log('New user: '+'First Name: ' +this.model.firstName +'\tLast Name: ' +this.model.lastName +'\tEmail: ' +this.model.email);
-
-    //import account service - populate the account for use within app
-
     if(this.model.accountContext === UserAccountContext.create) {
-      //CASE: create new account in firebase
-      //pass to firestore service
-      firebase.firestore().collection('users').add({
-        accountType: this.model.accountType,
-        email: this.model.email,
-        firstName: this.model.firstName,
-        lastName: this.model.lastName,
-        preferredCurrency: this.model.preferredCurrency,
-        //secret: this.model.secret
-        secret: 'abcdef'
-      }).then(()=>{
-          this.accountCreationEvent.emit(false)
-          this.model = new IUserModel();
-          form.reset();
-          this.isBusy = false;
-          this.router.navigate(['favorites'])
-      }).catch((e) => {
+      this.accountService.insertUserAccount(this.model)
+      .then(()=> {
+        this.accountService.setUserAccount(this.model);
+        this.model.isAuthenticated = true;
+        this.accountCreationEvent.emit(true)
+        this.model = new IUserModel();
+        form.reset();
         this.isBusy = false;
-        console.error('Error writing user to database', e);
+        this.router.navigate(['favorites'])
+      }).catch((e) => {
+        console.error(e);
+        this.isBusy = false;
       });
-      }
-    else if(this.model.accountContext === UserAccountContext.update) {
-      // TODO: CASE: update existing account in firebase
-
     }
+    else if(this.model.accountContext === UserAccountContext.update) {
+
+      this.accountService.updateUserAccount(this.model)
+      .then(()=> {
+        this.accountCreationEvent.emit(false)
+        this.isBusy = false;
+
+        //TODO: Add success message (or error message)
+
+      }).catch((e) => {
+        console.error(e);
+        this.isBusy = false;
+      });
+    }
+
   }
 
   onCancel(form):void{
-    console.log('cancel');
     this.accountCreationEvent.emit(false);
     form.reset();
     this.router.navigate(['login'])
