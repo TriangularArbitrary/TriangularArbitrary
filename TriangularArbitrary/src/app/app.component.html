@@ -25,19 +25,16 @@
 
 <!-- Login Component -->
 <div *ngIf='!account.isAuthenticated && !accountCreationClicked' class="container-fluid min-width-1000 max-width-100 h-100 w-100 mx-auto">
-  <app-login
-    (accountCreationEvent)='accountCreationEvent($event)'
-    (userAuthenticated)='userAuthEvent($event)'
-    ></app-login>
+  <router-outlet></router-outlet>
 </div>
 
 <!-- User-Account Component -->
-<div *ngIf='accountCreationClicked' class="container-fluid min-width-1000 max-width-100 h-100 w-50 align-middle mx-auto">
+<!-- <div *ngIf='accountCreationClicked' class="container-fluid min-width-1000 max-width-100 h-100 w-50 align-middle mx-auto">
   <app-user-account
     [model]='account'
     (accountCreationEvent)='accountCreationEvent($event)'
     ></app-user-account>
-</div>
+</div> -->
 
 <!-- Left Navigation and Main Content-->
 <div *ngIf='account.isAuthenticated && !accountCreationClicked' class="container-fluid max-width-100 w-100 h-100">
@@ -48,36 +45,28 @@
       <nav class="nav navbar">
         <ul class="nav navbar-nav">
           <div class="row">
-            <!-- TODO: INSERT href here -->
             <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" routerLink="top-ten" routerLinkActive="active"><b>TOP 10</b> </a></li>
           </div>
           <hr class="color-jet">
           <div class="row">
-            <!-- TODO: INSERT href here -->
             <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" routerLink="favorites" routerLinkActive="active"><b>FAVORITES</b> </a></li>
           </div>
           <hr>
           <div class="row">
-            <!-- TODO: INSERT href here -->
             <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" routerLink="search" routerLinkActive="active"><b>SEARCH</b> </a></li>
           </div>
           <hr>
           <div class="row">
-            <!-- TODO: INSERT href here -->
             <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" routerLink="conversion" routerLinkActive="active"><b>CONVERSIONS</b> </a></li>
           </div>
           <hr>
-          <div class="row">
-            <!-- TODO: INSERT href here -->
-            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" routerLink="admin" routerLinkActive="active"><b>ACCOUNT ADMINISTRATION</b> </a></li>
-          </div>
-          <hr>
-
-          <div class="row">
-            <!-- TODO: INSERT href here -->
+            <div class="row">
             <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" routerLink="create-ticket" routerLinkActive="active"><b>CREATE TICKET</b> </a></li>
           </div>
           <hr>
+          <div class="row" *ngIf='account.isAuthenticated && account.accountType === "Administrator"'>
+            <li class="btn w-100 nav-item "><a class="nav-link text-color-jet" routerLink="admin" routerLinkActive="active"><b>ACCOUNT ADMINISTRATION</b> </a></li>
+          </div>
         </ul>
       </nav>
     </div>

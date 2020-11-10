@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 
 import { AccountService } from './Services/account.service';
 import { IUserModel } from './Models/IUserModel';
+import { Router } from '@angular/router';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAGVrbwqSR3WZjlUpL_13y7lLDe8e1kYWA",
@@ -34,7 +35,7 @@ export class AppComponent {
   localStorageKeys = Object.keys(LocalStorageKeys);
   showImage: boolean = false;
 
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AccountService, private router: Router) {
 
     // get account object for use authenticating and contextualizing the app
     this.getAppSessionAccount();
@@ -62,6 +63,7 @@ export class AppComponent {
     this.account = this.accountService.getUserAccount();
     this.account.isAuthenticated = false;
     this.accountCreationClicked = false;
+    this.router.navigate(['login']);
   }
 
   getAppSessionAccount():void {
@@ -72,7 +74,8 @@ export class AppComponent {
 
   accountUpdateClicked(): void {
     this.account.accountContext = UserAccountContext.update;
-    this.accountCreationClicked = true;
+    this.accountCreationClicked = false;
+    this.router.navigate(['user-account']);
   }
 
   accountCreationEvent(e: boolean) {
