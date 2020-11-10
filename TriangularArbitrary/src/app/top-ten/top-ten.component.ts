@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageKeys } from '../Enums/Enums';
-import { Movers, MoversWithTimestamp } from '../Models/Movers';
+import { Movers, MoversList } from '../Models/Movers';
 import { YahooFinanceService } from '../Services/yahoo-finance.service';
 
 @Component({
@@ -14,20 +14,24 @@ export class TopTenComponent implements OnInit {
 
   movers: Movers[] = [];
   topten: Movers[] = [];
-  previous: MoversWithTimestamp;
+  previous: Date;
 
   ngOnInit(): void {
+    this.topten=[];
+    var list = this.getListFromStorage();
+    console.log("Loaded on init:" + list);
+    if (list != null) this.topten=list.list;
+
   }
 
   getMovers() {
-    this.movers=[];
-    this.topten=[];
     if (this.eligibleForRequery()) {
-      this.queryMovers()
+      this.movers=[];
+      this.topten=[];
+      this.queryMovers();
     }
     else {
       alert("Data has not changed since previous query.")
-      this.topten=this.previous.list;
     }
   }
 
@@ -40,6 +44,8 @@ export class TopTenComponent implements OnInit {
           element['shortName'],element['regularMarketPrice'],
           element['regularMarketChange'],element['regularMarketChangePercent'],
           element['fiftyTwoWeekRange']));
+          console.log(response);
+
         });
 
       var i:number;
@@ -47,7 +53,8 @@ export class TopTenComponent implements OnInit {
         this.topten.push(this.movers[i]);
       }
       console.log(this.topten);
-      this.setStorage()
+      this.setListToStorage()
+      this.previous = new Date();
       },
       (error) => {console.log(error)}
       );
@@ -56,8 +63,8 @@ export class TopTenComponent implements OnInit {
   eligibleForRequery() {
     let now = new Date();
     console.log(this.previous)
-    this.getFromStorage();
-    if(this.timeComparison(this.previous.timestamp,now)>2) return true;
+    if(this.topten.length==0 || this.previous==null) return true;
+    else if(this.timeComparison(this.previous,now)>2) return true;
     else return false;
 
   }
@@ -70,14 +77,16 @@ export class TopTenComponent implements OnInit {
     return toReturn;
   }
 
-  getFromStorage() {
-    this.previous = JSON.parse(localStorage.getItem(LocalStorageKeys.TopTen));
-    console.log("Successfully retrieved: " + this.previous)
+  getListFromStorage():MoversList {
+    let list:MoversList = JSON.parse(localStorage.getItem(LocalStorageKeys.TopTen));
+    console.log("Successfully retrieved: " + list);
+    return list;
+
   }
 
-  setStorage() {
-    let toSet:MoversWithTimestamp = new MoversWithTimestamp(new Date(), this.topten);
+  setListToStorage() {
+    let toSet:MoversList = new MoversList(this.topten);
     localStorage.setItem(LocalStorageKeys.TopTen, JSON.stringify(toSet));
-    console.log("Successfully stored: " + toSet)
+    console.log("Successfully stored: " + toSet.list)
   }
 }

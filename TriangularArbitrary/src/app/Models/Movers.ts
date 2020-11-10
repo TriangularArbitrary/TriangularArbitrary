@@ -10,6 +10,13 @@ export class MoversWithTimestamp {
   }
 }
 
+export class MoversList {
+  list:Movers[];
+  constructor(list:Movers[]) {
+    this.list=list;
+  }
+}
+
 
 export class Movers {
   symbol:string;
