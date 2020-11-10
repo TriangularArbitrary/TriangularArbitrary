@@ -67,6 +67,13 @@ export class ConversionComponent implements OnInit {
     console.log("Successfully stored: " + toSet)
   }
 
+  addToArray(conversion:CurrencyConversion) {
+    if (this.conversions.length>=5) {
+      this.conversions.shift();
+    }
+    this.conversions.push(conversion);
+  }
+
   getConversions():void {
     this.serv.getCurrencyExchange(this.money.toCurrency,this.money.fromCurrency).subscribe
     (
@@ -80,7 +87,7 @@ export class ConversionComponent implements OnInit {
           data['4. To_Currency Name'],data['5. Exchange Rate'],data['6. Last Refreshed'],data['7. Time Zone'],data['8. Bid Price'],
           data['9. Ask Price']);
         console.log(newConversion);
-        this.conversions.push(newConversion);
+        this.addToArray(newConversion);
         console.log(this.conversions);
       },
       (error) => {
