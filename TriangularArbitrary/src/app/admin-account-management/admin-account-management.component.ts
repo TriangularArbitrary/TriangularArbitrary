@@ -1,6 +1,9 @@
+import { AccountService } from './../Services/account.service';
+import { IUserModel } from './../Models/IUserModel';
 import { ITicketModel } from './../Models/ITicketModel';
 import { TicketStorageService } from './../Services/ticket-storage.service';
 import { Component, OnInit, Input } from '@angular/core';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-admin-account-management',
@@ -12,9 +15,10 @@ export class AdminAccountManagementComponent implements OnInit {
   private ticketService: TicketStorageService;
 
   @Input() tickets: ITicketModel[];
+  @Input() users: IUserModel[] = [];
   @Input() isBusy: boolean;
 
-  constructor(ticketService: TicketStorageService) {
+  constructor(ticketService: TicketStorageService, private accountService: AccountService) {
     this.ticketService = ticketService;
 
     // LocalStorage solution:
@@ -25,6 +29,50 @@ export class AdminAccountManagementComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  private async loadUsers(): Promise<void> {
+    var loadedUsers = [];
+    await firebase.firestore().collection('users')
+    .get()
+      .then(function(querySnapshot){
+          if (querySnapshot != null) {
+            querySnapshot.docs.map(function(doc){
+              loadedUsers.push(new IUserModel(
+                doc.id,
+                doc.data().email,
+                doc.data().firstName,
+                doc.data().lastName,
+                null,
+                doc.data().accountType,
+                doc.data().preferredCurrency,
+                null,
+                null
+              ));
+
+            });
+          } else {
+            console.error('Failed to load users')
+          }
+        }).catch(function(error){
+          console.log('error: ' + error);
+        });
+
+        this.users = loadedUsers
+        console.log(this.users)
+  }
+
+  removeUser(index: string): void {
+    this.isBusy = true;
+    var user = this.users[index];
+    this.accountService.deleteUserAccount(user.id).then( () => {
+      this.users.splice(parseInt(index), 1)
+      this.isBusy = false
+    }).catch(e => {
+      console.log(e)
+      this.isBusy = false
+    })
   }
 
   resolveTicket(index: string): void {

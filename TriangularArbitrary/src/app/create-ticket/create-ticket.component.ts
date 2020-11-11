@@ -1,3 +1,4 @@
+import { AccountService } from './../Services/account.service';
 import { TicketStorageService } from './../Services/ticket-storage.service';
 import { TicketTypes, TicketSeverityTypes, LocalStorageKeys } from './../Enums/Enums';
 import { ITicketModel } from './../Models/ITicketModel';
@@ -18,14 +19,16 @@ export class CreateTicketComponent implements OnInit {
   @Input() formSubmitted = false;
 
   private ticketService: TicketStorageService;
+  private accountService: AccountService;
 
   ticketTypes = TicketTypes;
   severityTypes = TicketSeverityTypes;
   enumKeys = Object.keys;
 
-  constructor(ticketService: TicketStorageService) {
+  constructor(ticketService: TicketStorageService, accountService: AccountService) {
     this.model = new ITicketModel();
     this.ticketService = ticketService;
+    this.accountService = accountService;
    }
 
   ngOnInit(): void {
@@ -41,7 +44,8 @@ export class CreateTicketComponent implements OnInit {
   SubmitTicketFirebase(form: NgForm): any {
     // starts the loading spinner
     this.isBusy = true;
-    this.ticketService.saveFirebaseTicket(this.model)
+    var user = this.accountService.getUserAccount()
+    this.ticketService.saveFirebaseTicket(this.model, user)
       .then(() => {
         this.model = new ITicketModel();
         form.reset();
