@@ -27,7 +27,7 @@
                   <td>{{ticket.type}}</td>
                   <td>{{ticket.severity}}</td>
                   <td>{{ticket.ticketReason}}</td>
-                  <td>UserId123</td>
+                  <td>{{ticket.user}}</td>
                   <td><button class="btn btn-success" (click)="resolveTicket(i)">Resolve</button></td>
                 </tr>
             </tbody>
@@ -43,27 +43,13 @@
             <th>User ID</th>
             <th>Name</th>
             <th></th>
-            <th></th>
             </thead>
             <tbody>
-            <tr>
-              <td>UserId123</td>
-              <td>Michael Scott</td>
-              <td><button class="btn btn-warning">Freeze</button></td>
-              <td><button class="btn btn-danger">Remove</button></td>
-            </tr>
-            <tr>
-              <td>UserId456</td>
-              <td>Dwight Schrute</td>
-              <td><button class="btn btn-warning">Freeze</button></td>
-              <td><button class="btn btn-danger">Remove</button></td>
-            </tr>
-            <tr>
-              <td>UserId789</td>
-              <td>Ron Swanson</td>
-              <td><button class="btn btn-warning">Freeze</button></td>
-              <td><button class="btn btn-danger">Remove</button></td>
-            </tr>
+              <tr *ngFor="let user of users; let i = index">
+                <td>{{user.email}}</td>
+                <td>{{user.firstName}} {{user.lastName}}</td>
+                <td><button class="btn btn-danger" (click)="removeUser(i)">Remove</button></td>
+              </tr>
             </tbody>
           </table>
         </div>

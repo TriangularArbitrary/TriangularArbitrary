@@ -112,6 +112,16 @@ export class AccountService {
 
      }
 
+     deleteUserAccount(id: string): Promise<any> {
+      try{
+        return firebase.firestore().collection('users').doc(id).delete();
+      }
+      catch(e) {
+        console.error('unable to delete user', e);
+      }
+     }
+
+
 
   // +--------------------------------------+
   // |    Account methods begin             |

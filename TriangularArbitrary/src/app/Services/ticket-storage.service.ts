@@ -1,3 +1,4 @@
+import { IUserModel } from './../Models/IUserModel';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { TicketTypes, TicketSeverityTypes, LocalStorageKeys } from './../Enums/Enums';
@@ -84,12 +85,13 @@ export class TicketStorageService {
    * Save ticket to Firebase DB
    * @param newTicket
    */
-  saveFirebaseTicket(newTicket: ITicketModel): Promise<any> {
+  saveFirebaseTicket(newTicket: ITicketModel, user: IUserModel): Promise<any> {
     return firebase.firestore().collection('tickets').add( {
       subject: newTicket.subject,
       type: newTicket.type,
       severity: newTicket.severity,
-      ticketReason: newTicket.ticketReason
+      ticketReason: newTicket.ticketReason,
+      user: user.email
     })
       .catch((e) => {
       console.error('Error writing new ticket to database', e);
