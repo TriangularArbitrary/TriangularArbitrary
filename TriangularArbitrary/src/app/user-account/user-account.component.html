@@ -1,11 +1,11 @@
-<div class="md-form h-100 w-75 mt-5 mx-auto align-middle">
+<div class="md-form w-75 mt-5 mx-auto align-middle">
   <div class="row mb-5">
     <h1><b>{{ this.model.accountContext }}</b></h1>
   </div>
-  <div class="row ml-2">
+  <div class="row ml-2" *ngIf="!isBusy">
     <h3>Personal Information</h3>
   </div>
-  <form #accountForm="ngForm" (ngSubmit)="accountForm.form.valid && onSubmit(accountForm)">
+  <form #accountForm="ngForm" (ngSubmit)="accountForm.form.valid && onSubmit(accountForm)" *ngIf="!isBusy">
     <div class="row">
         <div class="col">
             <input required type="text" placeholder="First Name" class="form-control w-100" maxlength="30"
@@ -78,7 +78,7 @@
         &nbsp;
     </div>
     <div class="row m-1">
-        <hr width="100%">
+        <hr class="w-100">
     </div>
     <br>
     <div class="row ">
@@ -90,16 +90,30 @@
                     <button (click)="onCancel(accountForm)" class="btn btn-primary form-control" style="background-color: white; border:#7043F5 1px solid; color: #7043F5; ">Cancel</button>
                 </div>
                 <div class="col">
-                    <!-- <form action="./my-account-component.html">
-                      <button class="btn btn-primary form-control">Create Account</button>
-                    </form> -->
                     <button class="btn bg-color-lively-darkgreen text-white form-control text-nowrap">{{ this.model.accountContext }}</button>
                 </div>
             </div>
         </div>
     </div>
-
   </form>
 
-    <br/>
+
+  <!-- loading spinner while ticket is submitting to firebase just in case it takes any amount of time -->
+  <div *ngIf="isBusy" class="row w-100">
+    <div  class="col d-flex justify-content-center">
+      <div class="spinner-border spinner-lg text-info" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Successful Toast Message -->
+  <div class="row fixed-bottom mb-5" *ngIf="formSuccess">
+    <div class="d-flex align-content-center l-25 w-50 h-25 alert bg-color-lively-darkgreen text-white app-toast-primary">{{ this.model.accountContext }} Successful.</div>
+  </div>
+
+  <!-- Failure Toast Message -->
+  <div class="row page-footer fixed-bottom" *ngIf="formFailure">
+    <div id="accountToastFailure" class="d-flex align-content-center l-25 w-50 h-50 alert alert-danger app-toast-primary">Failed to {{ this.model.accountContext }}.</div>
+  </div>
 </div>

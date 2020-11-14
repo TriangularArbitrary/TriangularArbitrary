@@ -14,6 +14,9 @@ export class UserAccountComponent implements OnInit {
 
   //Input properties for tracking changes against and binding based on parent component context
   @Input() isBusy: boolean = false;
+  @Input() formSuccess: boolean = false;
+  @Input() formFailure: boolean = false;
+
   @Input() model = new IUserModel();
 
   @Output() accountCreationEvent = new EventEmitter<boolean>();
@@ -38,7 +41,6 @@ export class UserAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
   onSubmit(form:NgForm):void{
@@ -53,9 +55,11 @@ export class UserAccountComponent implements OnInit {
         this.model = new IUserModel();
         form.reset();
         this.isBusy = false;
+        this.displaySuccessToastMessage();
         this.router.navigate(['favorites'])
       }).catch((e) => {
         console.error(e);
+        this.displayFailureToastMessage(e);
         this.isBusy = false;
       });
     }
@@ -65,15 +69,28 @@ export class UserAccountComponent implements OnInit {
       .then(()=> {
         this.accountCreationEvent.emit(false)
         this.isBusy = false;
-
-        //TODO: Add success message (or error message)
-
+        this.displaySuccessToastMessage();
       }).catch((e) => {
         console.error(e);
+        this.displayFailureToastMessage(e);
         this.isBusy = false;
       });
     }
 
+  }
+
+  displaySuccessToastMessage = () => {
+    this.formSuccess = true;
+    setTimeout(() => {
+      this.formSuccess = false;
+    }, 3000);
+  }
+
+  displayFailureToastMessage = (e) => {
+    this.formFailure = true;
+    setTimeout(() => {
+      this.formFailure = false;
+    }, 3000);
   }
 
   onCancel(form):void{
@@ -81,6 +98,4 @@ export class UserAccountComponent implements OnInit {
     form.reset();
     this.router.navigate(['login'])
   }
-
-
 }
