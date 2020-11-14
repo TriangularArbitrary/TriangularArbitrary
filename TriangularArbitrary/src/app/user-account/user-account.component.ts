@@ -16,7 +16,6 @@ export class UserAccountComponent implements OnInit {
   @Input() isBusy: boolean = false;
   @Input() formSuccess: boolean = false;
   @Input() formFailure: boolean = false;
-
   @Input() model = new IUserModel();
 
   @Output() accountCreationEvent = new EventEmitter<boolean>();
@@ -43,7 +42,7 @@ export class UserAccountComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(form:NgForm):void{
+  async onSubmit(form:NgForm): Promise<void>{
     this.isBusy = true;
 
     if(this.model.accountContext === UserAccountContext.create) {
@@ -65,7 +64,7 @@ export class UserAccountComponent implements OnInit {
     }
     else if(this.model.accountContext === UserAccountContext.update) {
 
-      this.accountService.updateUserAccount(this.model)
+      await this.accountService.updateUserAccount(this.model)
       .then(()=> {
         this.accountCreationEvent.emit(false)
         this.isBusy = false;
@@ -93,9 +92,15 @@ export class UserAccountComponent implements OnInit {
     }, 3000);
   }
 
-  onCancel(form):void{
-    this.accountCreationEvent.emit(false);
+  onCancel(form: NgForm): void {
     form.reset();
-    this.router.navigate(['login'])
+    this.accountCreationEvent.emit(false);
+
+    if (this.model.accountContext == UserAccountContext.create){
+      this.router.navigate(['login'])
+    }
+    else if (this.model.accountContext == UserAccountContext.update) {
+      this.router.navigate(['favorites']);
+    }
   }
 }
