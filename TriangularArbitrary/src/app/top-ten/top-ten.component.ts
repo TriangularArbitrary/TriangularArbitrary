@@ -12,9 +12,7 @@ export class TopTenComponent implements OnInit {
 
   constructor(private serv: YahooFinanceService) {}
 
-  movers: Movers[] = [];
   topten: Movers[] = [];
-  previous: Date;
 
   ngOnInit(): void {
     this.topten=[];
@@ -25,13 +23,15 @@ export class TopTenComponent implements OnInit {
   }
 
   getMovers() {
-    if (this.eligibleForRequery()) {
-      this.movers=[];
-      this.topten=[];
-      this.queryMovers();
-    }
-    else {
-      alert("Data has not changed since previous query.")
+    this.topten=[];
+    this.queryMovers();
+  }
+
+  addToArray(conversion:Movers) {
+    if (this.topten.length<10) {
+      this.topten.push(conversion);
+      //console.log(this.topten)
+      this.setListToStorage()
     }
   }
 
@@ -39,49 +39,25 @@ export class TopTenComponent implements OnInit {
     this.serv.getMovers().subscribe (
       (response) => {
         let data:Object[] = response['quotes'];
+        var i:number;
         data.forEach( (element) => {
-          this.movers.push(new Movers(element['symbol'],
+          this.addToArray(new Movers(element['symbol'],
           element['shortName'],element['regularMarketPrice'],
           element['regularMarketChange'],element['regularMarketChangePercent'],
           element['fiftyTwoWeekRange']));
-          console.log(response);
-
         });
-
-      var i:number;
-      for(i=0;i<10;i++) {
-        this.topten.push(this.movers[i]);
-      }
-      console.log(this.topten);
-      this.setListToStorage()
-      this.previous = new Date();
+        //console.log(this.topten);
       },
-      (error) => {console.log(error)}
-      );
-  }
-
-  eligibleForRequery() {
-    let now = new Date();
-    console.log(this.previous)
-    if(this.topten.length==0 || this.previous==null) return true;
-    else if(this.timeComparison(this.previous,now)>2) return true;
-    else return false;
-
-  }
-
-  timeComparison(date1:Date, date2:Date) {
-    let time1:number = new Date(date1).getTime();
-    let time2:number = new Date(date2).getTime();
-    let toReturn:number = Math.abs(((time1 - time2) / 1000) / 60);
-    console.log("Difference in mins: " + toReturn);
-    return toReturn;
+      (error) => {
+        console.log(error);
+        alert("Too many requests, please wait a minute before trying again.");
+      });
   }
 
   getListFromStorage():MoversList {
     let list:MoversList = JSON.parse(localStorage.getItem(LocalStorageKeys.TopTen));
     console.log("Successfully retrieved: " + list);
     return list;
-
   }
 
   setListToStorage() {
