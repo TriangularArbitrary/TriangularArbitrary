@@ -93,7 +93,6 @@ export class UserAccountComponent implements OnInit {
   }
 
   onCancel(form: NgForm): void {
-    form.reset();
     this.accountCreationEvent.emit(false);
 
     if (this.model.accountContext == UserAccountContext.create){
