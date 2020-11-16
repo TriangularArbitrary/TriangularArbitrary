@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageKeys } from '../Enums/Enums';
-import { Movers, MoversWithTimestamp } from '../Models/Movers';
+import { Movers, MoversList } from '../Models/Movers';
 import { YahooFinanceService } from '../Services/yahoo-finance.service';
 
 @Component({
@@ -12,22 +12,26 @@ export class TopTenComponent implements OnInit {
 
   constructor(private serv: YahooFinanceService) {}
 
-  movers: Movers[] = [];
   topten: Movers[] = [];
-  previous: MoversWithTimestamp;
 
   ngOnInit(): void {
+    this.topten=[];
+    var list = this.getListFromStorage();
+    console.log("Loaded on init:" + list);
+    if (list != null) this.topten=list.list;
+
   }
 
   getMovers() {
-    this.movers=[];
     this.topten=[];
-    if (this.eligibleForRequery()) {
-      this.queryMovers()
-    }
-    else {
-      alert("Data has not changed since previous query.")
-      this.topten=this.previous.list;
+    this.queryMovers();
+  }
+
+  addToArray(conversion:Movers) {
+    if (this.topten.length<10) {
+      this.topten.push(conversion);
+      //console.log(this.topten)
+      this.setListToStorage()
     }
   }
 
@@ -35,49 +39,30 @@ export class TopTenComponent implements OnInit {
     this.serv.getMovers().subscribe (
       (response) => {
         let data:Object[] = response['quotes'];
+        var i:number;
         data.forEach( (element) => {
-          this.movers.push(new Movers(element['symbol'],
+          this.addToArray(new Movers(element['symbol'],
           element['shortName'],element['regularMarketPrice'],
           element['regularMarketChange'],element['regularMarketChangePercent'],
           element['fiftyTwoWeekRange']));
         });
-
-      var i:number;
-      for(i=0;i<10;i++) {
-        this.topten.push(this.movers[i]);
-      }
-      console.log(this.topten);
-      this.setStorage()
+        //console.log(this.topten);
       },
-      (error) => {console.log(error)}
-      );
+      (error) => {
+        console.log(error);
+        alert("Too many requests, please wait a minute before trying again.");
+      });
   }
 
-  eligibleForRequery() {
-    let now = new Date();
-    console.log(this.previous)
-    this.getFromStorage();
-    if(this.timeComparison(this.previous.timestamp,now)>2) return true;
-    else return false;
-
+  getListFromStorage():MoversList {
+    let list:MoversList = JSON.parse(localStorage.getItem(LocalStorageKeys.TopTen));
+    console.log("Successfully retrieved: " + list);
+    return list;
   }
 
-  timeComparison(date1:Date, date2:Date) {
-    let time1:number = new Date(date1).getTime();
-    let time2:number = new Date(date2).getTime();
-    let toReturn:number = Math.abs(((time1 - time2) / 1000) / 60);
-    console.log("Difference in mins: " + toReturn);
-    return toReturn;
-  }
-
-  getFromStorage() {
-    this.previous = JSON.parse(localStorage.getItem(LocalStorageKeys.TopTen));
-    console.log("Successfully retrieved: " + this.previous)
-  }
-
-  setStorage() {
-    let toSet:MoversWithTimestamp = new MoversWithTimestamp(new Date(), this.topten);
+  setListToStorage() {
+    let toSet:MoversList = new MoversList(this.topten);
     localStorage.setItem(LocalStorageKeys.TopTen, JSON.stringify(toSet));
-    console.log("Successfully stored: " + toSet)
+    console.log("Successfully stored: " + toSet.list)
   }
 }

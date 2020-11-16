@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Currencies, LocalStorageKeys } from '../Enums/Enums';
-import { CurrencyConversion, CurrencyConversionWithTimestamp } from '../Models/CurrencyConversion';
+import { CurrencyConversion, CurrencyConversionList } from '../Models/CurrencyConversion';
 import { AlphaVantageService } from '../Services/alpha-vantage.service';
 
 
@@ -45,6 +45,11 @@ export class ConversionComponent implements OnInit {
       to: new FormControl(this.money.toCurrency, [Validators.required])
     });
 
+
+    var list:CurrencyConversionList = this.getFromStorage();
+    console.log("Loaded on init:" + list);
+    if(list != null) this.conversions = list.list;
+
   }
 
   isEmpty(obj: any) {
@@ -55,23 +60,30 @@ export class ConversionComponent implements OnInit {
     return true;
   }
 
-  getFromStorage() {
-    let retrieved:CurrencyConversionWithTimestamp = JSON.parse(localStorage.getItem(LocalStorageKeys.Conversions));
-    this.conversions = retrieved.list;
-    console.log("Successfully retrieved: " + this.conversions)
+  getFromStorage():CurrencyConversionList {
+    let retrieved:CurrencyConversionList = JSON.parse(localStorage.getItem(LocalStorageKeys.Conversions));
+    console.log("Successfully retrieved: " + retrieved);
+    return retrieved;
   }
 
   setStorage() {
-    let toSet:CurrencyConversionWithTimestamp = new CurrencyConversionWithTimestamp(new Date(), this.conversions);
+    let toSet:CurrencyConversionList = new CurrencyConversionList(this.conversions);
     localStorage.setItem(LocalStorageKeys.Conversions, JSON.stringify(toSet));
     console.log("Successfully stored: " + toSet)
+  }
+
+  addToArray(conversion:CurrencyConversion) {
+    if (this.conversions.length>=5) {
+      this.conversions.shift();
+    }
+    this.conversions.push(conversion);
+    this.setStorage();
   }
 
   getConversions():void {
     this.serv.getCurrencyExchange(this.money.toCurrency,this.money.fromCurrency).subscribe
     (
       (response) => {
-
 
         let data = response['Realtime Currency Exchange Rate'];
         console.log(data);
@@ -80,7 +92,7 @@ export class ConversionComponent implements OnInit {
           data['4. To_Currency Name'],data['5. Exchange Rate'],data['6. Last Refreshed'],data['7. Time Zone'],data['8. Bid Price'],
           data['9. Ask Price']);
         console.log(newConversion);
-        this.conversions.push(newConversion);
+        this.addToArray(newConversion);
         console.log(this.conversions);
       },
       (error) => {

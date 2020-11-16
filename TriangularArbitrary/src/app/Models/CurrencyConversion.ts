@@ -1,10 +1,8 @@
 
-export class CurrencyConversionWithTimestamp {
-  timestamp:Date;
+export class CurrencyConversionList {
   list:CurrencyConversion [];
 
-  constructor(timestamp:Date, list:CurrencyConversion[]) {
-    this.timestamp = timestamp;
+  constructor(list:CurrencyConversion[]) {
     this.list = list;
   }
 }
