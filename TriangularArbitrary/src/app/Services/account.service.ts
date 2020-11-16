@@ -77,8 +77,7 @@ export class AccountService {
           firstName: user.firstName,
           lastName: user.lastName,
           preferredCurrency: (user.preferredCurrency) ? user.preferredCurrency : Currency.Undeclared,
-          //secret: this.model.secret
-          secret: 'abcdef',
+          secret: user.secret,    //shhh, don't tell anyone, it's not encrypted with a one-way hash
           createDate:  firebase.firestore.FieldValue.serverTimestamp(),
           modifiedDate:  firebase.firestore.FieldValue.serverTimestamp()
         }).catch((e) => {
@@ -101,8 +100,7 @@ export class AccountService {
           firstName: user.firstName,
           lastName: user.lastName,
           preferredCurrency: (user.preferredCurrency) ? user.preferredCurrency : Currency.Undeclared,
-          //secret: this.model.secret
-          secret: 'abcdef',
+          secret: user.secret,    //here either
           modifiedDate: firebase.firestore.FieldValue.serverTimestamp()
 
         }).catch((e) => {

@@ -65,9 +65,6 @@ export class UserAccountComponent implements OnInit {
       .then(()=> {
         this.accountCreationEvent.emit(false)
         this.isBusy = false;
-
-        //TODO: Add success message (or error message)
-
       }).catch((e) => {
         console.error(e);
         this.isBusy = false;

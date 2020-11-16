@@ -17,6 +17,7 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { DupeCheckDirective } from './directives/dupe-check.directive';
 import { LoginComponent } from './login/login.component';
+import { MustMatchDirective } from './directives/must-match.directive';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { LoginComponent } from './login/login.component';
     TopTenComponent,
     UserAccountComponent,
     LoginComponent,
-    DupeCheckDirective
+    DupeCheckDirective,
+    MustMatchDirective
   ],
   imports: [
     BrowserModule,
