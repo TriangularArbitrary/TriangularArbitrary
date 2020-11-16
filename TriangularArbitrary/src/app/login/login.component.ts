@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
         //  +---------------------------------------------------------------+
         //  | if this is the first time the user has logged in then we need |
-        //  | to add their info to our data store except for secret         |                           |
+        //  | to add their info to our data store except for secret         |
         //  +---------------------------------------------------------------+
 
         //2. send to an async method since we can't await here

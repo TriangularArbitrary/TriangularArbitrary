@@ -14,6 +14,8 @@ export class UserAccountComponent implements OnInit {
 
   //Input properties for tracking changes against and binding based on parent component context
   @Input() isBusy: boolean = false;
+  @Input() formSuccess: boolean = false;
+  @Input() formFailure: boolean = false;
   @Input() model = new IUserModel();
 
   @Output() accountCreationEvent = new EventEmitter<boolean>();
@@ -38,10 +40,9 @@ export class UserAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
-  onSubmit(form:NgForm):void{
+  async onSubmit(form:NgForm): Promise<void>{
     this.isBusy = true;
 
     if(this.model.accountContext === UserAccountContext.create) {
@@ -53,31 +54,52 @@ export class UserAccountComponent implements OnInit {
         this.model = new IUserModel();
         form.reset();
         this.isBusy = false;
+        this.displaySuccessToastMessage();
         this.router.navigate(['favorites'])
       }).catch((e) => {
         console.error(e);
+        this.displayFailureToastMessage(e);
         this.isBusy = false;
       });
     }
     else if(this.model.accountContext === UserAccountContext.update) {
 
-      this.accountService.updateUserAccount(this.model)
+      await this.accountService.updateUserAccount(this.model)
       .then(()=> {
         this.accountCreationEvent.emit(false)
         this.isBusy = false;
+        this.displaySuccessToastMessage();
       }).catch((e) => {
         console.error(e);
+        this.displayFailureToastMessage(e);
         this.isBusy = false;
       });
     }
 
   }
 
-  onCancel(form):void{
-    this.accountCreationEvent.emit(false);
-    form.reset();
-    this.router.navigate(['login'])
+  displaySuccessToastMessage = () => {
+    this.formSuccess = true;
+    setTimeout(() => {
+      this.formSuccess = false;
+    }, 3000);
   }
 
+  displayFailureToastMessage = (e) => {
+    this.formFailure = true;
+    setTimeout(() => {
+      this.formFailure = false;
+    }, 3000);
+  }
 
+  onCancel(form: NgForm): void {
+    this.accountCreationEvent.emit(false);
+
+    if (this.model.accountContext == UserAccountContext.create){
+      this.router.navigate(['login'])
+    }
+    else if (this.model.accountContext == UserAccountContext.update) {
+      this.router.navigate(['favorites']);
+    }
+  }
 }
