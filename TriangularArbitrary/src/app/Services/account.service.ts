@@ -91,6 +91,7 @@ export class AccountService {
      public async updateUserAccount(user: IUserModel): Promise<any>{
 
       var userCheck = await this.getUserAccountByEmail(user.email, false);
+
       if(userCheck == null){
         throw new Error("Account can't be updated. Call the police.")
       }else{
@@ -135,7 +136,6 @@ export class AccountService {
       this.account.lastName = user.lastName;
       this.account.email = user.email;
       this.account.photo = user.photoUrl;
-      //this.account.accountType = this.getAccountType();
       this.account.accountType = (user.accountType) ? user.accountType: UserAccountType.Undeclared;
       this.account.isAuthenticated = true;
       this.account.preferredCurrency = (user.preferredCurrency) ? user.preferredCurrency : Currency.Undeclared;
