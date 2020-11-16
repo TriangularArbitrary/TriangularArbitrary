@@ -22,12 +22,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let stock of stocks">
+        <tr *ngFor="let stock of stocks; let i=index">
           <td>
             <a
               href="{{
                 'https://www.marketwatch.com/investing/stock/' + stock.symbol
               }}"
+              target="_blank"
               >{{ stock.symbol }}</a
             >
           </td>
@@ -38,8 +39,8 @@
           <td>{{ stock.volume }}</td>
           <td>{{ stock.latestTradingDay }}</td>
           <td>{{ stock.prevClose }}</td>
-          <td>{{ stock.change }}</td>
-          <td>{{ stock.changePercent }}</td>
+          <td [style.color]="getTextColor(i)">{{ stock.change }}</td>
+          <td [style.color]="getTextColor(i)">{{ stock.changePercent }}</td>
           <td>
             <button (click)="deleteFavorite(stock)" class="btn btn-danger" type="button">
               Delete from favorites
