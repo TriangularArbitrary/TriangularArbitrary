@@ -148,6 +148,7 @@ export class AccountService {
 
   public signOut(): void {
     this.authService.signOut();
+
     //remove any reference to the user
     this.account = new IUserModel();
   }

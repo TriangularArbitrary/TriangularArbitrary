@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from '../../../node_modules/ngx-toastr';
 import { Stock } from '../Models/Stock';
 import { AccountService } from '../Services/account.service';
 import { AlphaVantageService } from '../Services/alpha-vantage.service';
@@ -12,6 +12,8 @@ import { FavoritesStorageService } from '../Services/favorites-storage.service';
   styleUrls: ['./favorites.component.css'],
 })
 export class FavoritesComponent implements OnInit {
+
+  @Input() isBusy: boolean = null;
 
   stocks: Stock[] = [];
   textColor: string;
@@ -30,10 +32,12 @@ export class FavoritesComponent implements OnInit {
   }
 
   async loadFavorites() {
+    this.isBusy = true;
     let currentFavs = await this.favServ.getAllFavorites(this.accServ.getUserAccount().email);
     for(let i = 0; i < currentFavs.length; i++) {
       this.retrieveStock(currentFavs[i]);
     }
+    this.isBusy = null;
   }
 
   refreshData() {
@@ -46,6 +50,7 @@ export class FavoritesComponent implements OnInit {
   }
 
   retrieveStock(symbol: string) {
+    this.isBusy = true;
     this.serv.getStocks(symbol).subscribe(
       (response) => {
         let data = response['Global Quote'];
@@ -63,6 +68,7 @@ export class FavoritesComponent implements OnInit {
           data['10. change percent']
         );
         this.stocks.push(newStock);
+        this.isBusy = null;
       },
       (error) => console.log(error)
     );

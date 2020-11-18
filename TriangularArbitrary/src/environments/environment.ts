@@ -2,6 +2,8 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { GoogleLoginProvider, SocialAuthServiceConfig } from 'angularx-social-login';
+
 export const environment = {
   production: false,
   firebaseConfig: {
@@ -35,7 +37,19 @@ export const environment = {
                     '2c42f9b7damsh0337a009b8e72f8p15e9d8jsn6f2f2f1c6f70',
                     '1eba3876a0msh68dce7c6f2dd412p1885aajsn2b03db874223'
                   ]
-  }
+  },
+  socialAuthService: {
+    provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: true,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('413592386133-89m1je7fsgf4h65unfqrct9mmnqh4pk5.apps.googleusercontent.com')
+          }
+        ]
+      } as SocialAuthServiceConfig
+    }
 };
 
 /*

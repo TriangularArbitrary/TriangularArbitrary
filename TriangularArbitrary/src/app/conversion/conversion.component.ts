@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Currencies, LocalStorageKeys } from '../Enums/Enums';
 import { CurrencyConversion, CurrencyConversionList } from '../Models/CurrencyConversion';
@@ -17,6 +17,8 @@ export class Money{
   styleUrls: ['./conversion.component.css']
 })
 export class ConversionComponent implements OnInit {
+
+  @Input() isBusy: boolean = null;
 
   constructor(private serv: AlphaVantageService) {}
 
@@ -81,6 +83,7 @@ export class ConversionComponent implements OnInit {
   }
 
   getConversions():void {
+    this.isBusy = true;
     this.serv.getCurrencyExchange(this.money.toCurrency,this.money.fromCurrency).subscribe
     (
       (response) => {
@@ -94,10 +97,12 @@ export class ConversionComponent implements OnInit {
         console.log(newConversion);
         this.addToArray(newConversion);
         console.log(this.conversions);
+        this.isBusy = null;
       },
       (error) => {
         console.log(error);
-        alert("Too many requests, please wait a minute before trying again.")
+        alert("Too many requests, please wait a minute before trying again.");
+        this.isBusy = null;
       }
     )
   }

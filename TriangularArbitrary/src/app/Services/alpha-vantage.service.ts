@@ -30,7 +30,7 @@ getStocks(symbol: string) {
 getCurrencyExchange(to:string, from:string) {
   var key: string = this.getKey();
   let headers = new HttpHeaders().set('x-rapidapi-host',environment.alphaVantageAPIConfig.xRapidApiHost)
-                                 .set('x-rapidapi-key', environment.alphaVantageAPIConfig.xRapidApiKeys[1]);
+                                 .set('x-rapidapi-key', key);
 
   return this.http.get("https://alpha-vantage.p.rapidapi.com/query?function=CURRENCY_EXCHANGE_RATE&to_currency="+to+"&from_currency="+from, {headers});
 }

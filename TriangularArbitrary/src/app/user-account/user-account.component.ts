@@ -4,6 +4,7 @@ import { FormControl, NgForm, Validators } from '@angular/forms';
 import { UserAccountType, Currency, UserAccountContext } from '../Enums/Enums';
 import { AccountService } from './../Services/account.service';
 import { Router } from '@angular/router';
+import { ToastrService } from '../../../node_modules/ngx-toastr';
 
 @Component({
   selector: 'app-user-account',
@@ -27,7 +28,7 @@ export class UserAccountComponent implements OnInit {
   accountTypes = UserAccountType;
   currencies = Currency;
 
-  constructor(private accountService: AccountService, private router: Router) {
+  constructor(private accountService: AccountService, private router: Router, private toastr: ToastrService) {
     if(this.model === undefined || this.model == null){
       this.model = new IUserModel();
     }else{
@@ -79,17 +80,11 @@ export class UserAccountComponent implements OnInit {
   }
 
   displaySuccessToastMessage = () => {
-    this.formSuccess = true;
-    setTimeout(() => {
-      this.formSuccess = false;
-    }, 3000);
+    this.toastr.success(this.model.accountContext + " successful.");
   }
 
   displayFailureToastMessage = (e) => {
-    this.formFailure = true;
-    setTimeout(() => {
-      this.formFailure = false;
-    }, 3000);
+    this.toastr.error(this.model.accountContext + " failed.");
   }
 
   onCancel(form: NgForm): void {

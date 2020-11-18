@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { LocalStorageKeys } from '../Enums/Enums';
 import { Movers, MoversList } from '../Models/Movers';
 import { YahooFinanceService } from '../Services/yahoo-finance.service';
@@ -9,6 +9,8 @@ import { YahooFinanceService } from '../Services/yahoo-finance.service';
   styleUrls: ['./top-ten.component.css']
 })
 export class TopTenComponent implements OnInit {
+
+  @Input() isBusy: boolean = null;
 
   constructor(private serv: YahooFinanceService) {}
 
@@ -36,6 +38,7 @@ export class TopTenComponent implements OnInit {
   }
 
   queryMovers() {
+    this.isBusy = true;
     this.serv.getMovers().subscribe (
       (response) => {
         let data:Object[] = response['quotes'];
@@ -47,10 +50,12 @@ export class TopTenComponent implements OnInit {
           element['fiftyTwoWeekRange']));
         });
         //console.log(this.topten);
+        this.isBusy = null;
       },
       (error) => {
         console.log(error);
         alert("Too many requests, please wait a minute before trying again.");
+        this.isBusy = null;
       });
   }
 
