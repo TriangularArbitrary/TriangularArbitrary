@@ -75,6 +75,10 @@ export class AppComponent {
     this.account.isAuthenticated = e;
   }
 
+  handleTitleClick = () => {
+    this.account?.isAuthenticated ? this.router.navigate(['favorites']) : this.router.navigate(['login']);
+  }
+
 }
 
 
