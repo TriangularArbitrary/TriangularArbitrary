@@ -45,8 +45,8 @@ export class UserAccountComponent implements OnInit {
 
   async onSubmit(form:NgForm): Promise<void>{
     this.isBusy = true;
-
     if(this.model.accountContext === UserAccountContext.create) {
+      this.model.isSocialUser = false;
       this.accountService.insertUserAccount(this.model)
       .then(()=> {
         this.accountService.setUserAccount(this.model);
