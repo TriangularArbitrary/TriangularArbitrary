@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -19,6 +19,12 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { DupeCheckDirective } from './directives/dupe-check.directive';
 import { LoginComponent } from './login/login.component';
+import { environment } from 'src/environments/environment';
+import { FavoritesStorageService } from './Services/favorites-storage.service';
+import { AlphaVantageService } from './Services/alpha-vantage.service';
+import { CryptoAssetService } from './Services/crypto-asset.service';
+import { AccountService } from './Services/account.service';
+import { YahooFinanceService } from './Services/yahoo-finance.service';
 
 @NgModule({
   declarations: [
@@ -44,18 +50,13 @@ import { LoginComponent } from './login/login.component';
   ],
   providers: [
     TicketStorageService,
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: true,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('413592386133-89m1je7fsgf4h65unfqrct9mmnqh4pk5.apps.googleusercontent.com')
-          }
-        ]
-      } as SocialAuthServiceConfig,
-    }
+    ToastrService,
+    FavoritesStorageService,
+    AccountService,
+    AlphaVantageService,
+    CryptoAssetService,
+    YahooFinanceService,
+    environment.socialAuthService
   ],
   bootstrap: [AppComponent]
 })

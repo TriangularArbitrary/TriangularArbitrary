@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,9 @@ export class YahooFinanceService {
    }
 
    getMovers() {
-    let headers = new HttpHeaders().set('x-rapidapi-host','yahoo-finance15.p.rapidapi.com').set('x-rapidapi-key','dab15a3f9cmshddce05f66ea95dcp13569ejsn701258d7a016');
+    let headers = new HttpHeaders().set('x-rapidapi-host', environment.yahooAPIConfig.xRapidApiHost)
+                                   .set('x-rapidapi-key', environment.yahooAPIConfig.xRapidApiKey);
+
     return this.http.get("https://yahoo-finance15.p.rapidapi.com/api/yahoo/mu/topmutualfunds?start=0", {headers});
   }
 

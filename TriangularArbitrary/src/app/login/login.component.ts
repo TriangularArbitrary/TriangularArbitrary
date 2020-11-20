@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { SocialAuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { FormControl, NgForm } from '@angular/forms'
@@ -13,7 +13,7 @@ import { UserAccountContext } from '../Enums/Enums';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   //Output properties for emitting events to parent (App.Component)
   @Output() accountCreationEvent = new EventEmitter<boolean>();
@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
     this.authService.authState.subscribe((user) => {
 
       if(user != null){
-
         //1. set the app account of the user
         this.accountService.setUserAccount(user);
 
@@ -47,6 +46,16 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['favorites']);
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.model = null;
+    this.accountCreationEvent = null;
+    this.userAuthenticated = null;
+    this.userAccountEvent = null;
+    this.authService = null;
+    this.accountService = null;
+    this.router = null;
   }
 
   async insertSocialUser():Promise<void>{
@@ -97,7 +106,7 @@ export class LoginComponent implements OnInit {
       var signInUser = await this.accountService.getUserAccountByEmail(this.model.email, true);
       console.log('userCheck: ', signInUser.preferredCurrency);
     }catch(error){
-      console.log(error);
+      console.log('unable to sign in with requested email: ' + error);
     }
 
     //TODO: temp for debugging - reset below

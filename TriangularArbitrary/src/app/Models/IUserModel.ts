@@ -15,11 +15,12 @@ export class IUserModel {
     accountContext: UserAccountContext = UserAccountContext.create;
     createDate: Date;
     modifiedDate: Date;
+    isSocialUser: boolean;
 
     constructor(id?: string, email?: string, firstName?: string, lastName?: string, photo?: string,
                 accountType?: UserAccountType, preferredCurrency?: Currency, secret?: string,
                 accountContext: UserAccountContext = UserAccountContext.create,
-                createDate? : Date, modifiedDate?: Date){
+                createDate? : Date, modifiedDate?: Date, isSocialUser?: boolean){
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -32,6 +33,7 @@ export class IUserModel {
         this.accountContext = accountContext;
         this.createDate = createDate;
         this.modifiedDate = modifiedDate;
+        this.isSocialUser = isSocialUser;
     }
 
     //yep, intense level of security

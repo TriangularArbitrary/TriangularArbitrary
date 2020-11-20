@@ -7,18 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AccountService } from './Services/account.service';
 import { IUserModel } from './Models/IUserModel';
 import { Router } from '@angular/router';
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAGVrbwqSR3WZjlUpL_13y7lLDe8e1kYWA",
-  authDomain: "triangulararbitrary.firebaseapp.com",
-  databaseURL: "https://triangulararbitrary.firebaseio.com",
-  projectId: "triangulararbitrary",
-  storageBucket: "triangulararbitrary.appspot.com",
-  messagingSenderId: "991332102738",
-  appId: "1:991332102738:web:1399c62301d65b001fe58b",
-  measurementId: "G-QRJ5RJR3F8"
-};
-
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -48,11 +37,9 @@ export class AppComponent {
     //   localStorage.getItem(element);
     // });
 
-
     // Firebase initialization - takes the firebaseConfig constant that points to the TriangularArbitrary firebase app
     // and initializes its development functions for use
-    let app = firebase.initializeApp(firebaseConfig);
-
+    let app = firebase.initializeApp(environment.firebaseConfig);
 
     //DEBUG without login
     // this.account.isAuthenticated = true;
@@ -86,6 +73,10 @@ export class AppComponent {
 
   userAuthEvent(e: boolean) {
     this.account.isAuthenticated = e;
+  }
+
+  handleTitleClick = () => {
+    this.account?.isAuthenticated ? this.router.navigate(['favorites']) : this.router.navigate(['login']);
   }
 
 }

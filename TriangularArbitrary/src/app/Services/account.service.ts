@@ -4,6 +4,7 @@ import { Currency, UserAccountType } from './../Enums/Enums';
 import { IUserModel } from './../Models/IUserModel';
 import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 import * as firebase from 'firebase/app';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class AccountService {
   account: IUserModel;
   private authService: SocialAuthService;
 
-  constructor(authService?: SocialAuthService) {
+  constructor(authService?: SocialAuthService, private router?: Router) {
     this.authService = authService;
     this.account = new IUserModel();
   }
@@ -73,6 +74,7 @@ export class AccountService {
 
         return firebase.firestore().collection('users').add({
           accountType: (user.accountType) ? user.accountType: UserAccountType.Undeclared,
+          isSocialUser: user.isSocialUser,
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
@@ -113,8 +115,19 @@ export class AccountService {
 
      }
 
-     deleteUserAccount(id: string): Promise<any> {
+     async deleteUserAccount(id: string): Promise<any> {
       try{
+        // Delete Tickets for account
+        var deleteTicketsSnapshot = firebase.firestore().collection('tickets').where('user', '==', this.account.email);
+
+        await deleteTicketsSnapshot.get().then((docs) => {
+          docs.forEach((doc) => firebase.firestore().collection('tickets').doc(doc.id).delete());
+        })
+
+        // Delete Favorites for account
+        firebase.firestore().collection('favorites').doc(this.account.email).delete();
+
+        // Delete Account
         return firebase.firestore().collection('users').doc(id).delete();
       }
       catch(e) {
@@ -139,6 +152,7 @@ export class AccountService {
       this.account.accountType = (user.accountType) ? user.accountType: UserAccountType.Undeclared;
       this.account.isAuthenticated = true;
       this.account.preferredCurrency = (user.preferredCurrency) ? user.preferredCurrency : Currency.Undeclared;
+      this.account.isSocialUser = user.isSocialUser == null ? true : false;
     }
   }
 
@@ -147,9 +161,16 @@ export class AccountService {
   }
 
   public signOut(): void {
-    this.authService.signOut();
-    //remove any reference to the user
-    this.account = new IUserModel();
-  }
 
+    // TODO: I think we are signing out even though we haven't signed a google social user in...
+    // therefore, should only call this if account is a google account, otherwise... just wipe account and router back to login
+
+    if (this.account.isSocialUser) {
+      this.authService.signOut().then(() => this.account = new IUserModel());
+    }
+    else {
+      this.account = new IUserModel();
+      this.router.navigate(['login']);
+    }
+  }
 }

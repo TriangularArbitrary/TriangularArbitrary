@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from '../../../node_modules/ngx-toastr';
 import { Stock } from '../Models/Stock';
 import { AccountService } from '../Services/account.service';
 import { AlphaVantageService } from '../Services/alpha-vantage.service';
@@ -12,6 +12,7 @@ import { FavoritesStorageService } from '../Services/favorites-storage.service';
 })
 export class SearchComponent implements OnInit {
   @Input() stocks: Stock[] = [];
+  @Input() isBusy = null;
   symbol: string;
   textColor: string;
 
@@ -31,6 +32,7 @@ export class SearchComponent implements OnInit {
   }
 
   getStocks(): void {
+    this.isBusy = true;
     this.serv.getStocks(this.symbol).subscribe(
       (response) => {
         let data = response['Global Quote'];
@@ -54,14 +56,19 @@ export class SearchComponent implements OnInit {
         this.stocks = [];
         this.stocks.push(newStock);
         this.favServ.lastStock = newStock;
+        this.isBusy = null;
       },
-      (error) => console.log(error)
+      (error) => {
+        console.log(error);
+        alert("Too many requests, please wait a minute before trying again.");
+        this.isBusy = null;
+      }
     );
   }
 
   async addFavorite(symbol: string) {
     if ((await this.checkDuplicates(symbol)) === true) {
-      this.toastr.info(symbol + " is already favorited!")
+      this.toastr.warning(symbol + " is already favorited!")
       return;
     }
     this.favServ.saveFavorite(symbol, this.accServ.getUserAccount().email);
