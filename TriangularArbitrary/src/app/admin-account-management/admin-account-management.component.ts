@@ -16,7 +16,8 @@ export class AdminAccountManagementComponent implements OnInit {
 
   @Input() tickets: ITicketModel[];
   @Input() users: IUserModel[] = [];
-  @Input() isBusy: boolean;
+  @Input() ticketTableisBusy: boolean;
+  @Input() accountTableIsBusy: boolean = null;
 
   constructor(ticketService: TicketStorageService, private accountService: AccountService) {
     this.ticketService = ticketService;
@@ -64,20 +65,20 @@ export class AdminAccountManagementComponent implements OnInit {
   }
 
   removeUser(index: string): void {
-    this.isBusy = true;
+    this.accountTableIsBusy = true;
     var user = this.users[index];
     this.accountService.deleteUserAccount(user.id).then( () => {
       this.users.splice(parseInt(index), 1)
-      this.isBusy = false
+      this.accountTableIsBusy = false
     }).catch(e => {
       console.log(e)
-      this.isBusy = false
+      this.accountTableIsBusy = false
     })
   }
 
   resolveTicket(index: string): void {
 
-    this.isBusy = true;
+    this.ticketTableisBusy = true;
     // LocalStorage solution:
     // this.ticketService.deleteTicket(index)
     // this.tickets = this.ticketService.getAllTickets();
@@ -86,7 +87,7 @@ export class AdminAccountManagementComponent implements OnInit {
     this.ticketService.deleteFirebaseTicket(this.tickets[index].id).then( () =>
       {
         this.tickets = this.ticketService.getAllFirebaseTickets();
-        this.isBusy = false;
+        this.ticketTableisBusy = false;
       }
     );
   }

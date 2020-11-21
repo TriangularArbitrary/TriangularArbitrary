@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +20,12 @@ import { UserAccountComponent } from './user-account/user-account.component';
 import { DupeCheckDirective } from './directives/dupe-check.directive';
 import { LoginComponent } from './login/login.component';
 import { MustMatchDirective } from './directives/must-match.directive';
+import { environment } from 'src/environments/environment';
+import { FavoritesStorageService } from './Services/favorites-storage.service';
+import { AlphaVantageService } from './Services/alpha-vantage.service';
+import { CryptoAssetService } from './Services/crypto-asset.service';
+import { AccountService } from './Services/account.service';
+import { YahooFinanceService } from './Services/yahoo-finance.service';
 
 @NgModule({
   declarations: [
@@ -38,22 +46,19 @@ import { MustMatchDirective } from './directives/must-match.directive';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    SocialLoginModule
+    SocialLoginModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     TicketStorageService,
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: true,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('413592386133-89m1je7fsgf4h65unfqrct9mmnqh4pk5.apps.googleusercontent.com')
-          }
-        ]
-      } as SocialAuthServiceConfig,
-    }
+    ToastrService,
+    FavoritesStorageService,
+    AccountService,
+    AlphaVantageService,
+    CryptoAssetService,
+    YahooFinanceService,
+    environment.socialAuthService
   ],
   bootstrap: [AppComponent]
 })

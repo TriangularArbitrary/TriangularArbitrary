@@ -4,7 +4,7 @@
     <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
       <!-- Page Title -->
       <div class="navbar-header m-2">
-        <a href="./index.html" class="navbar-brand ml-5"><h1 class="text-color-jet">Tri<b>angular</b> Arbitrary</h1></a>
+        <a (click)="handleTitleClick()" class="navbar-brand ml-5"><h1 class="text-color-jet">Tri<b>angular</b> Arbitrary</h1></a>
       </div>
     </div>
 
@@ -45,11 +45,11 @@
       <nav class="nav navbar">
         <ul class="nav navbar-nav">
           <div class="row">
-            <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" routerLink="top-ten" routerLinkActive="active"><b>TOP 10</b> </a></li>
+            <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" routerLink="favorites" routerLinkActive="active"><b>FAVORITES</b> </a></li>
           </div>
           <hr class="color-jet">
           <div class="row">
-            <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" routerLink="favorites" routerLinkActive="active"><b>FAVORITES</b> </a></li>
+            <li class="btn w-100 nav-item"><a class="nav-link text-color-jet" routerLink="top-ten" routerLinkActive="active"><b>TOP 10</b> </a></li>
           </div>
           <hr>
           <div class="row">

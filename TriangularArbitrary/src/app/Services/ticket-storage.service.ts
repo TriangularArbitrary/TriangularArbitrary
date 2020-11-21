@@ -51,9 +51,6 @@ export class TicketStorageService {
   //////////////////////////////////////////
   // #endregion "LocalStorage Functionality"
 
-
-
-
   // #region "Firebase Functionality"
   ///////////////////////////////////
 
