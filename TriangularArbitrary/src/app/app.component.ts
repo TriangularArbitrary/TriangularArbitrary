@@ -1,5 +1,5 @@
 import { LocalStorageKeys, UserAccountContext } from './Enums/Enums';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import * as firebase from 'firebase';
 import { BehaviorSubject } from 'rxjs';
 
@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   //Input properties to track changes against
   @Input() accountCreationClicked = false;
