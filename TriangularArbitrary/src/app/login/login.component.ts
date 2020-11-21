@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       if(user != null){
         //1. set the app account of the user
-        this.accountService.setUserAccount(user);
+        this.accountService.setUserAccount(user, true);
 
         //  +---------------------------------------------------------------+
         //  | if this is the first time the user has logged in then we need |
