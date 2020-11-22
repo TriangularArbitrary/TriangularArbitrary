@@ -96,12 +96,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   async signInWithEmail(): Promise<void>{
 
-    //testaccounts TODO: REMOVE WHEN FINISHED
-    //John.Smith@WoltersKluwer.com
-    //xxxx@noemailxxxx.com
-    //UniqueEmail2@email.com
-    //11081215@email.com
-
     try{
       var signInUser = await this.accountService.getUserAccountByEmail(this.model.email, true);
       console.log('userCheck: ', signInUser.preferredCurrency);
@@ -110,21 +104,21 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     //TODO: temp for debugging - reset below
-    // signInUser.accountContext = UserAccountContext.update;
-    //   this.accountService.setUserAccount(signInUser);
-    //   this.userAuthenticated.emit(true);
-    //   this.router.navigate(['favorites']);
-
-    if(signInUser.email === this.model.email && signInUser.secret === this.model.secret){
-
-      //load user into userAccount
-      signInUser.accountContext = UserAccountContext.update;
+    signInUser.accountContext = UserAccountContext.update;
       this.accountService.setUserAccount(signInUser);
       this.userAuthenticated.emit(true);
       this.router.navigate(['favorites']);
-    }else{
-        //TODO: sign in failed -> display message
-    }
+
+    // if(signInUser.email === this.model.email && signInUser.secret === this.model.secret){
+
+    //   //load user into userAccount
+    //   signInUser.accountContext = UserAccountContext.update;
+    //   this.accountService.setUserAccount(signInUser);
+    //   this.userAuthenticated.emit(true);
+    //   this.router.navigate(['favorites']);
+    // }else{
+    //     //TODO: sign in failed -> display message
+    // }
 
   }
 }
