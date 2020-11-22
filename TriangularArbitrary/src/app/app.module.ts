@@ -19,6 +19,7 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { DupeCheckDirective } from './directives/dupe-check.directive';
 import { LoginComponent } from './login/login.component';
+import { MustMatchDirective } from './directives/must-match.directive';
 import { environment } from 'src/environments/environment';
 import { FavoritesStorageService } from './Services/favorites-storage.service';
 import { AlphaVantageService } from './Services/alpha-vantage.service';
@@ -37,7 +38,8 @@ import { YahooFinanceService } from './Services/yahoo-finance.service';
     TopTenComponent,
     UserAccountComponent,
     LoginComponent,
-    DupeCheckDirective
+    DupeCheckDirective,
+    MustMatchDirective
   ],
   imports: [
     BrowserModule,

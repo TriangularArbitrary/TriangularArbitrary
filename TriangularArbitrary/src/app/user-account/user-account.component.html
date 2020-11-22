@@ -5,7 +5,10 @@
   <div class="row ml-2" *ngIf="!isBusy">
     <h3>Personal Information</h3>
   </div>
-  <form #accountForm="ngForm" (ngSubmit)="accountForm.form.valid && onSubmit(accountForm)" *ngIf="!isBusy">
+  <form #accountForm="ngForm" (ngSubmit)="accountForm.form.valid && onSubmit(accountForm)"
+  *ngIf="!isBusy"
+  [mustMatch]="['password', 'confirmPassword']"
+  >
     <div class="row">
         <div class="col">
             <input required type="text" placeholder="First Name" class="form-control w-100" maxlength="30"
@@ -49,12 +52,11 @@
           <!-- <option value="">Select Account Type...</option> -->
           <option *ngFor="let accountType of this.enumKeys(accountTypes)" [value]="accountType"> {{ accountTypes[accountType]}} </option>
 
-        </select>
+          </select>
 
-        <div *ngIf="accountForm.submitted && accountType.invalid" class="invalid-feedback">
-          <div *ngIf="accountType.errors.required" class="text-danger">Type of account is required</div>
-        </div>
-
+          <div *ngIf="accountForm.submitted && accountType.invalid" class="invalid-feedback">
+            <div *ngIf="accountType.errors.required" class="text-danger">Type of account is required</div>
+          </div>
         </div>
         <div class="col">
             <select required name="Preferred Currency" id="" class="custom-select"
@@ -73,6 +75,48 @@
 
         </div>
     </div>
+    <div class="row">
+      <br/>
+    </div>
+    <div *ngIf="(!model.isAuthenticated) || (model.isAuthenticated && !model.isSocialUser)" class="row" >
+
+        <div class="col" >
+          <input required type="password" placeholder="Password" class="form-control w-100" minlength="10" maxlength="10" name="password"
+          [(ngModel)]="model.secret" #secret="ngModel"
+          [ngClass]="{'is-invalid': accountForm.submitted && secret.invalid}"
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!,@,#,$,%]).{10,}" >
+          <div *ngIf="accountForm.submitted && secret.invalid" class="invalid-feedback">
+            <div *ngIf="secret.errors.required">Password is required</div>
+            <div *ngIf="secret.invalid">
+                <!-- TODO: dynamically display to user the pattern fault -->
+            </div>
+          </div>
+        </div>
+
+        <div class="col" >
+          <input type="password" placeholder="Confirm Password" class="form-control w-100" minlength="10" maxlength="10" name="confirmPassword"
+          [(ngModel)]="model.confirmSecret" #confirmSecret="ngModel"
+          [ngClass]="{'is-invalid': accountForm.submitted && confirmSecret.invalid}"
+          required>
+          <div *ngIf="accountForm.submitted && confirmSecret.invalid" class="invalid-feedback">
+            <div *ngIf="confirmSecret.errors.mustMatch">Passwords must match</div>
+          </div>
+        </div>
+
+        <div class="col float-left">&nbsp;</div>
+    </div>
+    <div *ngIf="(!model.isAuthenticated) || (model.isAuthenticated && !model.isSocialUser)"  class="row m-1">
+
+      <div class="col-8">
+        <div id="instructions" class="passwordInstructions">Must be 10 characters and contain at least one number, one uppercase, one lowercase letter and one character from (!, @, #, $, %).</div>
+      </div>
+      <div class="col-4"></div>
+
+    </div>
+
+    <!-- <div class="row m-1">
+        <hr class="w-100">
+    </div> -->
     <br>
 
     <br>
@@ -93,12 +137,13 @@
     <div class="row m-1">
       &nbsp;
     </div>
-    <div class="row m-1">
-      <hr class="w-100">
-    </div>
+
   </form>
 
-
+<div *ngIf="model.isAuthenticated">
+  <div class="row m-1">
+    <hr class="w-100">
+  </div>
   <!-- loading spinner while ticket is submitting to firebase just in case it takes any amount of time -->
   <div *ngIf="isBusy" class="row w-100">
     <div  class="col d-flex justify-content-center">
@@ -146,5 +191,7 @@
       </div>
     </div>
   </div>
+</div>
 
 </div>
+

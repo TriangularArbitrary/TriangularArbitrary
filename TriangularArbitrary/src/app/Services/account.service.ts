@@ -79,8 +79,7 @@ export class AccountService {
           firstName: user.firstName,
           lastName: user.lastName,
           preferredCurrency: (user.preferredCurrency) ? user.preferredCurrency : Currency.Undeclared,
-          //secret: this.model.secret
-          secret: 'abcdef',
+          secret: user.secret,    //shhh, don't tell anyone, it's not encrypted with a one-way hash
           createDate:  firebase.firestore.FieldValue.serverTimestamp(),
           modifiedDate:  firebase.firestore.FieldValue.serverTimestamp()
         }).catch((e) => {
@@ -104,8 +103,7 @@ export class AccountService {
           firstName: user.firstName,
           lastName: user.lastName,
           preferredCurrency: (user.preferredCurrency) ? user.preferredCurrency : Currency.Undeclared,
-          //secret: this.model.secret
-          secret: 'abcdef',
+          secret: user.secret,    //here either
           modifiedDate: firebase.firestore.FieldValue.serverTimestamp()
 
         }).catch((e) => {
@@ -142,7 +140,7 @@ export class AccountService {
   // +--------------------------------------+
 
   //changed from type SocialUser to any user to accomodate email logins; could be problem if adding new providers that don't conform to standard interface
-  public setUserAccount(user: any): void {
+  public setUserAccount(user: any, isSocialUser?: boolean): void {
     if (user) {
       this.account.id = user.id;
       this.account.firstName = user.firstName;
@@ -152,7 +150,7 @@ export class AccountService {
       this.account.accountType = (user.accountType) ? user.accountType: UserAccountType.Undeclared;
       this.account.isAuthenticated = true;
       this.account.preferredCurrency = (user.preferredCurrency) ? user.preferredCurrency : Currency.Undeclared;
-      this.account.isSocialUser = user.isSocialUser == null ? true : false;
+      this.account.isSocialUser = isSocialUser;
     }
   }
 
@@ -170,7 +168,6 @@ export class AccountService {
     }
     else {
       this.account = new IUserModel();
-      this.router.navigate(['login']);
     }
   }
 }

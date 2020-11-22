@@ -9,7 +9,7 @@
 
           <div class="col" style="background: white; padding-top: 2%;">
                 <h2>Sign In</h2>
-                or <button class="btn btn-link" (click)="createAccountClicked()">create an account</button>
+                or <a class="btn btn-link" (click)="createAccountClicked()">create an account</a>
                 <br/>
                 <br/>
                 <input required type="email" name="email" placeholder="Email" class="form-control" [(ngModel)]='model.email'/>
@@ -17,13 +17,13 @@
                 <input required type="password" name="password" placeholder="Password" class="form-control" [(ngModel)]='model.secret'/>
                 <br/>
                 <button
+                  type="submit"
                   class="btn btn-primary form-control"
                   style="background-color: #7043F5; "
                   (click)="signInWithEmail()"
                 >Sign In</button>
                 <br/><br/>
                 <button
-                  type="submit"
                   class="btn btn-primary form-control"
                   style="background-color: white; border:#7043F5 1px solid; color: #7043F5; "
                   (click)="signInWithGoogle()"
@@ -40,3 +40,4 @@
       <router-outlet></router-outlet>
   </div>
   </form>
+

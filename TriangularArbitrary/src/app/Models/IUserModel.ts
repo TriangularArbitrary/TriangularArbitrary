@@ -12,6 +12,7 @@ export class IUserModel {
     accountType: UserAccountType;
     preferredCurrency: Currency;
     secret: string;
+    confirmSecret: string;
     accountContext: UserAccountContext = UserAccountContext.create;
     createDate: Date;
     modifiedDate: Date;

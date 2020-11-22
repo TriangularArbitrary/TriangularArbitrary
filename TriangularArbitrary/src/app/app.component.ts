@@ -47,14 +47,14 @@ export class AppComponent {
 
   signOut():void{
     this.accountService.signOut();
-    this.account = this.accountService.getUserAccount();
+    //this.account = this.accountService.getUserAccount();
+    this.account = new IUserModel();
     this.account.isAuthenticated = false;
     this.accountCreationClicked = false;
     this.router.navigate(['login']);
   }
 
   getAppSessionAccount():void {
-
     //Load up the user account for app use
     this.account = this.accountService.getUserAccount();
   }
