@@ -6,6 +6,7 @@ import { FormControl, NgForm } from '@angular/forms'
 import { IUserModel } from './../Models/IUserModel';
 import { AccountService } from './../Services/account.service';
 import { UserAccountContext } from '../Enums/Enums';
+import { ToastrService } from '../../../node_modules/ngx-toastr';
 
 
 @Component({
@@ -23,7 +24,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   model: IUserModel;
 
   constructor(private authService: SocialAuthService,
-              private accountService: AccountService, private router: Router) {
+              private accountService: AccountService,
+              private router: Router,
+              private toastr: ToastrService) {
                 this.model = new IUserModel();
                }
 
@@ -102,30 +105,31 @@ export class LoginComponent implements OnInit, OnDestroy {
     //UniqueEmail2@email.com
     //11081215@email.com
 
-    try{
-      var signInUser = await this.accountService.getUserAccountByEmail(this.model.email, true);
-      console.log('userCheck: ', signInUser.preferredCurrency);
-    }catch(error){
-      console.log('unable to sign in with requested email: ' + error);
+    if(this.model.email != undefined){
+      try{
+          var signInUser = await this.accountService.getUserAccountByEmail(this.model.email, true);
+
+      }catch(error){
+        console.log('unable to sign in with requested email: ' + error);
+      }
+
+      //TODO: temp for debugging - reset below
+      // signInUser.accountContext = UserAccountContext.update;
+      //   this.accountService.setUserAccount(signInUser);
+      //   this.userAuthenticated.emit(true);
+      //   this.router.navigate(['favorites']);
+
+      if(signInUser.email === this.model.email && signInUser.secret === this.model.secret){
+
+        //load user into userAccount
+        signInUser.accountContext = UserAccountContext.update;
+        this.accountService.setUserAccount(signInUser);
+        this.userAuthenticated.emit(true);
+        this.router.navigate(['favorites']);
+      }else{
+        this.toastr.error("You have failed me for the last time.");
+      }
     }
-
-    //TODO: temp for debugging - reset below
-    // signInUser.accountContext = UserAccountContext.update;
-    //   this.accountService.setUserAccount(signInUser);
-    //   this.userAuthenticated.emit(true);
-    //   this.router.navigate(['favorites']);
-
-    if(signInUser.email === this.model.email && signInUser.secret === this.model.secret){
-
-      //load user into userAccount
-      signInUser.accountContext = UserAccountContext.update;
-      this.accountService.setUserAccount(signInUser);
-      this.userAuthenticated.emit(true);
-      this.router.navigate(['favorites']);
-    }else{
-        //TODO: sign in failed -> display message
-    }
-
   }
 }
 

@@ -114,9 +114,9 @@
 
     </div>
 
-    <div class="row m-1">
+    <!-- <div class="row m-1">
         <hr class="w-100">
-    </div>
+    </div> -->
     <br>
 
     <br>
@@ -137,12 +137,12 @@
     <div class="row m-1">
       &nbsp;
     </div>
-    <div class="row m-1">
-      <hr class="w-100">
-    </div>
   </form>
 
-
+  <div *ngIf="model.isAuthenticated">
+  <div class="row m-1">
+    <hr class="w-100">
+  </div>
   <!-- loading spinner while ticket is submitting to firebase just in case it takes any amount of time -->
   <div *ngIf="isBusy" class="row w-100">
     <div  class="col d-flex justify-content-center">
@@ -190,6 +190,6 @@
       </div>
     </div>
   </div>
-
+</div>
 </div>
 
