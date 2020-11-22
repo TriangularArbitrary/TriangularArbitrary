@@ -1,3 +1,5 @@
+import { TicketStorageService } from './../Services/ticket-storage.service';
+import { ITicketModel } from './../Models/ITicketModel';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IUserModel } from '../Models/IUserModel';
 import { FormControl, NgForm, Validators } from '@angular/forms';
@@ -18,6 +20,7 @@ export class UserAccountComponent implements OnInit {
   @Input() formSuccess: boolean = false;
   @Input() formFailure: boolean = false;
   @Input() model = new IUserModel();
+  @Input() myTickets: ITicketModel[];
 
   @Output() accountCreationEvent = new EventEmitter<boolean>();
 
@@ -28,7 +31,7 @@ export class UserAccountComponent implements OnInit {
   accountTypes = UserAccountType;
   currencies = Currency;
 
-  constructor(private accountService: AccountService, private router: Router, private toastr: ToastrService) {
+  constructor(private accountService: AccountService, private router: Router, private toastr: ToastrService, private ticketService: TicketStorageService) {
     if(this.model === undefined || this.model == null){
       this.model = new IUserModel();
     }else{
@@ -37,7 +40,7 @@ export class UserAccountComponent implements OnInit {
       console.log(this.model.accountContext);
       console.log(this.model.preferredCurrency);
     }
-
+    this.myTickets = ticketService.getAllFirebaseTicketsByEmail(this.model.email);
   }
 
   ngOnInit(): void {
