@@ -26,7 +26,7 @@ export class AdminAccountManagementComponent implements OnInit {
     // this.tickets = this.ticketService.getAllTickets();
 
     // Firebase solution:
-    this.tickets = this.ticketService.getAllFirebaseTickets();
+    this.tickets = this.ticketService.getAllFirebaseTickets(true);
    }
 
   ngOnInit(): void {
@@ -61,7 +61,6 @@ export class AdminAccountManagementComponent implements OnInit {
         });
 
         this.users = loadedUsers
-        console.log(this.users)
   }
 
   removeUser(index: string): void {
@@ -84,9 +83,11 @@ export class AdminAccountManagementComponent implements OnInit {
     // this.tickets = this.ticketService.getAllTickets();
 
     // Firebase solution:
-    this.ticketService.deleteFirebaseTicket(this.tickets[index].id).then( () =>
+    const resolvedTicket = this.tickets[index];
+    resolvedTicket.resolved = true;
+    this.ticketService.updateFirebaseTicket(resolvedTicket).then( () =>
       {
-        this.tickets = this.ticketService.getAllFirebaseTickets();
+        this.tickets = this.ticketService.getAllFirebaseTickets(true);
         this.ticketTableisBusy = false;
       }
     );

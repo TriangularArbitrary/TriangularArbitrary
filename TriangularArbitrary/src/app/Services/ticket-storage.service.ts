@@ -54,7 +54,7 @@ export class TicketStorageService {
   // #region "Firebase Functionality"
   ///////////////////////////////////
 
-  getAllFirebaseTickets(): ITicketModel[] {
+  getAllFirebaseTickets(filterForUnresolved?: boolean): ITicketModel[] {
 
     // Create the query to load the last 12 tickets and listen for new ones.
     let currentTickets = [] as ITicketModel[];
@@ -69,8 +69,39 @@ export class TicketStorageService {
           // deleteTicket(change.doc.id);
         } else {
           let ticket = change.doc.data() as ITicketModel;
-          ticket.id = change.doc.id;
-          currentTickets.push(ticket);
+          if (filterForUnresolved && ticket.resolved) {
+            //skip
+          } else {
+            ticket.id = change.doc.id;
+            currentTickets.push(ticket);
+          }
+          console.log(ticket)
+        }
+      });
+    });
+
+    return currentTickets;
+  }
+
+  getAllFirebaseTicketsByEmail(email: string): ITicketModel[] {
+
+    // Create the query to load the last 12 tickets and listen for new ones.
+    let currentTickets = [] as ITicketModel[];
+
+    var query = firebase.firestore()
+    .collection('tickets')
+    // .limit(12);
+
+    query.onSnapshot(function(snapshot) {
+      snapshot.docChanges().forEach(function(change) {
+        if(change.type === 'removed') {
+          // deleteTicket(change.doc.id);
+        } else {
+          let ticket = change.doc.data() as ITicketModel;
+          if (ticket.user == email) {
+            ticket.id = change.doc.id;
+            currentTickets.push(ticket);
+          }
         }
       });
     });
@@ -93,6 +124,15 @@ export class TicketStorageService {
       .catch((e) => {
       console.error('Error writing new ticket to database', e);
     });
+  }
+
+  updateFirebaseTicket(updatedTicket: ITicketModel): Promise<any> {
+    try{
+      return firebase.firestore().collection('tickets').doc(updatedTicket.id).update(updatedTicket)
+    }
+    catch(e) {
+      console.error('unable to update ticket', e);
+    }
   }
 
   /**
