@@ -173,7 +173,7 @@
                 <th>Type</th>
                 <th>Severity</th>
                 <th>Description</th>
-                <th>Status</th>
+                <th>Resolution</th>
               </tr>
             </thead>
           <tbody>
@@ -182,8 +182,8 @@
                 <td>{{ticket.type}}</td>
                 <td>{{ticket.severity}}</td>
                 <td>{{ticket.ticketReason}}</td>
-                <td *ngIf="ticket.resolved"><span class="badge"><b>Resolved</b></span></td>
-                <td *ngIf="!ticket.resolved"><span class="badge"><i>In Progress</i></span></td>
+                <td *ngIf="ticket.resolved">{{ticket.resolvedReason}}</td>
+                <td *ngIf="!ticket.resolved"><span class="badge"><i>In Progress...</i></span></td>
               </tr>
           </tbody>
         </table>

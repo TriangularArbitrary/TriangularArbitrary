@@ -2,8 +2,9 @@ import { AccountService } from './../Services/account.service';
 import { IUserModel } from './../Models/IUserModel';
 import { ITicketModel } from './../Models/ITicketModel';
 import { TicketStorageService } from './../Services/ticket-storage.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import * as firebase from 'firebase/app';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-admin-account-management',
@@ -18,8 +19,10 @@ export class AdminAccountManagementComponent implements OnInit {
   @Input() users: IUserModel[] = [];
   @Input() ticketTableisBusy: boolean;
   @Input() accountTableIsBusy: boolean = null;
+  @Input() resolveReason: string;
 
-  constructor(ticketService: TicketStorageService, private accountService: AccountService) {
+
+  constructor(ticketService: TicketStorageService, private accountService: AccountService, private modalService: NgbModal) {
     this.ticketService = ticketService;
 
     // LocalStorage solution:
@@ -75,7 +78,7 @@ export class AdminAccountManagementComponent implements OnInit {
     })
   }
 
-  resolveTicket(index: string): void {
+  resolveTicket(index: string, resolveReason: string): void {
 
     this.ticketTableisBusy = true;
     // LocalStorage solution:
@@ -83,8 +86,9 @@ export class AdminAccountManagementComponent implements OnInit {
     // this.tickets = this.ticketService.getAllTickets();
 
     // Firebase solution:
-    const resolvedTicket = this.tickets[index];
+    const resolvedTicket: ITicketModel = this.tickets[index];
     resolvedTicket.resolved = true;
+    resolvedTicket.resolvedReason = resolveReason
     this.ticketService.updateFirebaseTicket(resolvedTicket).then( () =>
       {
         this.tickets = this.ticketService.getAllFirebaseTickets(true);
@@ -92,5 +96,22 @@ export class AdminAccountManagementComponent implements OnInit {
       }
     );
   }
+
+
+  openResolveModal(content, index: string) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      if (result === ModalDismissReasons.ESC) {
+        // by pressing ESC
+      } else if (result === ModalDismissReasons.BACKDROP_CLICK) {
+        // by clicking on a backdrop
+      } else {
+        // resolve ticket
+        this.resolveTicket(index, this.resolveReason)
+      }
+    }, (reason) => {
+      // modal dismissed
+    });
+  }
+
 
 }
