@@ -60,8 +60,7 @@ export class SearchComponent implements OnInit {
         this.isBusy = null;
       },
       (error) => {
-        console.log(error);
-        alert("Too many requests, please wait a minute before trying again.");
+        this.toastr.info("Too many requests, please wait a minute before trying again.");
         this.isBusy = null;
       }
     );

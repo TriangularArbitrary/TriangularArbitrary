@@ -28,14 +28,6 @@
   <router-outlet></router-outlet>
 </div>
 
-<!-- User-Account Component -->
-<!-- <div *ngIf='accountCreationClicked' class="container-fluid min-width-1000 max-width-100 h-100 w-50 align-middle mx-auto">
-  <app-user-account
-    [model]='account'
-    (accountCreationEvent)='accountCreationEvent($event)'
-    ></app-user-account>
-</div> -->
-
 <!-- Left Navigation and Main Content-->
 <div *ngIf='account.isAuthenticated && !accountCreationClicked' class="container-fluid max-width-100 w-100 h-100">
   <div class="row">

@@ -75,22 +75,16 @@ export class LoginComponent implements OnInit, OnDestroy {
       socialUser = user;
     })
 
-    console.log('Social User: ', socialUser);
-
     if(socialUser != null){
 
       //b/c of the async nature, get a reference to the account service
       if(this.accountService != null){
         var refAccountServ = this.accountService;
       }
-      console.log('this.accountService', this.accountService === null);
 
       //check if social user already exists
       var appUser =  await refAccountServ.getUserAccountByEmail(socialUser.email);
 
-      console.log('App User:  ', appUser);
-      console.log('this.accountService', this.accountService === null);
-      console.log('refAccountServ', refAccountServ === null);
 
       if (appUser === null){
         //await this.accountService.insertUserAccount(this.accountService.getUserAccount());
@@ -101,16 +95,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         if(refAccountServ != null){
           refAccountServ.setUserAccount(appUser, true);
         }
-
-        //TODO: Compare existing values in datastore with recent social pull
-        // updated if any changes
       }
     }
-
   };
 
   signInWithGoogle():void{
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).catch(() => this.toastr.error('Error during Google Login. Please try again later.'));
   }
 
   createAccountClicked() {
@@ -121,36 +111,26 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   async signInWithEmail(): Promise<void>{
 
-    if(this.model.email != undefined){
-      try{
+        try{
           var signInUser = await this.accountService.getUserAccountByEmail(this.model.email, true);
 
-      }catch(error){
-        console.log('unable to sign in with requested email: ' + error);
-      }
+        // CASE:check for email and secret to match DB values
+        if(signInUser.email === this.model.email && signInUser.secret === this.model.secret){
 
-      //TODO: temp for debugging - reset below
-      // signInUser.accountContext = UserAccountContext.update;
-      //   this.accountService.setUserAccount(signInUser);
-      //   this.userAuthenticated.emit(true);
-      //   this.router.navigate(['favorites']);
-
-      if(signInUser.email === this.model.email && signInUser.secret === this.model.secret){
-
-        //load user into userAccount
-        signInUser.accountContext = UserAccountContext.update;
-        this.accountService.setUserAccount(signInUser);
-        this.userAuthenticated.emit(true);
-        this.router.navigate(['favorites']);
-      }else{
-        this.toastr.error(this.phrases[this.count]);
-        if(this.count < this.phrases.length-1){
-          this.count++;
-        }else{
-          this.count = 0;
+          //load user into userAccount
+          signInUser.accountContext = UserAccountContext.update;
+          this.accountService.setUserAccount(signInUser);
+          this.userAuthenticated.emit(true);
+          this.router.navigate(['favorites']);
+        }
+        // CASE: email or password entered did not match DB
+        else {
+          this.toastr.error(this.phrases[this.count]);
+          this.count < this.phrases.length-1 ? this.count++ : this.count = 0;
         }
       }
-    }
+      catch(error){
+        this.toastr.error('Unable to sign in with requested email');
+      }
   }
 }
-

@@ -5,6 +5,7 @@ import { IUserModel } from './../Models/IUserModel';
 import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
+import { ToastrService } from '../../../node_modules/ngx-toastr';
 
 
 @Injectable({
@@ -15,7 +16,7 @@ export class AccountService {
   account: IUserModel;
   private authService: SocialAuthService;
 
-  constructor(authService?: SocialAuthService, private router?: Router) {
+  constructor(authService?: SocialAuthService, private router?: Router, private toastr?: ToastrService) {
     this.authService = authService;
     this.account = new IUserModel();
   }
@@ -35,7 +36,6 @@ export class AccountService {
 
           if(querySnapshot.docs.length === 1 && querySnapshot != null){
             querySnapshot.docs.map(function(doc){
-              //console.log('doc: ' + doc.id, ' => ', doc.data());
 
               //map into an IUserModel
               result = new IUserModel(
@@ -53,13 +53,11 @@ export class AccountService {
             });
 
           }else if(querySnapshot.docs.length > 1){
-            console.error('More than 1 matching document');
+            throw new Error('More than 1 matching document');
           }else if (querySnapshot.empty){
-            console.log('No matching documents in store');
+            throw new Error('No matching documents in store');
           };
-        }).catch(function(error){
-          console.log('error: ' + error);
-        });
+        }, () => { throw new Error('An unexpected error ocurred during sign in'); });
 
       return result;
      }
@@ -69,7 +67,7 @@ export class AccountService {
        //check that email is unique -- TODO: move to directive?
        var userCheck = await this.getUserAccountByEmail(user.email, false);
        if(userCheck != null && userCheck.email === user.email){
-          throw new Error("No no no");
+          throw new Error("Error creating new user account. Please try again.");
        }
 
         return firebase.firestore().collection('users').add({
@@ -83,7 +81,7 @@ export class AccountService {
           createDate:  firebase.firestore.FieldValue.serverTimestamp(),
           modifiedDate:  firebase.firestore.FieldValue.serverTimestamp()
         }).catch((e) => {
-          console.error('Error writing new ticket to database', e);
+          throw new Error('Error creating new user account');
         });
 
       }
@@ -107,7 +105,7 @@ export class AccountService {
           modifiedDate: firebase.firestore.FieldValue.serverTimestamp()
 
         }).catch((e) => {
-          console.error('Error writing new ticket to database', e);
+          throw new Error('Error writing new ticket to database');
         });
       }
 
@@ -129,7 +127,7 @@ export class AccountService {
         return firebase.firestore().collection('users').doc(id).delete();
       }
       catch(e) {
-        console.error('unable to delete user', e);
+        this.toastr.error('Error ocurred deleting user account')
       }
      }
 

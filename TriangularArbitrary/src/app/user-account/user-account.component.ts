@@ -37,10 +37,6 @@ export class UserAccountComponent implements OnInit {
     }else{
 
       this.model = accountService.getUserAccount();
-      console.log(this.model.isAuthenticated);
-      console.log(this.model.accountContext);
-      console.log(this.model.secret);
-      console.log(this.model.accountType);
     }
     this.myTickets = ticketService.getAllFirebaseTicketsByEmail(this.model.email);
   }
@@ -64,7 +60,6 @@ export class UserAccountComponent implements OnInit {
         this.displaySuccessToastMessage();
         this.router.navigate(['favorites'])
       }).catch((e) => {
-        console.error(e);
         this.displayFailureToastMessage(e);
         this.isBusy = false;
       });
@@ -77,7 +72,6 @@ export class UserAccountComponent implements OnInit {
         this.isBusy = false;
         this.displaySuccessToastMessage();
       }).catch((e) => {
-        console.error(e);
         this.displayFailureToastMessage(e);
         this.isBusy = false;
       });

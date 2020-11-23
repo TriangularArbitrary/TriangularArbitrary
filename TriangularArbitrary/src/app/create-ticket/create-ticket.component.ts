@@ -5,6 +5,7 @@ import { ITicketModel } from './../Models/ITicketModel';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import * as firebase from 'firebase/app';
+import { ToastrService } from '../../../node_modules/ngx-toastr';
 
 @Component({
   selector: 'app-create-ticket',
@@ -25,7 +26,7 @@ export class CreateTicketComponent implements OnInit {
   severityTypes = TicketSeverityTypes;
   enumKeys = Object.keys;
 
-  constructor(ticketService: TicketStorageService, accountService: AccountService) {
+  constructor(ticketService: TicketStorageService, accountService: AccountService, private toastr: ToastrService) {
     this.model = new ITicketModel();
     this.ticketService = ticketService;
     this.accountService = accountService;
@@ -52,6 +53,7 @@ export class CreateTicketComponent implements OnInit {
         this.isBusy = false;
         this.formSubmitted = true;
       }).catch((e) => {
+        this.toastr.error("Error ocurred attempting to submit ticket. Please try again later.");
         this.isBusy = false;
       });
   }

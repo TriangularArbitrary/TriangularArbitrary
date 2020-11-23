@@ -16,8 +16,12 @@ export class YahooFinanceService {
    getMovers() {
     let headers = new HttpHeaders().set('x-rapidapi-host', environment.yahooAPIConfig.xRapidApiHost)
                                    .set('x-rapidapi-key', environment.yahooAPIConfig.xRapidApiKey);
-
-    return this.http.get("https://yahoo-finance15.p.rapidapi.com/api/yahoo/mu/topmutualfunds?start=0", {headers});
+    try {
+      return this.http.get("https://yahoo-finance15.p.rapidapi.com/api/yahoo/mu/topmutualfunds?start=0", {headers});
+    }
+    catch(e) {
+      throw new Error('Error ocurred attempting to get Movers from Yahoo Finance');
+    }
   }
 
 

@@ -5,6 +5,7 @@ import { TicketStorageService } from './../Services/ticket-storage.service';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from '../../../node_modules/ngx-toastr';
 
 @Component({
   selector: 'app-admin-account-management',
@@ -22,7 +23,7 @@ export class AdminAccountManagementComponent implements OnInit {
   @Input() resolveReason: string;
 
 
-  constructor(ticketService: TicketStorageService, private accountService: AccountService, private modalService: NgbModal) {
+  constructor(ticketService: TicketStorageService, private accountService: AccountService, private toastr : ToastrService, private modalService: NgbModal) {
     this.ticketService = ticketService;
 
     // LocalStorage solution:
@@ -38,32 +39,37 @@ export class AdminAccountManagementComponent implements OnInit {
 
   private async loadUsers(): Promise<void> {
     var loadedUsers = [];
-    await firebase.firestore().collection('users')
-    .get()
-      .then(function(querySnapshot){
-          if (querySnapshot != null) {
-            querySnapshot.docs.map(function(doc){
-              loadedUsers.push(new IUserModel(
-                doc.id,
-                doc.data().email,
-                doc.data().firstName,
-                doc.data().lastName,
-                null,
-                doc.data().accountType,
-                doc.data().preferredCurrency,
-                null,
-                null
-              ));
+    try {
+      await firebase.firestore().collection('users')
+      .get()
+        .then(function(querySnapshot){
+            if (querySnapshot != null) {
+              querySnapshot.docs.map(function(doc){
+                loadedUsers.push(new IUserModel(
+                  doc.id,
+                  doc.data().email,
+                  doc.data().firstName,
+                  doc.data().lastName,
+                  null,
+                  doc.data().accountType,
+                  doc.data().preferredCurrency,
+                  null,
+                  null
+                ));
 
-            });
-          } else {
-            console.error('Failed to load users')
-          }
-        }).catch(function(error){
-          console.log('error: ' + error);
-        });
+              });
+            } else {
+              this.toastr.error('Failed to load user accounts');
+            }
+          },function(error){
+            this.toastr.error('an unexpected error occurred loading user accounts');
+          });
 
-        this.users = loadedUsers
+          this.users = loadedUsers
+    }
+    catch(e) {
+      this.toastr.error('Error loading user accounts');
+    }
   }
 
   removeUser(index: string): void {
@@ -73,7 +79,7 @@ export class AdminAccountManagementComponent implements OnInit {
       this.users.splice(parseInt(index), 1)
       this.accountTableIsBusy = false
     }).catch(e => {
-      console.log(e)
+      this.toastr.error('Error removing specified user account: ' + user.firstName ?? '' + ' ' + user.lastName ?? '');
       this.accountTableIsBusy = false
     })
   }
@@ -93,10 +99,11 @@ export class AdminAccountManagementComponent implements OnInit {
       {
         this.tickets = this.ticketService.getAllFirebaseTickets(true);
         this.ticketTableisBusy = false;
+      }, (e) => {
+        this.toastr.error('Error ocurred attempting to resolve ticket');
       }
     );
   }
-
 
   openResolveModal(content, index: string) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
