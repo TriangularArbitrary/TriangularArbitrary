@@ -23,6 +23,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   model: IUserModel;
 
+  count = 0;
+  phrases: string[] = ['Strike One',
+                       'What can\'t remember simple little password?',
+                       'Go ahead, make my day, punk!',
+                      'You have failed me for the last time, Admiral' ]
+
   constructor(private authService: SocialAuthService,
               private accountService: AccountService,
               private router: Router,
@@ -137,7 +143,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.userAuthenticated.emit(true);
         this.router.navigate(['favorites']);
       }else{
-        this.toastr.error("You have failed me for the last time.");
+        this.toastr.error(this.phrases[this.count]);
+        if(this.count < this.phrases.length-1){
+          this.count++;
+        }else{
+          this.count = 0;
+        }
       }
     }
   }

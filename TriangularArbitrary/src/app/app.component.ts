@@ -52,6 +52,7 @@ export class AppComponent {
     this.account.isAuthenticated = false;
     this.accountCreationClicked = false;
     window.location.replace('/TriangularArbitrary/login');
+    //window.location.replace('/login');
     //this.router.navigate(['login']);
   }
 
