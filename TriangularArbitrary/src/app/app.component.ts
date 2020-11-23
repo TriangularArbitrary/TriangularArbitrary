@@ -51,7 +51,8 @@ export class AppComponent {
     this.account = new IUserModel();
     this.account.isAuthenticated = false;
     this.accountCreationClicked = false;
-    this.router.navigate(['login']);
+    window.location.replace('/login');
+    //this.router.navigate(['login']);
   }
 
   getAppSessionAccount():void {
