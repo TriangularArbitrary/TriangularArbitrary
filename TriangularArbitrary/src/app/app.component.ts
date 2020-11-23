@@ -51,7 +51,7 @@ export class AppComponent {
     this.account = new IUserModel();
     this.account.isAuthenticated = false;
     this.accountCreationClicked = false;
-    window.location.replace('/login');
+    window.location.replace('/TriangularArbitrary/login');
     //this.router.navigate(['login']);
   }
 
