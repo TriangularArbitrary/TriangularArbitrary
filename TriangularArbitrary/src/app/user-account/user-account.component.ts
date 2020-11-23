@@ -35,16 +35,19 @@ export class UserAccountComponent implements OnInit {
     if(this.model === undefined || this.model == null){
       this.model = new IUserModel();
     }else{
-      this.model = this.accountService.getUserAccount();
+
+      this.model = accountService.getUserAccount();
       console.log(this.model.isAuthenticated);
       console.log(this.model.accountContext);
-      console.log(this.model.preferredCurrency);
+      console.log(this.model.secret);
+      console.log(this.model.accountType);
     }
     this.myTickets = ticketService.getAllFirebaseTicketsByEmail(this.model.email);
   }
 
   ngOnInit(): void {
   }
+
 
   async onSubmit(form:NgForm): Promise<void>{
     this.isBusy = true;

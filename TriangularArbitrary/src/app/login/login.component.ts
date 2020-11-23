@@ -6,6 +6,7 @@ import { FormControl, NgForm } from '@angular/forms'
 import { IUserModel } from './../Models/IUserModel';
 import { AccountService } from './../Services/account.service';
 import { UserAccountContext } from '../Enums/Enums';
+import { ToastrService } from '../../../node_modules/ngx-toastr';
 
 
 @Component({
@@ -22,8 +23,16 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   model: IUserModel;
 
+  count = 0;
+  phrases: string[] = ['Strike One',
+                       'What can\'t remember simple little password?',
+                       'Go ahead, make my day, punk!',
+                      'You have failed me for the last time, Admiral' ]
+
   constructor(private authService: SocialAuthService,
-              private accountService: AccountService, private router: Router) {
+              private accountService: AccountService,
+              private router: Router,
+              private toastr: ToastrService) {
                 this.model = new IUserModel();
                }
 
@@ -66,17 +75,33 @@ export class LoginComponent implements OnInit, OnDestroy {
       socialUser = user;
     })
 
-    console.log('1st ', socialUser);
+    console.log('Social User: ', socialUser);
 
     if(socialUser != null){
+
+      //b/c of the async nature, get a reference to the account service
+      if(this.accountService != null){
+        var refAccountServ = this.accountService;
+      }
+      console.log('this.accountService', this.accountService === null);
+
       //check if social user already exists
-      var userCheck =  await this.accountService.getUserAccountByEmail(socialUser.email);
+      var appUser =  await refAccountServ.getUserAccountByEmail(socialUser.email);
 
-      console.log('2nd ', userCheck);
+      console.log('App User:  ', appUser);
+      console.log('this.accountService', this.accountService === null);
+      console.log('refAccountServ', refAccountServ === null);
 
-      if (userCheck === null){
-        await this.accountService.insertUserAccount(this.accountService.getUserAccount());
+      if (appUser === null){
+        //await this.accountService.insertUserAccount(this.accountService.getUserAccount());
+        await refAccountServ.insertUserAccount(refAccountServ.getUserAccount());
       }else{
+
+        //if we already have the user need to set the app specific data that we don't get with social login
+        if(refAccountServ != null){
+          refAccountServ.setUserAccount(appUser, true);
+        }
+
         //TODO: Compare existing values in datastore with recent social pull
         // updated if any changes
       }
@@ -96,30 +121,36 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   async signInWithEmail(): Promise<void>{
 
-    try{
-      var signInUser = await this.accountService.getUserAccountByEmail(this.model.email, true);
-      console.log('userCheck: ', signInUser.preferredCurrency);
-    }catch(error){
-      console.log('unable to sign in with requested email: ' + error);
+    if(this.model.email != undefined){
+      try{
+          var signInUser = await this.accountService.getUserAccountByEmail(this.model.email, true);
+
+      }catch(error){
+        console.log('unable to sign in with requested email: ' + error);
+      }
+
+      //TODO: temp for debugging - reset below
+      // signInUser.accountContext = UserAccountContext.update;
+      //   this.accountService.setUserAccount(signInUser);
+      //   this.userAuthenticated.emit(true);
+      //   this.router.navigate(['favorites']);
+
+      if(signInUser.email === this.model.email && signInUser.secret === this.model.secret){
+
+        //load user into userAccount
+        signInUser.accountContext = UserAccountContext.update;
+        this.accountService.setUserAccount(signInUser);
+        this.userAuthenticated.emit(true);
+        this.router.navigate(['favorites']);
+      }else{
+        this.toastr.error(this.phrases[this.count]);
+        if(this.count < this.phrases.length-1){
+          this.count++;
+        }else{
+          this.count = 0;
+        }
+      }
     }
-
-    //TODO: temp for debugging - reset below
-    signInUser.accountContext = UserAccountContext.update;
-      this.accountService.setUserAccount(signInUser);
-      this.userAuthenticated.emit(true);
-      this.router.navigate(['favorites']);
-
-    // if(signInUser.email === this.model.email && signInUser.secret === this.model.secret){
-
-    //   //load user into userAccount
-    //   signInUser.accountContext = UserAccountContext.update;
-    //   this.accountService.setUserAccount(signInUser);
-    //   this.userAuthenticated.emit(true);
-    //   this.router.navigate(['favorites']);
-    // }else{
-    //     //TODO: sign in failed -> display message
-    // }
-
   }
 }
 
