@@ -22,7 +22,7 @@ export class FavoritesComponent implements OnInit {
     private serv: AlphaVantageService,
     private favServ: FavoritesStorageService,
     private toastr: ToastrService,
-    private accServ: AccountService
+    private accServ: AccountService,
    ) {
 
   }
@@ -32,17 +32,17 @@ export class FavoritesComponent implements OnInit {
   }
 
   async loadFavorites() {
-    this.isBusy = true;
     let currentFavs = await this.favServ.getAllFavorites(this.accServ.getUserAccount().email);
+
     for(let i = 0; i < currentFavs.length; i++) {
       this.retrieveStock(currentFavs[i]);
     }
-    this.isBusy = null;
   }
 
   refreshData() {
     let copy: Stock[] = this.stocks;
     this.stocks = [];
+
     for (var i = 0; i < copy.length; i++) {
       let stock: Stock = copy[i];
       this.retrieveStock(stock.symbol);
@@ -70,17 +70,28 @@ export class FavoritesComponent implements OnInit {
         this.stocks.push(newStock);
         this.isBusy = null;
       },
-      (error) => console.log(error)
-    );
+      (e) => {
+        this.isBusy = null;
+        if (e.status == 429) {
+          this.toastr.info("Too many requests, please wait a minute before trying again.");
+        }
+        else {
+          this.toastr.error('Error ocurred retrieving favorites');
+        }
+      });
   }
 
   deleteFavorite(stock: Stock) {
-    if(confirm("Delete " + stock.symbol + " from favorites?")) {
-      this.stocks.splice(this.stocks.indexOf(stock), 1);
-      this.favServ.deleteFavorite(stock.symbol, this.accServ.getUserAccount().email);
-      this.toastr.info(stock.symbol + " deleted from favorites");
+    try {
+      if(confirm("Delete " + stock.symbol + " from favorites?")) {
+        this.stocks.splice(this.stocks.indexOf(stock), 1);
+        this.favServ.deleteFavorite(stock.symbol, this.accServ.getUserAccount().email);
+        this.toastr.success(stock.symbol + " deleted from favorites");
+      }
     }
-
+    catch(e) {
+      this.toastr.error('Error ocurred attempting to delete specified favorite');
+    }
   }
 
   getTextColor(index: number): string {

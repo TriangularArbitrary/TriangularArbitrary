@@ -26,6 +26,7 @@ import { AlphaVantageService } from './Services/alpha-vantage.service';
 import { CryptoAssetService } from './Services/crypto-asset.service';
 import { AccountService } from './Services/account.service';
 import { YahooFinanceService } from './Services/yahoo-finance.service';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -47,12 +48,14 @@ import { YahooFinanceService } from './Services/yahoo-finance.service';
     HttpClientModule,
     AppRoutingModule,
     SocialLoginModule,
+    NgbModalModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
   providers: [
     TicketStorageService,
     ToastrService,
+    NgbModalModule,
     FavoritesStorageService,
     AccountService,
     AlphaVantageService,
