@@ -37,7 +37,8 @@ export class SearchComponent implements OnInit {
       (response) => {
         let data = response['Global Quote'];
         if (this.isEmpty(data)) {
-          this.toastr.info("no stocks matching " + this.symbol);
+          this.toastr.info("No stocks matching " + this.symbol);
+          this.isBusy = null;
           return;
         }
         this.setTextColor(data['09. change'])
