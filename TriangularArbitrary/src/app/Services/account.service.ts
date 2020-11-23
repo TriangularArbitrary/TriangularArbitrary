@@ -79,7 +79,7 @@ export class AccountService {
           firstName: user.firstName,
           lastName: user.lastName,
           preferredCurrency: (user.preferredCurrency) ? user.preferredCurrency : Currency.Undeclared,
-          secret: user.secret,    //shhh, don't tell anyone, it's not encrypted with a one-way hash
+          secret: (user.isSocialUser) ? "xxsocialxx" : user.secret,
           createDate:  firebase.firestore.FieldValue.serverTimestamp(),
           modifiedDate:  firebase.firestore.FieldValue.serverTimestamp()
         }).catch((e) => {
@@ -103,7 +103,7 @@ export class AccountService {
           firstName: user.firstName,
           lastName: user.lastName,
           preferredCurrency: (user.preferredCurrency) ? user.preferredCurrency : Currency.Undeclared,
-          secret: user.secret,    //here either
+          secret: (user.isSocialUser) ? "xxsocialxx" : user.secret,
           modifiedDate: firebase.firestore.FieldValue.serverTimestamp()
 
         }).catch((e) => {
@@ -151,6 +151,7 @@ export class AccountService {
       this.account.isAuthenticated = true;
       this.account.preferredCurrency = (user.preferredCurrency) ? user.preferredCurrency : Currency.Undeclared;
       this.account.isSocialUser = isSocialUser;
+      this.account.secret = user.secret;
     }
   }
 

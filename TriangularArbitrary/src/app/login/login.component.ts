@@ -69,17 +69,33 @@ export class LoginComponent implements OnInit, OnDestroy {
       socialUser = user;
     })
 
-    console.log('1st ', socialUser);
+    console.log('Social User: ', socialUser);
 
     if(socialUser != null){
+
+      //b/c of the async nature, get a reference to the account service
+      if(this.accountService != null){
+        var refAccountServ = this.accountService;
+      }
+      console.log('this.accountService', this.accountService === null);
+
       //check if social user already exists
-      var userCheck =  await this.accountService.getUserAccountByEmail(socialUser.email);
+      var appUser =  await refAccountServ.getUserAccountByEmail(socialUser.email);
 
-      console.log('2nd ', userCheck);
+      console.log('App User:  ', appUser);
+      console.log('this.accountService', this.accountService === null);
+      console.log('refAccountServ', refAccountServ === null);
 
-      if (userCheck === null){
-        await this.accountService.insertUserAccount(this.accountService.getUserAccount());
+      if (appUser === null){
+        //await this.accountService.insertUserAccount(this.accountService.getUserAccount());
+        await refAccountServ.insertUserAccount(refAccountServ.getUserAccount());
       }else{
+
+        //if we already have the user need to set the app specific data that we don't get with social login
+        if(refAccountServ != null){
+          refAccountServ.setUserAccount(appUser, true);
+        }
+
         //TODO: Compare existing values in datastore with recent social pull
         // updated if any changes
       }
@@ -98,12 +114,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   async signInWithEmail(): Promise<void>{
-
-    //testaccounts TODO: REMOVE WHEN FINISHED
-    //John.Smith@WoltersKluwer.com
-    //xxxx@noemailxxxx.com
-    //UniqueEmail2@email.com
-    //11081215@email.com
 
     if(this.model.email != undefined){
       try{
