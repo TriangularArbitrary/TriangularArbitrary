@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { LocalStorageKeys } from '../Enums/Enums';
 import { Movers, MoversList } from '../Models/Movers';
 import { YahooFinanceService } from '../Services/yahoo-finance.service';
@@ -12,14 +13,13 @@ export class TopTenComponent implements OnInit {
 
   @Input() isBusy: boolean = null;
 
-  constructor(private serv: YahooFinanceService) {}
+  constructor(private serv: YahooFinanceService, private toastr: ToastrService) {}
 
   topten: Movers[] = [];
 
   ngOnInit(): void {
     this.topten=[];
     var list = this.getListFromStorage();
-    console.log("Loaded on init:" + list);
     if (list != null) this.topten=list.list;
 
   }
@@ -32,7 +32,6 @@ export class TopTenComponent implements OnInit {
   addToArray(conversion:Movers) {
     if (this.topten.length<10) {
       this.topten.push(conversion);
-      //console.log(this.topten)
       this.setListToStorage()
     }
   }
@@ -49,25 +48,26 @@ export class TopTenComponent implements OnInit {
           element['regularMarketChange'],element['regularMarketChangePercent'],
           element['fiftyTwoWeekRange']));
         });
-        //console.log(this.topten);
         this.isBusy = null;
       },
       (error) => {
-        console.log(error);
-        alert("Too many requests, please wait a minute before trying again.");
+        if( error.status == 429) {
+          this.toastr.info("Too many requests, please wait a minute before trying again.");
+        }
+        else {
+          this.toastr.error("Error ocurred attempting to Generate new Top 10");
+        }
         this.isBusy = null;
       });
   }
 
   getListFromStorage():MoversList {
     let list:MoversList = JSON.parse(localStorage.getItem(LocalStorageKeys.TopTen));
-    console.log("Successfully retrieved: " + list);
     return list;
   }
 
   setListToStorage() {
     let toSet:MoversList = new MoversList(this.topten);
     localStorage.setItem(LocalStorageKeys.TopTen, JSON.stringify(toSet));
-    console.log("Successfully stored: " + toSet.list)
   }
 }

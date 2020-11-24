@@ -28,7 +28,7 @@ export class FavoritesStorageService {
         }
       })
       .catch(function (error) {
-        console.log('Error getting document:', error);
+        throw new Error('Error getting ' + email + 'favorites');
       });
       return favs;
   }
@@ -40,7 +40,7 @@ export class FavoritesStorageService {
         symbols: firebase.firestore.FieldValue.arrayUnion(fav),
       });
     } catch (e) {
-      console.error('unable to add favorite', e);
+      throw new Error('Error ocurred attempting to add favorite');
     }
   }
 
@@ -52,7 +52,7 @@ export class FavoritesStorageService {
         symbols: firebase.firestore.FieldValue.arrayRemove(fav),
       });
     } catch (e) {
-      console.error('unable to delete favorite', e);
+      throw new Error('Error ocurred attempting to delete favorite');
     }
   }
 

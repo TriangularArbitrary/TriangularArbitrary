@@ -46,14 +46,15 @@ export class AppComponent {
   }
 
   signOut():void{
-    this.accountService.signOut();
-    //this.account = this.accountService.getUserAccount();
+
+    if(this.account.isSocialUser) {
+      this.accountService.signOut();
+    }
+
     this.account = new IUserModel();
     this.account.isAuthenticated = false;
     this.accountCreationClicked = false;
-    window.location.replace('/TriangularArbitrary/login');
-    //window.location.replace('/login');
-    //this.router.navigate(['login']);
+    this.router.navigate(['login']).then(() => window.location.reload());
   }
 
   getAppSessionAccount():void {

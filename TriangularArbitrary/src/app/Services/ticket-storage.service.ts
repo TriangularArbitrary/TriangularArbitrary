@@ -75,7 +75,6 @@ export class TicketStorageService {
             ticket.id = change.doc.id;
             currentTickets.push(ticket);
           }
-          console.log(ticket)
         }
       });
     });
@@ -122,7 +121,7 @@ export class TicketStorageService {
       user: user.email
     })
       .catch((e) => {
-      console.error('Error writing new ticket to database', e);
+      throw new Error('Error writing new ticket to database');
     });
   }
 
@@ -131,7 +130,7 @@ export class TicketStorageService {
       return firebase.firestore().collection('tickets').doc(updatedTicket.id).update(updatedTicket)
     }
     catch(e) {
-      console.error('unable to update ticket', e);
+      throw new Error('Error attempting to update ticket: ' + updatedTicket.id);
     }
   }
 
@@ -144,7 +143,7 @@ export class TicketStorageService {
       return firebase.firestore().collection('tickets').doc(id).delete();
     }
     catch(e) {
-      console.error('unable to delete ticket', e);
+      throw new Error('Error attempting to delete ticket: ' + id);
     }
   }
   //////////////////////////////////////
