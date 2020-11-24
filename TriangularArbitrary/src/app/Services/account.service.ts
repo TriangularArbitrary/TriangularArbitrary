@@ -55,7 +55,7 @@ export class AccountService {
           }else if(querySnapshot.docs.length > 1){
             throw new Error('More than 1 matching document');
           }else if (querySnapshot.empty){
-            throw new Error('No matching documents in store');
+            return result;
           };
         }, () => { throw new Error('An unexpected error ocurred during sign in'); });
 
