@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(private authService: SocialAuthService,
               private accountService: AccountService,
               private router: Router,
-              private toastr: ToastrService) {
+            private toastr: ToastrService) {
                 this.model = new IUserModel();
                }
 
@@ -113,6 +113,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         try{
           var signInUser = await this.accountService.getUserAccountByEmail(this.model.email, true);
+
+          if(signInUser === null ) {
+            throw new Error('Unable to sign in with requested email');
+          }
 
         // CASE:check for email and secret to match DB values
         if(signInUser.email === this.model.email && signInUser.secret === this.model.secret){
